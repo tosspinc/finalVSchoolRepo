@@ -45,6 +45,7 @@ export default function IssueForm({ onSubmit, issue }) {
             <h1 className='new-issue-title'>{issue ? 'Edit Issue' : 'Post a new current issue'}</h1>
                 <div className='issue-input-container'>
                     <form onSubmit={handleSubmit}>
+                        {formData.imgUrl && <img src={formData.imgUrl} style={{height:'100px', width:'100px'}} alt='issue'/>}   
                         <label htmlFor='title' className='issue-form-label'>Title: </label>
                         <input
                             id='title'
@@ -64,7 +65,7 @@ export default function IssueForm({ onSubmit, issue }) {
                             onChange={handleChange}
                             maxLength='600'
                         />
-                        <label htmlfor='imgUrl' className='issue-form-label'>Image: </label>
+                        <label htmlFor='imgUrl' className='issue-form-label'>Image: </label>
                         <input
                             id='imgUrl'
                             className='imgUrl-input'
@@ -73,7 +74,6 @@ export default function IssueForm({ onSubmit, issue }) {
                             value={formData.imgUrl}
                             onChange={handleChange}
                         />
-                        {formData.imgUrl && <img src={formData.imgUrl} style={{height:'100px', width:'100px'}} alt='issue'/>}
                         <button className='issueform-button'>
                             Submit
                         </button>

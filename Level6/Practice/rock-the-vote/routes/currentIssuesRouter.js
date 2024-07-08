@@ -1,7 +1,7 @@
 const express = require('express');
 const currentIssuesRouter = express.Router();
 const Issues = require('../models/issue.js');
-const UserName = require('../models/user.js');
+
 
 // Get all issues
 currentIssuesRouter.get('/', async (req, res, next) => {
@@ -89,5 +89,37 @@ currentIssuesRouter.delete('/:issueId', async (req, res, next) => {
         return next(error);
     }
 });
+
+currentIssuesRouter.put('/upvotes/:issueId', async(req, res, next) => {
+    try {
+        const updatedIssue = await Issues.findByIdAndUpdate(
+            req.params.issueId,
+            {
+                $addToSet: { upvotes: req.auth._id },
+                $pull: { downvotes: req.auth._id}
+            },
+            { new: true }
+        )
+        return res.status(201).send(updatedIssue)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
+currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
+    try {
+        const updatedIssue = await Issues.findByIdAndUpdate(
+            req.params.issueId,
+            {
+                $addToSet: { downvotes: req.auth._id },
+                $pull: {upvotes: req.auth._id}
+            }
+        )
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
 
 module.exports = currentIssuesRouter;

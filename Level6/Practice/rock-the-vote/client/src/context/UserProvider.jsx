@@ -146,6 +146,38 @@ export default function UserProvider(props) {
         }
     }
 
+    async function handleUpvote(issueId){
+        try {
+            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`)
+            console.log(res.data)
+            setAllIssues(prevIssues => prevIssues.map(issue => issue._id === issueId ? res.data : issue))
+            setUserState(prevUserState => {
+                return {
+                    ...prevUserState,
+                    issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+                }
+            })   
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async function handleDownvote(issueId){
+        try {
+            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`)
+            console.log(res.data)
+            setAllIssues(prevIssues => prevIssues.map(issue => issue._id === issueId ? res.data : issue))
+            setUserState(prevUserState => {
+                return {
+                    ...prevUserState,
+                    issues: prevUserState.issues.map(issue => issue._id ? res.data : issue)
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <UserContext.Provider value={{
             ...userState,
@@ -158,7 +190,9 @@ export default function UserProvider(props) {
             editIssue,
             deleteIssue,
             handleAuthErr,
-            resetAuthErr
+            resetAuthErr,
+            handleUpvote,
+            handleDownvote
         }}>
             {props.children}
         </UserContext.Provider>

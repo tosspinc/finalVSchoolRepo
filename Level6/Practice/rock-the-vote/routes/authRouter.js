@@ -24,9 +24,11 @@ authRouter.post('/login', async (req, res, next) => {
             res.status(403)
             return next(err)
         }
+        if (!isMatch) {
+            return res.status(403).send({ error: "Incorrect Username or Password."})
+        }
         })
-        // const isMatch = await bcrypt.compare(password, existingUser.password);
-        //
+        
 
         // Generate token
         const token = jwt.sign(existingUser.withoutPassword(), process.env.SECRET);
