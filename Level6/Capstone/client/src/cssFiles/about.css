@@ -1,0 +1,18 @@
+/*about page*/
+.about-company-info {
+    margin: 30px;
+    padding: 25px;
+    height: 400px;
+    width: 1575px;
+    border: 1px solid black;
+    
+  }
+  
+  .about-company-info p {
+    font-size: 16px;
+  }
+  
+  .about-company-h1 {
+    margin-top: 15px;
+    text-align: center;
+  }

@@ -1,0 +1,28 @@
+.home_link, profile_link {
+  margin-left: 10px;
+  padding: 5px;
+}
+
+.separator {
+  color: #000;
+}
+
+.navbar_container {
+  justify-content: center;
+}
+
+.App {
+  margin: 300px;
+  font-family: sans-serif;
+  text-align: center;
+  
+}
+
+.border {
+  border: 2px dashed #000;
+  width: 1000px;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+

@@ -1,0 +1,90 @@
+.new-issue-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    border: 1.5px solid black;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: antiquewhite;
+    
+}
+
+.issue-input-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 80%;
+    background-color: rgb(105, 163, 163);
+    align-items: center;
+}
+
+.issue-form-label {
+    color: firebrick;
+    font-size: 30px;
+    font-style: italic;
+    text-shadow: 1px 1px 0px black, 
+    -.5px -.5px 0px black, 
+    -.5px .5px 0px black, 
+    .5px -.5px 0px black,
+    .5px 0px 0px black, 
+    -.5px 0px 0px black, 
+    0px .5px 0px black, 
+    0px -.5px 0px black;;
+
+}
+
+.new-issue-title {
+    margin-top: 20px;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 40px;
+    color: rgb(101, 101, 236);
+    text-shadow: 1px 1px 0px black, 
+    -1px -1px 0px black, 
+    -1px 1px 0px black, 
+    1px -1px 0px black,
+    1px 0px 0px black, 
+    -1px 0px 0px black, 
+    0px 1px 0px black, 
+    0px -1px 0px black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.description-textarea {
+    height: 200px;
+    background-color: antiquewhite;
+}
+
+.title-textarea {
+    background-color: antiquewhite;
+}
+
+.issueform-button {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 16px;
+    background-color: firebrick;
+    color: antiquewhite;
+    text-shadow: 1px 1px 0px black, 
+    -1px -1px 0px black, 
+    -1px 1px 0px black, 
+    1px -1px 0px black,
+    1px 0px 0px black, 
+    -1px 0px 0px black, 
+    0px 1px 0px black, 
+    0px -1px 0px black;
+    border: 2px solid orange;
+    border-radius: 10px;
+    cursor: pointer;
+    align-self: center;
+}

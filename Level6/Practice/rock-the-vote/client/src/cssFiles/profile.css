@@ -1,0 +1,110 @@
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+}
+
+/*container that has current issues in it.*/
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: flex;
+    width: 1200px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    background-color: antiquewhite;
+    margin-top: 30px;
+    padding-top: 20px;
+}
+
+/*username title*/
+.profile-title {
+    margin-top: 250px;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 40px;
+}
+
+.profile-issues-title {
+    text-align: center;
+    font-weight: bolder;
+    font-style: italic;
+    font-size: 50px;
+    color: firebrick;    
+}
+
+.profile-issues-breakline {
+    margin: 0;
+    margin-top: 20px ;
+    margin-bottom: 15px;
+    width: 80%;
+    border: none;
+    border-top: 2px dashed blue;
+}
+
+.issue-list-container {
+    margin-top: 30px;
+    margin-left: 40px;
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    padding: 10px;
+    align-items: center;
+    border: 2px solid antiquewhite;
+    background-color: bisque;
+    color: black;
+}
+
+.issues-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: 75%;
+    height: 600px;
+    align-items: center;
+    background-color: rgb(105, 163, 163);
+    color: antiquewhite;
+}
+
+.issue-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.issue-title {
+    margin-bottom: 10px;
+}
+
+.issue-description {
+    margin-top: 5px;
+}
+
+.issue-author {
+    margin-top: 10px;
+    color: firebrick;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds space between the buttons */
+    margin-top: 10px;
+    
+}
+
+.buttons {
+    background-color: rgb(105, 163, 163);
+    border-radius: 10px;
+    color: antiquewhite;
+    font-size: 16px;
+    font-style: italic;
+    border: 2px solid firebrick;
+}

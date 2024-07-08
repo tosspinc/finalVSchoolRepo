@@ -1,0 +1,77 @@
+html, body {
+  background-color: teal;
+}
+
+.nav {                                  /*styling for navigation bar*/
+  display: flex;                      /*displays .nav across the top and allows automatically adjusts.*/
+  justify-content: space-between;     /*Creates spacing between the items.*/
+  align-items: center;                /*centers the items on the DOM.*/
+
+}
+
+.nav-logo {                             /*styling for logo in navigation bar*/
+  padding: 5px;                       /*displays logo in navigation bar 5 px from top of it.*/
+  width: 50px;                        /*sets logo in navigation bar to 40 pixels.*/  
+}
+
+.nav-items {                            /*syling for nav-items class in the navigation bar.*/    
+  display: flex;                      /*displays items horizontally.*/
+  list-style: none;                   /*removes the dot at the beginning of listed items names.*/
+}
+
+.nav-items > li {                       /*styling for navigation bar items list.*/
+  padding: 25px;                      /*places 25 pixels at the back of each item in the list of the navigagion bar.*/
+  color: antiquewhite;              /*list items text color.*/
+}
+
+.footer {                               /*styling for footer on DOM*/
+  text-align: center;                 /*text placement is centere at the bottom of the DOM.*/
+  color: antiquewhite;              /*text color*/
+  position: absolute;
+  right: 0px;
+  bottom: 0px;                        /*places the footer at the bottom of the DOM.*/
+  width: 100%;                        /*sets width of footer in DOM.*/
+  height: 30px;                       /*sets height of footer in DOM.*/
+}
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

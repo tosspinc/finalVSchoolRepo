@@ -1,0 +1,58 @@
+body {
+    background-color: whitesmoke;
+    margin: 0;
+    font-family: "Inter", sans-serif;
+}
+
+main {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 230px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    height: 360px;
+    box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+    -webkit-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+    -moz-box-shadow: 5px 5px 5px 1px rgba(120,120,120,0.44);
+}
+
+.card--image {
+    padding: 5px;
+    margin: 8px 8px 8px 8px;
+    background-color: antiquewhite;
+    width: 55%;
+    padding: 20%;
+    padding-bottom: 0;
+}
+
+.card--name {
+    margin-block: 13px;
+    background-color: antiquewhite;
+    color: #333333;
+}
+
+.card--info {
+    margin-left: 5px;
+    background-color: antiquewhite;
+    padding: 5px;
+    width: 90%;
+}
+
+.card--favorite {
+    width: 25px;
+    cursor: pointer;
+}
+
+.card--contact {
+    background-color: antiquewhite;
+    font-size: 0.75rem;
+    color: black;
+    margin-block: 7px;
+}

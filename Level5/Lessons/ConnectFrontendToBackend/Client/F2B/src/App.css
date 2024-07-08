@@ -1,0 +1,78 @@
+* {
+    box-sizing: border-box;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    margin: 5px;
+}
+
+p {
+    margin: 5px;
+}
+
+/*adding a movie section*/
+.add-movie {
+    margin: 20px auto;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    width: 440px;
+    font-style: italic;
+    font-weight: bolder;
+    font-size: 14px;
+}
+
+.add-movie h3 {
+    text-align: center;
+    font-size: 20px;
+}
+
+.add-movie input {
+    margin-right: 4px;
+}
+
+.add-movie input,
+.add-movie button {
+    margin-bottom: 3px;
+    background-color: bisque;
+    padding: 3px;    
+}
+
+/*delete list item section*/
+.delete-button {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: goldenrod;
+    color: black;
+    height: 40px;
+    width: 100px;
+}
+
+/*update movie button*/
+.update-button {
+    margin-left: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: goldenrod;
+    color: black;
+    height: 40px;
+    width: 100px;
+}
+
+
+/*displays list of movies section*/
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 32px;
+}
+
+.movie {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 5px;
+}

@@ -1,0 +1,37 @@
+html, body {                            /*styling for html and body of DOM.*/
+    margin: 0;
+    padding: 0;                         /*places items on DOM 0 pixels down from top.*/
+    background-color: teal;           /*sets DOM background color.*/  
+}
+
+.nav {                                  /*styling for navigation bar*/
+    display: flex;                      /*displays .nav across the top and allows automatically adjusts.*/
+    justify-content: space-between;     /*Creates spacing between the items.*/
+    align-items: center;                /*centers the items on the DOM.*/
+
+}
+
+.nav-logo {                             /*styling for logo in navigation bar*/
+    padding: 5px;                       /*displays logo in navigation bar 5 px from top of it.*/
+    width: 50px;                        /*sets logo in navigation bar to 40 pixels.*/  
+}
+
+.nav-items {                            /*syling for nav-items class in the navigation bar.*/    
+    display: flex;                      /*displays items horizontally.*/
+    list-style: none;                   /*removes the dot at the beginning of listed items names.*/
+}
+
+.nav-items > li {                       /*styling for navigation bar items list.*/
+    padding: 25px;                      /*places 25 pixels at the back of each item in the list of the navigagion bar.*/
+    color: antiquewhite;              /*list items text color.*/
+}
+
+.footer {                               /*styling for footer on DOM*/
+    text-align: center;                 /*text placement is centere at the bottom of the DOM.*/
+    color: antiquewhite;              /*text color*/
+    position: absolute;
+    right: 0px;
+    bottom: 0px;                        /*places the footer at the bottom of the DOM.*/
+    width: 100%;                        /*sets width of footer in DOM.*/
+    height: 30px;                       /*sets height of footer in DOM.*/
+}

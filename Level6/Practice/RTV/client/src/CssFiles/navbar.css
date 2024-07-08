@@ -1,0 +1,109 @@
+/*Navbar css code: for upper navbar*/
+.navbar {
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+    height: 70px;
+    width: 100%;
+    background-color: firebrick;
+}
+  
+.navleft-logo {
+    background-color: firebrick;
+    margin-left: 7px;
+    margin-top: 7px;
+}
+  
+.navleft-logo a img {
+    margin: 0;
+    padding: 0;
+}
+  
+.navcenter-navigation, .navigation-dropdown{
+    background-color: firebrick;
+}
+
+.navcenter-navigation {
+    border: 3px solid beige;
+    border-radius: 5px;
+    width: 25%;
+    height: 40px;
+}
+  
+.navigation-dropdown select {
+    margin-top: 10px;
+    margin-left: 42px;
+    width: 80%;
+    height: 80%;
+    font-size: 14px;
+
+}
+
+.user-info{
+    display: flex;
+    align-items: center;
+}
+
+.navbar-username {
+    margin-right: 10px;
+    font-size: 1rem;
+    color: antiquewhite;
+    font-weight: bold;
+}
+
+.navright-login {
+    margin-right: 30px;
+    display: flex;
+    align-items: center;
+    background-color: firebrick;
+}
+
+.logout-button {
+    background-color: transparent;
+    border: none;
+    color: bisque;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 25px;
+}
+
+.logout-button:hover {
+    text-decoration: underline;
+}
+
+/*images*/
+/*top nav bar images*/
+.navbar-logo {
+    margin-top: 2px;
+    margin-right: 1px;
+    margin-bottom: 2px;
+    margin-left: 25px;
+    height: 50px;
+    padding: 4px;
+    background-color: firebrick;
+    float: left;
+}
+
+/*login items*/
+.login-logo {
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    width: 50px;
+    margin-left: auto; /*pushes logo img to the right*/
+    margin-right: 25px;
+    background-color: firebrick;
+}
+  
+a.item.login {
+    background-color: transparent;
+}
+
+.item-login {
+    background-color: firebrick;
+    border: none;
+}

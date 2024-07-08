@@ -1,0 +1,82 @@
+/*footer css code*/
+
+.mainfooter {                             /*styling for footer on DOM*/
+    /* position: fixed;
+    bottom: 0;
+    left: 0; */
+    width: 100%;
+    background-color: rgb(48, 213, 200);
+    padding: 5px;
+    text-align: center;
+    height: 5vh;
+  }
+  
+  .footer-top-row {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(48, 213, 200);
+    align-items: center;
+  }
+  
+  .footer-bottom-row {
+    display: flex;
+    background-color: rgb(48, 213, 200);
+    justify-content: space-between;
+  }
+  
+  .footer-left-column {
+    background-color: rgb(48, 213, 200);
+  }
+  
+
+
+  .footer-center-column {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .footer-left-column a {
+    background-color: lightgoldenrodyellow;
+    color: black;
+  }
+
+  .footer-right-column {
+    height: 45px;
+    width: 100px;
+    background-color: rgb(48, 213, 200);
+  }
+
+.mainfooter small {
+    background-color: rgb(48, 213, 200);
+  }
+  
+  /*footer social media stuff*/
+  .social-media-links{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: .5rem 0 1.5rem 0;
+    background-color: rgb(48, 213, 200);
+    width: 200px;
+  }
+  
+  .facebook, .twitter, .tiktok, .instagram {
+    background-color: rgb(48, 213, 200);
+    height: 40px;
+    width: 40px;
+  }
+
+  .about-info, .contact-info, .careers-info  {
+    height: 15px;
+    width: 40px;
+    background-color: lightgoldenrodyellow;
+    border: 1px solid black;
+    color: black;
+  }
+  
+  .column {
+    flex: 1;
+  }
+

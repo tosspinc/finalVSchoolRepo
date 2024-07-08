@@ -1,0 +1,95 @@
+/* Books.css */
+.books-row {
+    margin: 20px;
+    margin-left: 80px;
+    padding: 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1400px;
+    border: 1px solid black;
+}
+
+.books-search-container {
+    text-align: center;
+    font-size: 30px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+
+.books-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.book-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    padding: 8px;
+    background: #594D5B;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: calc(16.66% - 20px);
+    box-sizing: border-box;
+    color: #333;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.book-image {
+    width: 90%;
+    height: auto;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    }
+
+.book-title {
+    font-size: .75em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.book-description {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: .9em;
+    margin-bottom: 5px;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.book-price {
+    font-size: .5em;
+    font-weight: bold;
+    font-style: italic;
+    text-align: center;
+    line-height: 2em;
+    color: #333;
+    margin-bottom: 5px;
+    width: 100%;
+    background-color: antiquewhite;
+}
+
+.book-likes {
+    font-size: .5em;
+    font-weight: bold;
+    font-style: italic;
+    line-height: 2em;
+    color:#333;
+    margin-bottom: 4px;
+    width: 100%;
+    background-color: antiquewhite;
+}

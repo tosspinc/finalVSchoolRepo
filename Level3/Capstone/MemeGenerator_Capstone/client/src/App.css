@@ -1,0 +1,147 @@
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Karla", sans-serif;
+    background-color: lightblue;
+  }
+
+  main {
+    padding: 40px;
+  }  
+  
+/*containers section*/
+.header-container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  height: 65px;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  color: white;
+}
+
+.meme-form-container {
+  display: grid;
+  grid-template: 40px 40px / 1fr 1fr;
+  gap: 17px;
+}
+
+.meme-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.saved-memes-container {
+  margin: 10px 10px;
+  padding: 10px 20px;
+  background-color: bisque;
+  border: 1.5px solid black;
+  border-radius: 10px;
+}
+
+/*images section*/
+.troll-image {
+  float: left;
+  height: 50px;
+  width: 50px;
+  margin-right: 6px;
+}
+
+.meme-image {
+  align-content:center;
+  justify-content: center;
+  height: 600px;
+  width: 800px; 
+}
+
+.saved-meme {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+} 
+
+.saved-meme-image {
+  flex: 0 0 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  margin-right: 20px;
+}
+
+/*buttons section*/
+.getNewMeme-button {
+  grid-column: 1 / -1;
+  font-family: "Karla", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  height: 50px;
+  width: 250px;
+}
+
+.addMeme-button {
+  font-family: "Karla", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #672280 1.18%, #a626d3 100%);
+  color: white;
+  border: 2px solid black;
+  cursor: pointer;
+  height: 50px;
+  margin: 5px 5px;
+  width: 600px;
+}
+
+.saved-meme-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-meme-button,
+.delete-saved-meme-button {
+  margin: 3px 6px;
+  padding: 3px 3px;
+  background-color: lightblue;
+  color: black;
+  border: 1.5px solid black;
+  border-radius: 8px;
+
+}
+
+/*rest of items*/
+.header-title {
+  font-size: 1.25rem; /*20px/16px = 1.25rem*/
+  margin-right: auto;
+}
+
+.meme-input {
+  background-color: bisque;
+}
+
+.saved-meme-text{
+  flex: 1;
+}
+
+.top {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  width: 100%;
+}
+
+.bottom { 
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  width: 100%;
+}

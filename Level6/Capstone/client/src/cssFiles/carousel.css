@@ -1,0 +1,42 @@
+/*Carousel css */
+.carousel-container {
+    margin: 15px auto;
+    margin-left: 35px;
+    padding: 0;
+    height: 500px;
+    width: 1475px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    z-index: 0; /*puts the carousel in the background on the dom*/
+  }
+  
+  .carousel-image {
+    margin: 0 auto;
+    width: 400px;
+    height: 350px;
+    top: 35%;
+    left: calc(50% - 150px);
+  }
+
+  
+  /*Carousel buttons*/
+  .left, .right {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%);
+    padding: 6px;
+    height: 50px;
+    width: 30px;
+    background-color: rgb(48, 213, 200);
+    border-radius: 45%;
+  }
+
+  .left {
+    left: 20px;
+  }
+
+  .right {
+    right: 20px;
+  }

@@ -1,0 +1,64 @@
+/*bottom row of navigation bar*/
+.navbar-bottom-container {
+    z-index: 1000;
+    margin: 0;
+    padding: 0;
+    height: 70px;
+    width: 100%;
+    background-color: #594D5B;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+  }
+  
+  .appliance-products, .womens-clothing, .mens-clothing, .kids-products, .shoes, .household-goods, .pet-products,.electronic-goods, .toy-products, .media-products, .books, .sports-products, .all-products {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 10px;
+    height: 40px;
+    width: 90px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #594D5B;
+    color: bisque;
+  }
+  
+  
+  
+  /*Anchor styling */
+  a {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    bottom: 1px solid #fff;
+    margin: -1px;
+    background-repeat: 3px;
+  }
+  
+  a:span {
+    font-size: 14px;
+    margin-left: -10px;
+  }
+  
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+    line-height: 5;
+  }
+  
+  h5 {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .item i{
+    padding: 0 5px;
+  
+  }
+  

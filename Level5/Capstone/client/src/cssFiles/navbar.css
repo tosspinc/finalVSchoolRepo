@@ -1,0 +1,139 @@
+/*Navbar css code: for upper navbar*/
+/*top row of navigation bar*/
+.navbar-top {
+    /* position: absolute;
+    top: 0;
+    left: 0; */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0;
+    margin-left: 0;
+    padding: 0;
+    height: 60px;
+    width: 100%;
+    background-color: rgb(48, 213, 200);
+    /* background-color: #040406; */
+  }
+  
+  .navleft-company-logo {
+    background-color: rgb(48, 213, 200);
+    margin-left: 10px;
+    margin-top: 3px;
+  }
+  
+  .navleft-company-logo a img {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navcenter-search, .search-container{
+    background-color: rgb(48, 213, 200);
+  }
+  
+  /*Navigation search all button*/
+  .all {
+    margin-top: 9px;
+    margin-bottom: 6px;
+    margin-left: 10px;
+    /* background-color: black; */
+    color: bisque;
+    border-radius: 5px 0 0 5px;
+    border: 1px solid bisque;
+    outline: none;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #594D5B;
+    height: 45px;
+    /* background-color: black; */
+  }
+  
+  nav input {
+    flex: 1;
+    padding: 10px;
+    font-size: 17px;
+    width: 700px;
+    height: 23px;
+    outline: none;
+    border: 1px solid black;
+    background-color: antiquewhite;
+    color: #000;
+  }
+  
+  nav button.search {
+    background-color: #594D5B;
+    border-radius: 0 5px 5px 0;
+    border: 1px solid bisque;
+    outline: none;
+    padding: 10px;
+    cursor: 10px;
+    height: 40px;
+    width: 50px;
+    margin-right: 10px;
+  
+  }
+  
+  .navright-login {
+    display: flex;
+    align-items: center;
+    background-color: rgb(48, 213, 200);
+  }
+
+  .navright-shopping-cart {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background-color: rgb(48, 213, 200);
+    height: 50px;
+    width: auto;
+  }
+
+  /*images*/
+/*top nav bar images*/
+.tosspi-bag-logo {
+    background-color: rgb(48, 213, 200);
+    margin-top: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+    margin-left: 5px;
+    height: 45px;
+    width: 50px;
+    padding: 5px;
+    float: left;
+  }
+  
+  .tosspi-logo {
+    margin-top: 2px;
+    margin-right: 1px;
+    margin-bottom: 2px;
+    margin-left: 25px;
+    height: 50px;
+    padding: 4px;
+    background-color: rgb(48, 213, 200);
+    float: left;
+  }
+
+  /*login items*/
+  .login-logo {
+    margin-top: 1px;
+    margin-right: 1px;
+    padding: 3px;
+    height: 50px;
+    width: 85px;
+    margin-left: auto; /*pushes logo img to the right*/
+    background-color: rgb(48, 213, 200);
+  }
+  
+  a.item.login {
+    background-color: rgb(48, 213, 200);
+  }
+  
+  /*cart items*/
+  .cart-logo {
+    margin: 0;
+    padding: 0;
+    height: 60px;
+    width: 65px;
+    background-color: transparent;
+  }

@@ -1,0 +1,47 @@
+* {
+  background-color: bisque;
+  padding: 5px;
+}
+
+.children-container {
+  margin: 5px 5px;
+  padding: 5px;
+  height: 220px;
+  width: 1250px;
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.border {
+  border: 1px solid blue;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.children-form-container {
+  background-color: aqua;
+}
+
+.cta1 {
+  background-color: orange;
+}
+
+h1 {
+  background-color: orange;
+}
+
+.email-box {
+  width: 250px;
+  background-color: bisque;
+}
+
+.clickme-button {
+  background-color: rosybrown;
+}
+
+.submit-button {
+  background-color: blue;
+  color: whitesmoke;
+  margin-top: 3px;
+}

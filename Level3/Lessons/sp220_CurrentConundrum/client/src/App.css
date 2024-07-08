@@ -1,0 +1,34 @@
+body {
+  background-color: #70B85D;
+  padding: 20px;
+  color: white;
+  font-family: "Karla", sans-serif;
+  font-size: 1.3rem;    /*21px/16px = 1.3rem*/
+}
+
+button {
+  background-color: transparent;
+  margin-bottom: 20px;
+  padding: 1rem;
+  border: 2px solid white;
+  border-radius: 50px;
+  color: white;
+  font-family: "Karla", sans-serif;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: antiquewhite;
+  color: black;
+  border: 2px solid black;
+}
+
+button:focus {
+  outline: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}

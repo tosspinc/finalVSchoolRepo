@@ -1,0 +1,33 @@
+import React from 'react'
+import Callout from './components/Callout'
+import './App.css'
+
+export default function App() {
+  return (
+    <main>
+      <h1>Welcome!</h1>
+      
+      <Callout>
+        <h2>Don't miss out!</h2>
+        <p>Unless you dont suffer from FOMO, you better make sure you fill out the email form below!</p>
+      </Callout>
+      
+      <p>This is probably the best site you've ever come across. I'm glad you're here to witness the magnificence of this website right now.</p>
+
+      <Callout className='infocallout-container'>
+        <img src='https://picsum.photos/id/102/4320/3240' width='100%' />
+        <figcaption>'Just look at those sparkling raspberries!'</figcaption>
+      </Callout>
+      
+      <p>Here's some more unforgettable content. Lorem ipsum something or other.</p>
+
+      <Callout className='emailcallout-container'>
+        <h2>'Give us your email. We definitely wont sell it to anyone.'</h2>
+        <input type='email' placeholder='Enter your Email Address.'/>
+        <button>Sign me up!</button>
+      </Callout>
+    </main>
+  )
+}
+
+

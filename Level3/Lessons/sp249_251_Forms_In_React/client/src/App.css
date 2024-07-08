@@ -1,0 +1,31 @@
+input[type='text'], input[type='email']{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 40px;
+  width: fit-content;
+  text-indent: 8px;
+  font-weight: bold;
+  font-size: 16px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  display: block;
+  background-color: antiquewhite;
+}
+
+input [type='checkbox'] {
+  margin-right: .75rem;
+}
+
+textarea {
+  margin-bottom: 10px;
+  height: 50px;
+  width: fit-content;
+  border: 1px solid black;
+  border-radius: 8px;
+  display: block;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: bold;
+  font-style: italic;
+  background-color: antiquewhite;
+}

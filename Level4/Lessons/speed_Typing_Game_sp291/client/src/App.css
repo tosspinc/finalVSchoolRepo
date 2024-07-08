@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.typing-game-container {
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 60vh;
+  width: 700px;
+  align-items: center;
+  justify-content: center;
+  background-color: aquamarine;
+}
+
+.typing-game-container > h1, h4 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 5px;
+  border-radius: 5px;
+  width: 100px;
+  background-color: coral;
+  font-style: italic;
+  font-weight: bolder;
+  width: 200px;
+  margin-left: 230px;
+}
+
+button.disabled {
+  cursor: not-allowed;
+}
+
+.wordgame-textbox {
+  margin-left: 15px;
+  padding: 10px;
+  background-color: antiquewhite;
+  height: 300px;
+  width: 650px;
+  border: 2px solid black;
+  border-radius: 20px;
+}
+

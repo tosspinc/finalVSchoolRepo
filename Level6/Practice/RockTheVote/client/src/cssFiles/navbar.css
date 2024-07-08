@@ -1,0 +1,15 @@
+#navbar {
+    height: 10vh;
+    width: 100vw;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: firebrick;
+    border: 1px solid darkgray;
+  }
+
+  button {
+    height: 40px;
+    width: 150px;
+  }

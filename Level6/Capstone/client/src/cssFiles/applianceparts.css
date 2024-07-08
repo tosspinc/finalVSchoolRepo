@@ -1,0 +1,59 @@
+/* Appliance products css file */
+.appliance-parts-row {
+    margin: 30px;
+    padding: 2px;
+    /*background: #333;*/
+    border: 1.5px solid black;
+    max-width: 1600px;
+
+}
+
+.appliance-parts-search-container {
+    text-align: center;
+}
+
+.appliance-parts-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.appliance-parts-card {
+    margin: 10px;
+    background-color: #594D5B;
+    /* background: rgb(207, 137, 7); */
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    width: calc(20% - 20px);
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+}
+
+.appliance-parts-card img {
+    max-width: 90%;
+    height: 300px; /* Ensure images are responsive */
+    border-radius: 4px; /* Slightly round the image corners */
+}
+
+.appliance-parts-card h2 {
+    background-color: orange;
+    font-size: 1em; /* Increase font size for better readability */
+    margin: 10px 0; /* Add margin for better spacing */
+    color: #333; /* Set text color for better contrast */
+}
+
+.appliance-parts-card p {
+    background-color: antiquewhite;
+    color: #333; /* Set text color for better contrast */
+    margin: 3px 0; /* Add margin for better spacing */
+}
+
+.appliance-parts-card .price {
+    font-weight: bold; /* Make price text bold */
+    color: #333; /* Set text color for better contrast */
+}
+
+.appliance-parts-card:hover {
+    transform: translateY(-5px); /* Add a subtle lift effect on hover */
+}

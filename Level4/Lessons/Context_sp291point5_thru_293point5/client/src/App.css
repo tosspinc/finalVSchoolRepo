@@ -1,0 +1,27 @@
+.context-container {
+  margin: 20px;
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: bisque;
+  width: 1240px;
+  height: 20vh;
+}
+
+div, button {
+  margin: 8px 8px;
+  padding: 10px 10px;
+  font-family: 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 10px;
+
+}
+
+.light-theme {
+  background-color: #cfcfcf;
+  color: #000;
+}
+
+.dark-theme {
+  background-color: #3a3b3c;
+  color: #fff;
+}
