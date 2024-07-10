@@ -4,6 +4,8 @@ const UserName = require('../models/user.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
+const saltRounds = 10;
+
 // User login
 authRouter.post('/login', async (req, res, next) => {
     try {
@@ -16,19 +18,10 @@ authRouter.post('/login', async (req, res, next) => {
         }
 
         // Check if password matches
-        existingUser.checkPassword(password, (err, isMatch) => {
-             if (!isMatch) {
-            return res.status(403).send({ error: "Incorrect Username or Password." })
-        }
-        if (err){
-            res.status(403)
-            return next(err)
-        }
+        const isMatch = await bcrypt.compare(password, existingUser.password)
         if (!isMatch) {
-            return res.status(403).send({ error: "Incorrect Username or Password."})
-        }
-        })
-        
+            return res.status(403).send({ error: "Incorrect Username or Password." })
+        }        
 
         // Generate token
         const token = jwt.sign(existingUser.withoutPassword(), process.env.SECRET);
@@ -52,12 +45,11 @@ authRouter.post('/signup', async (req, res, next) => {
             res.status(403).send({ error: "Username already exists." })
         }
 
-       
+       //hash password
+       const hashedPassword = await bcrypt.hash(password, saltRounds)
+       const newUser = new UserName({ username, password: hashedPassword })
+       const savedUser = await newUser.save()
         
-
-        const newUser = new UserName({ username, password });
-        const savedUser = await newUser.save();
-               
         // Generate JWT token
         const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET);
         

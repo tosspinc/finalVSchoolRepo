@@ -3,44 +3,54 @@ import { UserContext } from '../context/UserProvider';
 import '../cssFiles/public.css';
 
 export default function Public() {
-    const { getAllIssues, handleUpvote, handleDownvote } = useContext(UserContext);
+    const { getAllIssues, handleUpvote, handleDownvote, isAuthenticated } = useContext(UserContext);
     const [issues, setIssues] = useState([]);
 
     useEffect(() => {
         const fetchIssues = async () => {
-            try {
-                const issuesData = await getAllIssues();
-                // Initialize upvotes and downvotes counts to 0
-                const issuesWithVotes = issuesData.map(issue => ({
-                    ...issue,
-                    upvotes: 0,
-                    downvotes: 0
-                }));
-                setIssues(issuesWithVotes);
-            } catch (error) {
-                console.log(error);
-            }
-        };
-        fetchIssues();
+            const issuesData = await getAllIssues()
+            //Initialize upvotes and downvotes counts to 0.
+            const issuesWithVotes = issuesData.map(issue => ({
+                ...issue,
+                upvotes: 0,
+                downvotes: 0
+            }))
+            setIssues(issuesWithVotes)
+        }
+        fetchIssues()
     }, []);
 
     const incrementUpvote = (issueId) => {
-        setIssues(prevIssues =>
-            prevIssues.map(issue =>
-                issue._id === issueId ? { ...issue, upvotes: issue.upvotes + 1 } : issue
-            )
-        );
-        handleUpvote(issueId);
-    };
-
+        if (isAuthenticated()) {
+            setIssues(prevIssues =>
+                prevIssues.map(issue =>
+                    issue._id === issueId ? { 
+                        ...issue, 
+                        upvotes: issue.upvotes + 1 
+                    } : issue
+                )
+            );
+            handleUpvote(issueId);
+        } else {
+            console.log('User is not authenticated.')
+        }    
+    }
+        
     const incrementDownvote = (issueId) => {
-        setIssues(prevIssues =>
-            prevIssues.map(issue =>
-                issue._id === issueId ? { ...issue, downvotes: issue.downvotes + 1 } : issue
-            )
-        );
-        handleDownvote(issueId);
-    };
+        if (isAuthenticated()) {
+            setIssues(prevIssues =>
+                prevIssues.map(issue =>
+                    issue._id === issueId ? { 
+                        ...issue, 
+                        downvotes: issue.downvotes + 1 
+                    } : issue
+                )
+            );
+            handleDownvote(issueId);
+        } else {
+            console.log('User is not authenticated.')
+        }    
+    }
 
     return (
         <div className='public-wrapper'>

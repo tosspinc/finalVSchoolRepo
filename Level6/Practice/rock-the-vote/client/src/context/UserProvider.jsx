@@ -10,14 +10,16 @@ const userAxios = axios.create();
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
     console.log(token);
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
 });
 
 export default function UserProvider(props) {
 
     const initState = {
-        user: localStorage.getItem('user') || {},
+        user: JSON.parse(localStorage.getItem('user')) || {},
         token: localStorage.getItem('token') || '',
         issues: [],
         errMsg: ''
@@ -27,40 +29,38 @@ export default function UserProvider(props) {
 
     async function signup(creds) {
         try {
-            const res = await axios.post('/auth/signup', creds);
-            const { user, token } = res.data;
-            localStorage.setItem('token', token);
-            localStorage.setItem('user', user);
+            const res = await userAxios.post('/api/auth/signup', creds)
+            const { user, token } = res.data
+            localStorage.setItem('token', token)
+            localStorage.setItem('user', JSON.stringify(user))
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user: user,
                 token: token,
                 errMsg: ''
-            }));
+            }))
         } catch (error) {
-            handleAuthErr(error.response.data.error || 'Signup failed');
+            handleAuthErr(error.response?.data?.error || 'Signup failed');
         }
     }
 
     async function login(creds) {
         try {
-            const res = await axios.post('/auth/login', creds);
+            const res = await axios.post('/api/auth/login', creds);
             const { user, token } = res.data;
             localStorage.setItem('token', token);
-            localStorage.setItem('user', user);
+            localStorage.setItem('user', JSON.stringify(user));
             setUserState(prevUserState => ({
                 ...prevUserState,
                 user: user,
                 token: token,
                 errMsg: ''
             }));
-            getUserIssues();
+            //getUserIssues();
         } catch (error) {
-            handleAuthErr(error.response.data.error || 'Username or Password are incorrect.');
+            handleAuthErr(error.response?.data?.error || 'Username or Password are incorrect.');
         }
     }
-
-    //test comment
 
     async function logout() {
         localStorage.removeItem('token');
@@ -73,21 +73,25 @@ export default function UserProvider(props) {
         }));
     }
 
-    function handleAuthErr(errMsg) {
-        setUserState(prevUserState => ({
-            ...prevUserState,
-            errMsg
-        }));
+    const isAuthenticated = () => {
+        return !!localStorage.getItem('token')
     }
 
-    function resetAuthErr() {
+    const handleAuthErr = (errMsg) => {
         setUserState(prevUserState => ({
             ...prevUserState,
             errMsg: ''
         }));
     }
 
-    async function getUserIssues() {
+    const resetAuthErr  = () => {
+        setUserState(prevUserState => ({
+            ...prevUserState,
+            errMsg: ''
+        }));
+    }
+
+    const getUserIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues/person');
             setUserState(prevState => ({
@@ -99,16 +103,17 @@ export default function UserProvider(props) {
         }
     }
 
-    async function getAllIssues() {
+    const getAllIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues');
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.log('Error fetching all issues.', error);
+            return []
         }
     }
 
-    async function addIssue(newIssue) {
+    const addIssue = async (newIssue) => {
         try {
             const res = await userAxios.post('/api/user/issues', newIssue);
             setUserState(prevState => ({
@@ -120,7 +125,7 @@ export default function UserProvider(props) {
         }
     }
 
-    async function editIssue(issueId, updatedIssue) {
+    const editIssue = async (issueId, updatedIssue) => {
         try {
             const res = await userAxios.put(`/api/user/issues/post/${issueId}`, updatedIssue);
             setUserState(prevState => ({
@@ -134,7 +139,7 @@ export default function UserProvider(props) {
         }
     }
 
-    async function deleteIssue(issueId) {
+    const deleteIssue = async (issueId) => {
         try {
             await userAxios.delete(`/api/user/issues/${issueId}`);
             setUserState(prevState => ({
@@ -146,44 +151,39 @@ export default function UserProvider(props) {
         }
     }
 
-    async function handleUpvote(issueId){
+    const handleUpvote = async (issueId) => {
         try {
             const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`)
             console.log(res.data)
-            setAllIssues(prevIssues => prevIssues.map(issue => issue._id === issueId ? res.data : issue))
-            setUserState(prevUserState => {
-                return {
-                    ...prevUserState,
-                    issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-                }
-            })   
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+            }))
         } catch (error) {
             console.log(error)
         }
     }
 
-    async function handleDownvote(issueId){
+    const handleDownvote = async (issueId) => {
         try {
             const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`)
             console.log(res.data)
-            setAllIssues(prevIssues => prevIssues.map(issue => issue._id === issueId ? res.data : issue))
-            setUserState(prevUserState => {
-                return {
-                    ...prevUserState,
-                    issues: prevUserState.issues.map(issue => issue._id ? res.data : issue)
-                }
-            })
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+            }))
         } catch (error) {
             console.log(error)
         }
     }
-
+    
     return (
         <UserContext.Provider value={{
             ...userState,
             signup,
             login,
             logout,
+            isAuthenticated,
             getUserIssues,
             getAllIssues,
             addIssue,

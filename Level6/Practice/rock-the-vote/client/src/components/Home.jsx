@@ -1,22 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../context/UserProvider";
 import '../cssFiles/home.css'
 
 export default function Home (){
     const [allIssues, setAllIssues] = useState([])
+    const { isAuthenticated } = useContext(UserContext)
 
     useEffect(() => {
         const fetchIssues = async () => {
-            try {
-                const res = await fetch('/api/issues')
-                const data = await res.json()
-                setAllIssues(Array.isArray(data) ? data : [])
-            } catch (error) {
+            if (isAuthenticated()) {
+                try {
+                    const res = await fetch('/api/issues')
+                    const data = await res.json()
+                    setAllIssues(Array.isArray(data) ? data : [])
+                } catch (error) {
+                    console.error('Error fetching issues:', error)
+                }
+            } else {
                 console.error('Error fetching issues:', error)
             }
         }
         fetchIssues()
-        //this empty array ensure the useEffect hook only runs once.
-    }, [])
+    }, [isAuthenticated])
 
     return (
         <div className="home-container">

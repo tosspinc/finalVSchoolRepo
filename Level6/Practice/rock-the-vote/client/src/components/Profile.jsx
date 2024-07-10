@@ -4,13 +4,17 @@ import IssueForm from './IssueForm';
 import '../cssFiles/profile.css';
 
 function Profile() {
-    const { user, issues, getUserIssues, deleteIssue, editIssue } = useContext(UserContext);
+    const { user, issues, getUserIssues, deleteIssue, editIssue, isAuthenticated } = useContext(UserContext);
     const [isEditing, setIsEditing] = useState(false);
     const [currentIssue, setCurrentIssue] = useState({});
 
     useEffect(() => {
-        getUserIssues();
-    }, []);
+        if (isAuthenticated()) {
+            getUserIssues();
+        } else {
+            console.log("User is not Authenticated.")
+        }
+    }, [isAuthenticated]);
 
     const handleEditClick = (issue) => {
         setIsEditing(true);

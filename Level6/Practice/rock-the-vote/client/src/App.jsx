@@ -14,8 +14,9 @@ export default function App() {
       <Navbar logout={logout} />
       <div id="app">
         <Routes>
+          {/* this should restrict voting actions to authenticated users. */}
           <Route path="/" element={token ? <Navigate to='/profile' /> : <Auth />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={token ? <Profile /> : <Navigate to='/' />} />
           <Route path="public" element={<Public />} />
         </Routes>
       </div>

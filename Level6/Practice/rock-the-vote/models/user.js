@@ -29,25 +29,21 @@ const userNameSchema = new Schema({
 });
 
 userNameSchema.pre('save', async function(next){
-    const user = this
-    if(user.isModified('password')){
+    if(this.isModified('password') || this.isNew) {
         try {
-            const hash = await bcrypt.hash(user.password, 10)
-            user.password = hash
+            const hashedPassword = await bcrypt.hash(this.password, 10)
+            this.password = hashedPassword
+            next()
         } catch (error) {
-            return next(error)
+            next(error)
         }
     } else {
-        next()
+        return next()
     }
 })
 
-userNameSchema.methods.checkPassword = async function(passwordAttempt){
-    try {
-        return  bcrypt.compare(passwordAttempt, this.password)
-    } catch (error) {
-        throw(err)
-    }
+userNameSchema.methods.checkPassword = function(password, cb){
+    bcrypt.compare(password, this.password, cb)
 }
 
 userNameSchema.methods.withoutPassword = function () {
