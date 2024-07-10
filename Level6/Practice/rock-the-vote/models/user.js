@@ -42,8 +42,12 @@ userNameSchema.pre('save', async function(next){
     }
 })
 
-userNameSchema.methods.checkPassword = function(password, cb){
-    bcrypt.compare(password, this.password, cb)
+userNameSchema.methods.checkPassword = function(passwordAttempt, callback){
+ bcrypt.compare(passwordAttempt, this.password, (err, isMatch)=>{
+        if(err) return callback(err)
+            return callback(null, isMatch)
+    })
+    
 }
 
 userNameSchema.methods.withoutPassword = function () {

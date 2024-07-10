@@ -1,7 +1,6 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
 
-
 // Creates a context for user.
 export const UserContext = createContext();
 
@@ -9,60 +8,86 @@ const userAxios = axios.create();
 
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
-    console.log(token);
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
-    }
-    return config
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
 });
 
-export default function UserProvider(props) {
+const safeParseJSON = (value) => {
+    try {
+        return value ? JSON.parse(value) : {};
+    } catch (error) {
+        console.error('JSON parsing error:', error);
+        return {};
+    }
+};
 
-    const initState = {
-        user: JSON.parse(localStorage.getItem('user')) || {},
-        token: localStorage.getItem('token') || '',
-        issues: [],
-        errMsg: ''
+const initState = {
+    user: safeParseJSON(localStorage.getItem('user')) || {},
+    token: localStorage.getItem('token') || '',
+    issues: [],
+    errMsg: ''
+};
+
+export default function UserProvider({ children }) {
+    const [userState, setUserState] = useState(initState);
+
+    const updateUserState = (newState) => {
+        setUserState(prevState => ({
+            ...prevState,
+            ...newState
+        }));
     };
 
-    const [userState, setUserState] = useState(initState);
+    const handleAuthErr = (errMsg) => {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg
+        }));
+    };
+
+    const resetAuthErr = () => {
+        setUserState(prevState => ({
+            ...prevState,
+            errMsg: ''
+        }));
+    };
 
     async function signup(creds) {
         try {
-            const res = await userAxios.post('/api/auth/signup', creds)
-            const { user, token } = res.data
-            localStorage.setItem('token', token)
-            localStorage.setItem('user', JSON.stringify(user))
-            setUserState(prevUserState => ({
-                ...prevUserState,
-                user: user,
-                token: token,
-                errMsg: ''
-            }))
+            const response = await userAxios.post('/api/auth/signup', creds);
+            updateUserState({
+                user: response.data.user,
+                token: response.data.token
+            });
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            return true;
         } catch (error) {
-            handleAuthErr(error.response?.data?.error || 'Signup failed');
+            const errorMessage = error.response?.data?.message || "An error occurred. Please try again later.";
+            handleAuthErr(errorMessage);
+            return false;
         }
     }
 
     async function login(creds) {
         try {
             const res = await axios.post('/api/auth/login', creds);
-            const { user, token } = res.data;
+            const { token, user } = res.data;
+            updateUserState({
+                user,
+                token
+            });
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
-            setUserState(prevUserState => ({
-                ...prevUserState,
-                user: user,
-                token: token,
-                errMsg: ''
-            }));
-            //getUserIssues();
+            return true;
         } catch (error) {
-            handleAuthErr(error.response?.data?.error || 'Username or Password are incorrect.');
+            const errorMessage = error.response?.data?.message || "Username or Password are incorrect. Please try again.";
+            handleAuthErr(errorMessage);
+            return false;
         }
     }
 
-    async function logout() {
+    function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setUserState(prevUserState => ({
@@ -74,44 +99,31 @@ export default function UserProvider(props) {
     }
 
     const isAuthenticated = () => {
-        return !!localStorage.getItem('token')
-    }
-
-    const handleAuthErr = (errMsg) => {
-        setUserState(prevUserState => ({
-            ...prevUserState,
-            errMsg: ''
-        }));
-    }
-
-    const resetAuthErr  = () => {
-        setUserState(prevUserState => ({
-            ...prevUserState,
-            errMsg: ''
-        }));
-    }
+        return !!localStorage.getItem('token');
+    };
 
     const getUserIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues/person');
+            console.log("Fetched Issues:", res.data)
             setUserState(prevState => ({
                 ...prevState,
-                issues: res.data
+                issues: Array.isArray(res.data) ? res.data : []
             }));
         } catch (error) {
             console.log("Error fetching user issues: ", error);
         }
-    }
+    };
 
     const getAllIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues');
-            return res.data;
+            return res.data || [];
         } catch (error) {
             console.log('Error fetching all issues.', error);
-            return []
+            return [];
         }
-    }
+    };
 
     const addIssue = async (newIssue) => {
         try {
@@ -123,7 +135,7 @@ export default function UserProvider(props) {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const editIssue = async (issueId, updatedIssue) => {
         try {
@@ -137,7 +149,7 @@ export default function UserProvider(props) {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const deleteIssue = async (issueId) => {
         try {
@@ -149,34 +161,32 @@ export default function UserProvider(props) {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleUpvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`)
-            console.log(res.data)
+            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`);
             setUserState(prevUserState => ({
                 ...prevUserState,
                 issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-            }))
+            }));
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
+    };
 
     const handleDownvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`)
-            console.log(res.data)
+            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`);
             setUserState(prevUserState => ({
                 ...prevUserState,
                 issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-            }))
+            }));
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-    
+    };
+
     return (
         <UserContext.Provider value={{
             ...userState,
@@ -194,7 +204,7 @@ export default function UserProvider(props) {
             handleUpvote,
             handleDownvote
         }}>
-            {props.children}
+            {children}
         </UserContext.Provider>
     );
 }

@@ -8,16 +8,24 @@ export default function Public() {
 
     useEffect(() => {
         const fetchIssues = async () => {
-            const issuesData = await getAllIssues()
-            //Initialize upvotes and downvotes counts to 0.
-            const issuesWithVotes = issuesData.map(issue => ({
-                ...issue,
-                upvotes: 0,
-                downvotes: 0
-            }))
-            setIssues(issuesWithVotes)
-        }
-        fetchIssues()
+            try {
+                const issuesData = await getAllIssues();
+                if (Array.isArray(issuesData)) {
+                    // Initialize upvotes and downvotes counts to 0.
+                    const issuesWithVotes = issuesData.map(issue => ({
+                        ...issue,
+                        upvotes: 0,
+                        downvotes: 0
+                    }));
+                    setIssues(issuesWithVotes);
+                } else {
+                    console.error('Fetched data is not an array:', issuesData);
+                }
+            } catch (error) {
+                console.error('Error fetching issues:', error);
+            }
+        };
+        fetchIssues();
     }, []);
 
     const incrementUpvote = (issueId) => {
@@ -34,7 +42,7 @@ export default function Public() {
         } else {
             console.log('User is not authenticated.')
         }    
-    }
+    };
         
     const incrementDownvote = (issueId) => {
         if (isAuthenticated()) {
@@ -50,7 +58,7 @@ export default function Public() {
         } else {
             console.log('User is not authenticated.')
         }    
-    }
+    };
 
     return (
         <div className='public-wrapper'>
