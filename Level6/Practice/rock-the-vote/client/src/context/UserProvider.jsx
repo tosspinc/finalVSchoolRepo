@@ -215,6 +215,26 @@ export default function UserProvider({ children }) {
     //     }
     // };
 
+    const addComment = async (newComment) => {
+        try {
+            const res = await userAxios.post('/api/comments', newComment)
+            setUserState(prevState => ({
+                ...prevState,
+                issues: prevState.issues.map(issue => 
+                    issue._id === newComment.issueId ? { 
+                        ...issue,
+                        comments: [
+                            ...issue.comments,
+                            res.data
+                        ]
+                    } : issue
+                )
+            }))
+        } catch (error) {
+            console.error('Error adding a comment: ', error)
+        }
+    }
+
     return (
         <UserContext.Provider value={{
             ...userState,
@@ -231,7 +251,8 @@ export default function UserProvider({ children }) {
             handleAuthErr,
             resetAuthErr,
             handleUpvote,
-            handleDownvote
+            handleDownvote,
+            addComment
         }}>
             {children}
         </UserContext.Provider>
