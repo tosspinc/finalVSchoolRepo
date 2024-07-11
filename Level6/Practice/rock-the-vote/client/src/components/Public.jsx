@@ -11,11 +11,10 @@ export default function Public() {
             try {
                 const issuesData = await getAllIssues();
                 if (Array.isArray(issuesData)) {
-                    // Initialize upvotes and downvotes counts to 0.
                     const issuesWithVotes = issuesData.map(issue => ({
                         ...issue,
-                        upvotes: 0,
-                        downvotes: 0
+                        upvotes: issue.upvotes ? issue.upvotes.length : 0,
+                        downvotes: issue.downvotes ? issue.downvotes.length : 0
                     }));
                     setIssues(issuesWithVotes);
                 } else {
@@ -28,36 +27,66 @@ export default function Public() {
         fetchIssues();
     }, []);
 
-    const incrementUpvote = (issueId) => {
+    const incrementUpvote = async (issueId) => {
         if (isAuthenticated()) {
             setIssues(prevIssues =>
                 prevIssues.map(issue =>
-                    issue._id === issueId ? { 
-                        ...issue, 
-                        upvotes: issue.upvotes + 1 
+                    issue._id === issueId ? {
+                        ...issue,
+                        upvotes: issue.upvotes + 1
                     } : issue
                 )
             );
-            handleUpvote(issueId);
+            try {
+                const updatedIssue = await handleUpvote(issueId);
+                if (updatedIssue) {
+                    setIssues(prevIssues =>
+                        prevIssues.map(issue =>
+                            issue._id === updatedIssue._id ? {
+                                ...issue,
+                                upvotes: updatedIssue.upvotes.length,
+                                downvotes: updatedIssue.downvotes.length
+                            } : issue
+                        )
+                    );
+                }
+            } catch (error) {
+                console.log('Error upvoting issue:', error);
+            }
         } else {
-            console.log('User is not authenticated.')
-        }    
+            console.log('User is not authenticated.');
+        }
     };
-        
-    const incrementDownvote = (issueId) => {
+
+    const incrementDownvote = async (issueId) => {
         if (isAuthenticated()) {
             setIssues(prevIssues =>
                 prevIssues.map(issue =>
-                    issue._id === issueId ? { 
-                        ...issue, 
-                        downvotes: issue.downvotes + 1 
+                    issue._id === issueId ? {
+                        ...issue,
+                        downvotes: issue.downvotes + 1
                     } : issue
                 )
             );
-            handleDownvote(issueId);
+            try {
+                const updatedIssue = await handleDownvote(issueId);
+                if (updatedIssue) {
+                    setIssues(prevIssues =>
+                        prevIssues.map(issue =>
+                            issue._id === updatedIssue._id ? {
+                                ...issue,
+                                upvotes: updatedIssue.upvotes.length,
+                                downvotes: updatedIssue.downvotes.length
+                            } : issue
+                        )
+                    );
+                }
+            } catch (error) {
+                console.log('Error downvoting issue:', error);
+            }
         } else {
-            console.log('User is not authenticated.')
-        }    
+            console.log('User is not authenticated.');
+        }
     };
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
 
+
 // Creates a context for user.
 export const UserContext = createContext();
 
@@ -175,27 +176,44 @@ export default function UserProvider({ children }) {
 
     const handleUpvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`);
-            setUserState(prevUserState => ({
-                ...prevUserState,
-                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-            }));
+            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`)
+            return res.data
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
+
+    // const handleUpvote = async (issueId) => {
+    //     try {
+    //         const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`);
+    //         setUserState(prevUserState => ({
+    //             ...prevUserState,
+    //             issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+    //         }));
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     const handleDownvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`);
-            setUserState(prevUserState => ({
-                ...prevUserState,
-                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-            }));
+            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`)
+            return res.data
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
-    };
+    }
+    // const handleDownvote = async (issueId) => {
+    //     try {
+    //         const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`);
+    //         setUserState(prevUserState => ({
+    //             ...prevUserState,
+    //             issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+    //         }));
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
     return (
         <UserContext.Provider value={{
