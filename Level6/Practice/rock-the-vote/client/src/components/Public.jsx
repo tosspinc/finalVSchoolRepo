@@ -3,7 +3,7 @@ import { UserContext } from '../context/UserProvider';
 import '../cssFiles/public.css';
 
 export default function Public() {
-    const { getAllIssues, handleUpvote, handleDownvote, isAuthenticated } = useContext(UserContext);
+    const { getAllIssues, handleUpvote, handleDownvote, isAuthenticated, user } = useContext(UserContext);
     const [issues, setIssues] = useState([]);
 
     useEffect(() => {
@@ -25,18 +25,10 @@ export default function Public() {
             }
         };
         fetchIssues();
-    }, []);
+    }, [getAllIssues]);
 
     const incrementUpvote = async (issueId) => {
         if (isAuthenticated()) {
-            setIssues(prevIssues =>
-                prevIssues.map(issue =>
-                    issue._id === issueId ? {
-                        ...issue,
-                        upvotes: issue.upvotes + 1
-                    } : issue
-                )
-            );
             try {
                 const updatedIssue = await handleUpvote(issueId);
                 if (updatedIssue) {
@@ -60,14 +52,6 @@ export default function Public() {
 
     const incrementDownvote = async (issueId) => {
         if (isAuthenticated()) {
-            setIssues(prevIssues =>
-                prevIssues.map(issue =>
-                    issue._id === issueId ? {
-                        ...issue,
-                        downvotes: issue.downvotes + 1
-                    } : issue
-                )
-            );
             try {
                 const updatedIssue = await handleDownvote(issueId);
                 if (updatedIssue) {
@@ -92,8 +76,7 @@ export default function Public() {
     return (
         <div className='public-wrapper'>
             <div className='public-container'>
-                <h2 className='public-issues-title'>All Current Issues</h2>
-                <hr className='public-issues-breakline' />
+                <h1>Current Issues</h1>                
                 <ul className='issues-list'>
                     {issues.map(issue => (
                         <li key={issue._id} className='issue-item'>
@@ -102,16 +85,18 @@ export default function Public() {
                                 <h2 className='issue-title'>Title: {issue.title}</h2>
                                 <h3 className='issue-description'>Description: {issue.description}</h3>
                                 <h3 className='issue-author'>Author: {issue.username}</h3>
-                            </div>
-                            <div className='vote-buttons-container'>
-                                <div className='vote-button' onClick={() => incrementUpvote(issue._id)}>
-                                    <img src='../src/assets/IMGS/upvote.png' alt='Upvote' className='vote-icon' />
-                                    <span className='vote-count'>{issue.upvotes}</span>
-                                </div>
-                                <div className='vote-button' onClick={() => incrementDownvote(issue._id)}>
-                                    <img src='../src/assets/IMGS/downvote.png' alt='Downvote' className='vote-icon' />
-                                    <span className='vote-count'>{issue.downvotes}</span>
-                                </div>
+                                {issue.author !== user._id && (
+                                    <div className='vote-buttons-container'>
+                                        <div className='vote-button' onClick={() => incrementUpvote(issue._id)}>
+                                            <img src='../src/assets/IMGS/upvote.png' alt='Upvote' className='vote-icon' />
+                                            <span className='vote-count'>{issue.upvotes}</span>
+                                        </div>
+                                        <div className='vote-button' onClick={() => incrementDownvote(issue._id)}>
+                                            <img src='../src/assets/IMGS/downvote.png' alt='Downvote' className='vote-icon' />
+                                            <span className='vote-count'>{issue.downvotes}</span>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </li>
                     ))}

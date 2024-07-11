@@ -60,6 +60,7 @@ export default function UserProvider({ children }) {
     async function signup(creds) {
         try {
             const response = await userAxios.post('/auth/signup', creds);
+            const { token, user } = response.data
             setUserState( prevState => {
                 return {
                  ...prevState,
@@ -176,7 +177,7 @@ export default function UserProvider({ children }) {
 
     const handleUpvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`)
+            const res = await userAxios.put(`/api/user/issues/upvotes/${issueId}`)
             return res.data
         } catch (error) {
             console.log(error)
@@ -197,7 +198,7 @@ export default function UserProvider({ children }) {
 
     const handleDownvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`)
+            const res = await userAxios.put(`/api/user/issues/downvotes/${issueId}`)
             return res.data
         } catch (error) {
             console.log(error)

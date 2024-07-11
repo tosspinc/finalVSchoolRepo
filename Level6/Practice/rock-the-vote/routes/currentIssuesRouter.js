@@ -2,7 +2,6 @@ const express = require('express');
 const currentIssuesRouter = express.Router();
 const Issues = require('../models/issue.js');
 
-
 // Get all issues
 currentIssuesRouter.get('/', async (req, res, next) => {
     try {
@@ -28,12 +27,9 @@ currentIssuesRouter.get('/get/:issueId', async (req, res, next) => {
 // Get issues by specific user
 currentIssuesRouter.get('/person', async (req, res, next) => {
     try {
-        console.log(req)
-        console.log("fetching issues for user:", req.auth._id)
         const userIssues = await Issues.find({ author: req.auth._id })
         res.status(200).send(userIssues);
     } catch (error) {
-        console.log("Error fetching user issues: ", error)
         res.status(500).send({ error: 'Internal Server Error' });
         return next(error);
     }
@@ -42,7 +38,6 @@ currentIssuesRouter.get('/person', async (req, res, next) => {
 // Post a new issue
 currentIssuesRouter.post('/', async (req, res, next) => {
     try {
-        console.log(req)
         req.body.author = req.auth._id
         req.body.username = req.auth.username
         // Create and save new issue
@@ -53,7 +48,6 @@ currentIssuesRouter.post('/', async (req, res, next) => {
     } catch (error) {
        console.log(error)
         res.status(500).send({ error: 'Internal Server Error' });
-     //   return next(error);
     }
 });
 
@@ -96,8 +90,13 @@ currentIssuesRouter.put('/upvotes/:issueId', async(req, res, next) => {
         const userId = req.auth._id
 
         const issue = await Issues.findById(issueId)
+        
         if (!issue) {
             return res.status(404).send({ message: 'Issue not found.' })
+        }
+
+        if (issue.author.toString() === userId) {
+            return res.status(403).send({ message: 'Authors cannot vote on their own issues.' });
         }
 
         if (issue.downvotes.includes(userId)) {
@@ -121,11 +120,16 @@ currentIssuesRouter.put('/upvotes/:issueId', async(req, res, next) => {
 currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
     try {
         const issueId = req.params.issueId
-        const userId = req.auth._Id
+        const userId = req.auth._id
 
         const issue = await Issues.findById(issueId)
-        if (!issue.upvotes.includes(userId)) {
+        
+        if (!issue) {
             return res.status(404).send({ message: 'Issue not found.' })
+        }
+
+        if (issue.author.toString() === userId) {
+            return res.status(403).send({ message: 'Authors cannot vote on their own issues.' });
         }
 
         if (issue.upvotes.includes(userId)) {
@@ -134,10 +138,9 @@ currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
 
         if (issue.downvotes.includes(userId)) {
             issue.downvotes.pull(userId)
-        }else {
+        } else {
             issue.downvotes.push(userId)
         }
-
 
         const updatedIssue = await issue.save()
         return res.status(201).send(updatedIssue)
