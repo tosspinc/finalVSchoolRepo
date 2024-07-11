@@ -8,16 +8,18 @@ const userAxios = axios.create();
 
 userAxios.interceptors.request.use(config => {
     const token = localStorage.getItem('token');
-    config.headers.Authorization = `Bearer ${token}`;
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
 });
 
 const safeParseJSON = (value) => {
     try {
-        return value ? JSON.parse(value) : {};
+        return value ? JSON.parse(value) : null;
     } catch (error) {
         console.error('JSON parsing error:', error);
-        return {};
+        return null;
     }
 };
 
@@ -28,15 +30,17 @@ const initState = {
     errMsg: ''
 };
 
+
+
 export default function UserProvider({ children }) {
     const [userState, setUserState] = useState(initState);
 
-    const updateUserState = (newState) => {
-        setUserState(prevState => ({
-            ...prevState,
-            ...newState
-        }));
-    };
+    // const updateUserState = (newState) => {
+    //     setUserState(prevState => ({
+    //         ...prevState,
+    //         ...newState
+    //     }));
+    // };
 
     const handleAuthErr = (errMsg) => {
         setUserState(prevState => ({
@@ -54,11 +58,14 @@ export default function UserProvider({ children }) {
 
     async function signup(creds) {
         try {
-            const response = await userAxios.post('/api/auth/signup', creds);
-            updateUserState({
-                user: response.data.user,
-                token: response.data.token
-            });
+            const response = await userAxios.post('/auth/signup', creds);
+            setUserState( prevState => {
+                return {
+                 ...prevState,
+                 user, 
+                 token
+                }
+             });
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('user', JSON.stringify(response.data.user));
             return true;
@@ -71,11 +78,14 @@ export default function UserProvider({ children }) {
 
     async function login(creds) {
         try {
-            const res = await axios.post('/api/auth/login', creds);
+            const res = await axios.post('/auth/login', creds);
             const { token, user } = res.data;
-            updateUserState({
-                user,
+            setUserState( prevState => {
+               return {
+                ...prevState,
+                user, 
                 token
+               }
             });
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
@@ -118,7 +128,7 @@ export default function UserProvider({ children }) {
     const getAllIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues');
-            return res.data || [];
+            return Array.isArray(res.data) ? res.data : [];
         } catch (error) {
             console.log('Error fetching all issues.', error);
             return [];
@@ -193,6 +203,7 @@ export default function UserProvider({ children }) {
             signup,
             login,
             logout,
+            issues : userState.issues,
             isAuthenticated,
             getUserIssues,
             getAllIssues,

@@ -1,12 +1,21 @@
-import React, {useState, useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { UserContext } from '../context/UserProvider';
+import { useNavigate } from 'react-router-dom';
 import Form from './Form';
 import '../cssFiles/auth.css'
 
 function Auth() {
 
-  const {login, signup, errMsg, resetAuthErr } = useContext(UserContext)
+  const { login, signup, errMsg, resetAuthErr } = useContext(UserContext)
   const [isMember, setIsMember] = useState(false)
+  const navigate = useNavigate()
+
+  const handleSubmit = async (creds) => {
+    const success = isMember ? await login(creds) : await signup(creds)
+    if (success) {
+      navigate('/profile')
+    }
+  }
 
   const toggleForm = () => {
     setIsMember(!isMember)
@@ -14,25 +23,25 @@ function Auth() {
   }
 
   return ( 
-    <div id = "auth-div">
+    <div id="auth-div">
       {
         isMember ? ( 
         <>
           <Form 
-            isMember = {isMember} 
-            submit = {login}
-            errMsg = {errMsg}
+            isMember={isMember} 
+            submit={handleSubmit}
+            errMsg={errMsg}
           /> 
-          <button onClick = {toggleForm} >Create an Account?</button>
+          <button onClick={toggleForm}>Create an Account?</button>
         </>
         ) :  (  
         <>
           <Form 
-            isMember = {isMember} 
-            submit = {signup}
-            errMsg = {errMsg}
+            isMember={isMember} 
+            submit={handleSubmit}
+            errMsg={errMsg}
           /> 
-          <button onClick = {toggleForm}>Already a Member?</button>
+          <button onClick={toggleForm}>Already a Member?</button>
         </>
         )
       }
