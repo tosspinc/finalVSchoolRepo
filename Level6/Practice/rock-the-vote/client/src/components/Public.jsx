@@ -3,8 +3,10 @@ import { UserContext } from '../context/UserProvider';
 import '../cssFiles/public.css';
 
 export default function Public() {
-    const { getAllIssues, handleUpvote, handleDownvote, isAuthenticated, user } = useContext(UserContext);
+    const { getAllIssues, handleUpvote, handleDownvote, isAuthenticated, user, addComment } = useContext(UserContext);
     const [issues, setIssues] = useState([]);
+    const [comments, setComments] = useState({});
+    const [commentContent, setCommentContent] = useState({});
 
     useEffect(() => {
         const fetchIssues = async () => {
@@ -26,6 +28,35 @@ export default function Public() {
         };
         fetchIssues();
     }, [getAllIssues]);
+
+    const fetchComments = async (issueId) => {
+        try {
+            const res = await fetch(`/api/comments/${issueId}`);
+            const data = await res.json();
+            setComments(prevComments => ({ ...prevComments, [issueId]: data }));
+        } catch (error) {
+            console.error('Error fetching comments:', error);
+        }
+    };
+
+    const handleCommentSubmit = async (issueId) => {
+        try {
+            const newComment = {
+                content: commentContent[issueId],
+                issueId,
+                username: isAuthenticated() ? user.username : 'Anonymous'
+            };
+            await addComment(newComment);
+            setCommentContent(prevContent => ({ ...prevContent, [issueId]: '' }));
+            fetchComments(issueId); // Fetch comments again to update the UI
+        } catch (error) {
+            console.error('Error adding comment:', error);
+        }
+    };
+
+    const handleInputChange = (e, issueId) => {
+        setCommentContent(prevContent => ({ ...prevContent, [issueId]: e.target.value }));
+    };
 
     const incrementUpvote = async (issueId) => {
         if (isAuthenticated()) {
@@ -97,6 +128,20 @@ export default function Public() {
                                         </div>
                                     </div>
                                 )}
+                                <div className='comments-section'>
+                                    <h3>Comments:</h3>
+                                    <ul className='comments-list'>
+                                        {Array.isArray(comments[issue._id]) && comments[issue._id].map(comment => (
+                                            <li key={comment._id} className='comment-item'>{comment.username}: {comment.content}</li>
+                                        ))}
+                                    </ul>
+                                    <textarea
+                                        value={commentContent[issue._id] || ''}
+                                        onChange={(e) => handleInputChange(e, issue._id)}
+                                        placeholder='Add a comment'
+                                    />
+                                    <button onClick={() => handleCommentSubmit(issue._id)}>Submit</button>
+                                </div>
                             </div>
                         </li>
                     ))}

@@ -110,3 +110,46 @@
     font-size: 16px;
     font-weight: bold;
 }
+
+.comments-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.comments-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.comment-item {
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    text-align: left;
+}
+
+textarea {
+    width: 80%;
+    height: 60px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+button {
+    padding: 10px 10px;
+    border: 1px solid antiquewhite;
+    border-radius: 5px;
+    background-color: rgb(35, 74, 133);
+    color: bisque;
+    cursor: pointer;
+    height: auto;
+}
+
+button:hover {
+    background-color: firebrick;
+}
