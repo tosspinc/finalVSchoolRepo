@@ -1,7 +1,6 @@
 import React, { useState, createContext } from "react";
 import axios from "axios";
 
-
 // Creates a context for user.
 export const UserContext = createContext();
 
@@ -31,8 +30,6 @@ const initState = {
     errMsg: ''
 };
 
-
-
 export default function UserProvider({ children }) {
     const [userState, setUserState] = useState(initState);
 
@@ -60,16 +57,14 @@ export default function UserProvider({ children }) {
     async function signup(creds) {
         try {
             const response = await userAxios.post('/auth/signup', creds);
-            const { token, user } = response.data
-            setUserState( prevState => {
-                return {
-                 ...prevState,
-                 user, 
-                 token
-                }
-             });
-            localStorage.setItem('token', response.data.token);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
+            const { token, user } = response.data;
+            setUserState(prevState => ({
+                ...prevState,
+                user,
+                token
+            }));
+            localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
             return true;
         } catch (error) {
             const errorMessage = error.response?.data?.message || "An error occurred. Please try again later.";
@@ -82,13 +77,11 @@ export default function UserProvider({ children }) {
         try {
             const res = await axios.post('/auth/login', creds);
             const { token, user } = res.data;
-            setUserState( prevState => {
-               return {
+            setUserState(prevState => ({
                 ...prevState,
-                user, 
+                user,
                 token
-               }
-            });
+            }));
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
             return true;
@@ -117,7 +110,7 @@ export default function UserProvider({ children }) {
     const getUserIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues/person');
-            console.log("Fetched Issues:", res.data)
+            console.log("Fetched Issues:", res.data);
             setUserState(prevState => ({
                 ...prevState,
                 issues: Array.isArray(res.data) ? res.data : []
@@ -177,64 +170,40 @@ export default function UserProvider({ children }) {
 
     const handleUpvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/user/issues/upvotes/${issueId}`)
-            return res.data
+            const res = await userAxios.put(`/api/user/issues/upvotes/${issueId}`);
+            return res.data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-
-    // const handleUpvote = async (issueId) => {
-    //     try {
-    //         const res = await userAxios.put(`/api/main/issues/upvotes/${issueId}`);
-    //         setUserState(prevUserState => ({
-    //             ...prevUserState,
-    //             issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-    //         }));
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    };
 
     const handleDownvote = async (issueId) => {
         try {
-            const res = await userAxios.put(`/api/user/issues/downvotes/${issueId}`)
-            return res.data
+            const res = await userAxios.put(`/api/user/issues/downvotes/${issueId}`);
+            return res.data;
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    }
-    // const handleDownvote = async (issueId) => {
-    //     try {
-    //         const res = await userAxios.put(`/api/main/issues/downvotes/${issueId}`);
-    //         setUserState(prevUserState => ({
-    //             ...prevUserState,
-    //             issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
-    //         }));
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
+    };
 
-    const addComment = async (newComment) => {
+    const addComment = async (issueId, newComment) => {
         try {
-            const res = await userAxios.post('/api/comments', newComment)
+            const res = await userAxios.post(`/api/comments/${issueId}`, newComment);
             setUserState(prevState => ({
                 ...prevState,
-                issues: prevState.issues.map(issue => 
-                    issue._id === newComment.issueId ? { 
+                issues: prevState.issues.map(issue =>
+                    issue._id === issueId ? {
                         ...issue,
-                        comments: [
-                            ...issue.comments,
-                            res.data
-                        ]
+                        // previous code was comments: [...issue.comments, res.data] which assumed comments was an array. if it was undefined or null threw error message.
+                        // checks that issues.comments exists then spreads existing comment and adds new comment. if comment doesnt exist it initializes comments array with new comment.
+                        comments: issue.comments ? [...issue.comments, res.data] : [res.data]
                     } : issue
                 )
-            }))
+            }));
         } catch (error) {
-            console.error('Error adding a comment: ', error)
+            console.error('Error adding a comment: ', error);
         }
-    }
+    };
 
     return (
         <UserContext.Provider value={{
@@ -242,7 +211,7 @@ export default function UserProvider({ children }) {
             signup,
             login,
             logout,
-            issues : userState.issues,
+            issues: userState.issues,
             isAuthenticated,
             getUserIssues,
             getAllIssues,

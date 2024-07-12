@@ -19,6 +19,11 @@ const commentSchema = new Schema({
         ref: "Issue",
         required: true,
         trim: true
+    },
+    username: {
+        type: String,
+        default: 'Anonymous',
+        trim: true
     }
 })
 

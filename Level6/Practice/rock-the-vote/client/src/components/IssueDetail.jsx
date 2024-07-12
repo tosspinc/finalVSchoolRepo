@@ -9,7 +9,11 @@ function IssueDetail({ issue }) {
     // Function to fetch comments for the issue
     const fetchComments = async () => {
         try {
-            const res = await fetch(`/api/comments/${issue._id}`);
+            const res = await fetch(`/api/comments/${issue._id}`, {
+                headers: {
+                    'Authorization' :  `Bearer ${localStorage.getItem('token')}`
+                }
+            })
             const data = await res.json();
             setComments(data);
         } catch (error) {

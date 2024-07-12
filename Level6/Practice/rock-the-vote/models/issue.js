@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const commentSchema = require('./comment').Schema;
 
 const issueSchema = new Schema({
     title: {
@@ -27,6 +26,11 @@ const issueSchema = new Schema({
         type: String,
         required: true,
         trim: true  
+    },
+    comments: {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment',
+        trim: true
     },
     userId: {
         type: Schema.Types.ObjectId,

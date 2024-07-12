@@ -46,7 +46,7 @@ export default function Public() {
                 issueId,
                 username: isAuthenticated() ? user.username : 'Anonymous'
             };
-            await addComment(newComment);
+            await addComment(issueId, newComment);
             setCommentContent(prevContent => ({ ...prevContent, [issueId]: '' }));
             fetchComments(issueId); // Fetch comments again to update the UI
         } catch (error) {
