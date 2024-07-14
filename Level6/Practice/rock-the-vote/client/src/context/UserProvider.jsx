@@ -188,7 +188,12 @@ export default function UserProvider({ children }) {
 
     const addComment = async (issueId, newComment) => {
         try {
-            const res = await userAxios.post(`/api/comments/${issueId}`, newComment);
+            const token = localStorage.getItem('token')
+            const res = await userAxios.post(`/api/comments/${issueId}`, newComment, {
+                header: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
             setUserState(prevState => ({
                 ...prevState,
                 issues: prevState.issues.map(issue =>

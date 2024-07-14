@@ -27,11 +27,11 @@ const issueSchema = new Schema({
         required: true,
         trim: true  
     },
-    comments: {
+    comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment',
         trim: true
-    },
+    }],
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',

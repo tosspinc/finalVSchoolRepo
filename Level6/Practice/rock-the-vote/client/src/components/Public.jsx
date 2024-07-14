@@ -33,7 +33,10 @@ export default function Public() {
         try {
             const res = await fetch(`/api/comments/${issueId}`);
             const data = await res.json();
-            setComments(prevComments => ({ ...prevComments, [issueId]: data }));
+            setComments(prevComments => ({ 
+                ...prevComments, 
+                [issueId]: data 
+            }));
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
@@ -47,7 +50,10 @@ export default function Public() {
                 username: isAuthenticated() ? user.username : 'Anonymous'
             };
             await addComment(issueId, newComment);
-            setCommentContent(prevContent => ({ ...prevContent, [issueId]: '' }));
+            setCommentContent(prevContent => ({ 
+                ...prevContent, 
+                [issueId]: '' 
+            }));
             fetchComments(issueId); // Fetch comments again to update the UI
         } catch (error) {
             console.error('Error adding comment:', error);
@@ -55,7 +61,10 @@ export default function Public() {
     };
 
     const handleInputChange = (e, issueId) => {
-        setCommentContent(prevContent => ({ ...prevContent, [issueId]: e.target.value }));
+        setCommentContent(prevContent => ({ 
+            ...prevContent, 
+            [issueId]: e.target.value 
+        }));
     };
 
     const incrementUpvote = async (issueId) => {
@@ -112,7 +121,14 @@ export default function Public() {
                     {issues.map(issue => (
                         <li key={issue._id} className='issue-item'>
                             <div className='issue-list-container'>
-                                {issue.imgUrl && <img src={issue.imgUrl} alt={issue.title} style={{ height: '100px', width: '100px' }} />}
+                                {issue.imgUrl && 
+                                    <img src={issue.imgUrl} 
+                                        alt={issue.title} 
+                                        style={{ 
+                                            height: '100px', 
+                                            width: '100px' 
+                                        }} 
+                                    />}
                                 <h2 className='issue-title'>Title: {issue.title}</h2>
                                 <h3 className='issue-description'>Description: {issue.description}</h3>
                                 <h3 className='issue-author'>Author: {issue.username}</h3>
@@ -132,7 +148,8 @@ export default function Public() {
                                     <h3>Comments:</h3>
                                     <ul className='comments-list'>
                                         {Array.isArray(comments[issue._id]) && comments[issue._id].map(comment => (
-                                            <li key={comment._id} className='comment-item'>{comment.username}: {comment.content}</li>
+                                            <li key={comment._id} 
+                                                className='comment-item'>{comment.username}: {comment.content}</li>
                                         ))}
                                     </ul>
                                     <textarea
