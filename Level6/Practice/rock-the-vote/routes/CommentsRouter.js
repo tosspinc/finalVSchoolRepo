@@ -8,10 +8,10 @@ const { expressjwt: jwt } = require('express-jwt');
 commentsRouter.use(jwt({ secret: process.env.SECRET, algorithms: ['HS256'] }));
 
 // Get comments by issueId
-commentsRouter.get('/:issueId', async (req, res, next) => {
+commentsRouter.get('/', async (req, res, next) => {
     try {
         const { issueId } = req.params;
-        const comments = await Comment.find({ issue: issueId });
+        const comments = await Comment.find();
         return res.status(200).send(comments);
     } catch (error) {
         console.log('Error fetching comments', error);

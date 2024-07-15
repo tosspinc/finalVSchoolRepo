@@ -27,7 +27,7 @@ currentIssuesRouter.get('/get/:issueId', async (req, res, next) => {
 // Get issues by specific user
 currentIssuesRouter.get('/person', async (req, res, next) => {
     try {
-        const userIssues = await Issues.find({ author: req.auth._id })
+        const userIssues = await Issues.find({ userId: req.auth._id })
         res.status(200).send(userIssues);
     } catch (error) {
         res.status(500).send({ error: 'Internal Server Error' });
@@ -38,7 +38,7 @@ currentIssuesRouter.get('/person', async (req, res, next) => {
 // Post a new issue
 currentIssuesRouter.post('/', async (req, res, next) => {
     try {
-        req.body.author = req.auth._id
+        req.body.userId = req.auth._id
         req.body.username = req.auth.username
         // Create and save new issue
         const newIssue = new Issues(req.body);
@@ -54,7 +54,6 @@ currentIssuesRouter.post('/', async (req, res, next) => {
 // Update an issue
 currentIssuesRouter.put('/post/:issueId', async (req, res, next) => {
     try {
-        // Update issue
         const updatedIssue = await Issues.findByIdAndUpdate(
             req.params.issueId,
             req.body,
@@ -84,38 +83,7 @@ currentIssuesRouter.delete('/:issueId', async (req, res, next) => {
     }
 });
 
-currentIssuesRouter.put('/upvotes/:issueId', async(req, res, next) => {
-    try {
-        const issueId = req.params.issueId
-        const userId = req.auth._id
-
-        const issue = await Issues.findById(issueId)
-        
-        if (!issue) {
-            return res.status(404).send({ message: 'Issue not found.' })
-        }
-
-        if (issue.author.toString() === userId) {
-            return res.status(403).send({ message: 'Authors cannot vote on their own issues.' });
-        }
-
-        if (issue.downvotes.includes(userId)) {
-            issue.downvotes.pull(userId)
-        }
-
-        if (issue.upvotes.includes(userId)) {
-            issue.upvotes.pull(userId)
-        } else {
-            issue.upvotes.push(userId)
-        }
-
-        const updatedIssue = await issue.save()
-        return res.status(201).send(updatedIssue)
-    } catch (error) {
-        res.status(500)
-        return next(error)
-    }
-})
+    
 
 currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
     try {
@@ -128,22 +96,58 @@ currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
             return res.status(404).send({ message: 'Issue not found.' })
         }
 
-        if (issue.author.toString() === userId) {
-            return res.status(403).send({ message: 'Authors cannot vote on their own issues.' });
+        if (issue.user.toString() === userId) {
+            return res.status(403).send({ message: 'Users cannot vote on their own issues.' });
         }
 
-        if (issue.upvotes.includes(userId)) {
-            issue.upvotes.pull(userId)
-        }
+        //removes user from upvotes if they have upvoted
+        await Issues.updateOne({ _id: issueId }, {$pull: {upvotes: userId } })
 
-        if (issue.downvotes.includes(userId)) {
-            issue.downvotes.pull(userId)
-        } else {
-            issue.downvotes.push(userId)
-        }
-
-        const updatedIssue = await issue.save()
+        //toggle downvote: add if not present, remove if already present
+        const update = issue.downvotes.includes(userId)
+        ? {$pull: {downvotes: userId } }
+        : { $addToSet: { downvotes: userId } }
+        const updatedIssue = await Issues.findByIdAndUpdate(
+            issueId, 
+            update, 
+            { new: true }
+        )
         return res.status(201).send(updatedIssue)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
+currentIssuesRouter.put('/upvotes/:issueId', async (req, res, next) => {
+    try {
+        const issueId = req.params.issueId
+        const userId = req.auth._id
+
+        const issue = await Issues.findById(issueId)
+
+        if (!issue) { 
+            return res.status(404).send({ message: 'Issue not found' })
+        }
+
+        if (issue.user.toString() === userId) {
+            return res.status(403).send({ message: 'Users cannot vote on thier own issues.' })
+        }
+
+        //removes user from downvotes if they have downvoted already.
+        await Issues.updateOne({ _id: issueId }, { $pull: { downvotes: userId } })
+
+        //toggle upvote: add if not present, remove if already present
+        const update = issue.upvotes.includes(userId)
+        ? {$pull: { upvotes: userId } }
+        : {$addToSet: { upvotes: userId } }
+        const updatedIssue = await Issues.findByIdAndUpdate(
+            issueId,
+            update,
+            { new: true }
+        )
+        
+        return res.status(201).sendd(updatedIssue)
     } catch (error) {
         res.status(500)
         return next(error)

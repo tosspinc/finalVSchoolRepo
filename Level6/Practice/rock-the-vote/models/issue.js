@@ -16,22 +16,11 @@ const issueSchema = new Schema({
         type: String,
         trim: true
     },
-    author: {
-        type: Schema.Types.ObjectId,
-        ref: "UserName",
-        required: true,
-        trim: true
-    },
     username: {
         type: String,
         required: true,
         trim: true  
     },
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment',
-        trim: true
-    }],
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',

@@ -14,7 +14,6 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    height: flex;
     width: 1200px;
     border: 1px solid blue;
     border-radius: 10px;
@@ -61,7 +60,7 @@
 
 .issue-list-container {
     margin-top: 30px;
-    margin-left: 40px;
+    /*margin-left: 40px;*/
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -137,7 +136,7 @@
     width: 300px;
     height: 150px;
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
 }
 
 .comment-item {
@@ -149,7 +148,6 @@
     height: 100px;
     border-radius: 5px;
     background-color: bisque;
-    border: 1px solid firebrick;
 }
 
 p {

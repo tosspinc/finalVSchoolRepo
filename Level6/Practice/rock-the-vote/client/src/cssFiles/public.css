@@ -1,4 +1,4 @@
-.public-wrapper {
+.profile-public-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -22,101 +22,22 @@
 }
 
 .public-issues-title {
+    margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
     font-weight: bolder;
     font-style: italic;
     font-size: 50px;
     text-shadow: 
-        -1px -1px 0 rgb(105, 163, 163),  /*top left moves 1px to left and 1px up w/ - blur effect w/ Border color*/
-        1px -1px 0 rgb(105, 163, 163), /*top right moves 1px to R and 1 px up w/ 0 blur effect w/ Border color*/
-        -1px  1px 0 rgb(105, 163, 163), /*bottom left move 1px to the left and 1px down w/ 0 blur effect w/ Border color*/
-        1px  1px 0 rgb(105, 163, 163); /* bottom right moves 1px to R and 1px down w/ 0 blur effect w/ Border color */
+        -1px -1px 0 rgb(105, 163, 163),  /*top L mvs 1px L & 1px up w/ 0 blur effect w/ Brdr color*/
+        1px -1px 0 rgb(105, 163, 163), /*top R mvs 1px R & 1 px up w/ 0 blur effect w/ Border color*/
+        -1px  1px 0 rgb(105, 163, 163), /*btm L mvs 1px L & 1px dwn w/ 0 blur effect w/ Border color*/
+        1px  1px 0 rgb(105, 163, 163); /* btm R mvs 1px R & 1px dwn w/ 0 blur effect w/ Border color */
     color: firebrick;    
-    background-color: antiquewhite;
-}
-
-.issue-list-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    list-style: none;
-    margin-top: 30px;
-    margin-left: 30px;
-    margin-right: 30px;
-    width: 90%;
-    padding: 0;
-    border: 2px solid bisque;
     background-color: bisque;
-    color: black;
 }
 
-.issues-list {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    list-style: none;
-    padding: 0;
-    margin-bottom: 50px;
-    border-radius: 5px;
-    width: 80%;
-    height: auto;
 
-    background-color: rgb(105, 163, 163);
-}
-
-.issues-item {
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-}
-
-.issue-title {
-    margin-bottom: 10px;
-}
-
-.issue-description {
-    margin-top: 5px;
-}
-
-.issue-author {
-    margin-top: 10px;
-    color: firebrick;
-}
-
-.vote-buttons-container {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    margin-top: 10px;
-}
-
-.vote-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    background-color: rgb(105, 163, 163);
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.vote-button:hover {
-    background-color: rgb(105, 163, 163);
-}
-
-.vote-icon {
-    width: 20px;
-    height: 20px;
-}
-
-.vote-count {
-    margin-left: 5px;
-    font-size: 16px;
-    font-weight: bold;
-}
 
 .comments-section {
     margin-top: 20px;
@@ -131,11 +52,11 @@
 }
 
 .comment-item {
+    margin-left: 12px;
     background-color: #f1f1f1;
     border: 1px solid #ddd;
     border-radius: 5px;
     padding: 10px;
-    margin: 5px 0;
     text-align: left;
 }
 
@@ -159,5 +80,5 @@ button {
 }
 
 button:hover {
-    background-color: firebrick;
+    background-color: rgb(105, 163, 163);
 }

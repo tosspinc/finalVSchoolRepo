@@ -32,6 +32,9 @@ const initState = {
 
 export default function UserProvider({ children }) {
     const [userState, setUserState] = useState(initState);
+    const [allIssues, setAllIssues] = useState([])
+    const [comments, setComments] = useState([])
+
 
     // const updateUserState = (newState) => {
     //     setUserState(prevState => ({
@@ -95,12 +98,12 @@ export default function UserProvider({ children }) {
     function logout() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        setUserState(prevUserState => ({
-            ...prevUserState,
+        setUserState({
             token: '',
             user: {},
-            errMsg: ''
-        }));
+            errMsg: '',
+            issues: []
+        });
     }
 
     const isAuthenticated = () => {
@@ -113,7 +116,7 @@ export default function UserProvider({ children }) {
             console.log("Fetched Issues:", res.data);
             setUserState(prevState => ({
                 ...prevState,
-                issues: Array.isArray(res.data) ? res.data : []
+                issues: res.data
             }));
         } catch (error) {
             console.log("Error fetching user issues: ", error);
@@ -123,10 +126,9 @@ export default function UserProvider({ children }) {
     const getAllIssues = async () => {
         try {
             const res = await userAxios.get('/api/user/issues');
-            return Array.isArray(res.data) ? res.data : [];
+            setAllIssues(res.data)
         } catch (error) {
             console.log('Error fetching all issues.', error);
-            return [];
         }
     };
 
@@ -173,7 +175,7 @@ export default function UserProvider({ children }) {
             const res = await userAxios.put(`/api/user/issues/upvotes/${issueId}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     };
 
@@ -182,24 +184,20 @@ export default function UserProvider({ children }) {
             const res = await userAxios.put(`/api/user/issues/downvotes/${issueId}`);
             return res.data;
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     };
+
+    function getComment(){
+        userAxios.get('/api/comments')
+        .then(res => setComments(res.data))
+        .catch(error => console.log(error))
+    }
 
     const addComment = async (issueId, newComment) => {
         try {
             const res = await userAxios.post(`/api/comments/${issueId}`, newComment)
-                setUserState(prevState => ({
-                    ...prevState,
-                issues: prevState.issues.map(issue =>
-                    issue._id === issueId ? {
-                        ...issue,
-                        // previous code was comments: [...issue.comments, res.data] which assumed comments was an array. if it was undefined or null threw error message.
-                        // checks that issues.comments exists then spreads existing comment and adds new comment. if comment doesnt exist it initializes comments array with new comment.
-                        comments: issue.comments ? [...issue.comments, res.data] : [res.data]
-                    } : issue
-                )
-            }));
+                setComments(prevComments => [...prevComments, res.data])
         } catch (error) {
             console.error('Error adding a comment: ', error);
         }
@@ -241,6 +239,8 @@ export default function UserProvider({ children }) {
         }
     }
 
+    console.log(allIssues)
+
     return (
         <UserContext.Provider value={{
             ...userState,
@@ -260,7 +260,10 @@ export default function UserProvider({ children }) {
             handleDownvote,
             addComment,
             deleteComment,
-            editComment
+            editComment,
+            comments,
+            getComment,
+            allIssues
         }}>
             {children}
         </UserContext.Provider>

@@ -17,4 +17,16 @@ export default function CurrentIssuesPage() {
         fetchIssues()
     }, [])
 
+    /*
+    return (
+        <div>
+            {issue.map(issue => (
+                <div key={issue._id}>
+                    <h2>{issue._id}</h2>
+                    <p>{issue.description}</p>
+                </div>
+            ))}
+        </div>
+    )
+    */   
 }

@@ -3,21 +3,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.title {
+  }
+  
+  .title {
     margin-top: 25px;
     margin-bottom: 15px;
     text-align: center;
-}
-
-.issues-list {
+  }
+  
+  .issues-list {
     list-style-type: none;
     padding: 0;
     text-align: center;
-}
-
-.issues-list li {
+  }
+  
+  .issues-list li {
     margin: 10px 0;
     text-align: center;
-}
+  }
+  

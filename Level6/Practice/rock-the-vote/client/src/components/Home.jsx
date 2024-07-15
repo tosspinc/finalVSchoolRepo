@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserProvider";
 import '../cssFiles/home.css'
 
-export default function Home (){
+    export default function Home (){
     const [allIssues, setAllIssues] = useState([])
     const { isAuthenticated } = useContext(UserContext)
 

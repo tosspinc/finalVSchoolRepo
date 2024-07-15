@@ -23,7 +23,7 @@ function Auth() {
   }
 
   return ( 
-    <div id="auth-div">
+    <div className='auth-container' id="auth-div">
       {
         isMember ? ( 
         <>
@@ -41,7 +41,6 @@ function Auth() {
             submit={handleSubmit}
             errMsg={errMsg}
           /> 
-          <button onClick={toggleForm}>Already a Member?</button>
         </>
         )
       }
