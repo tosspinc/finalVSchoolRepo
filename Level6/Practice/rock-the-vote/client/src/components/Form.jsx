@@ -24,7 +24,7 @@ export default function Form(props) {
      
         <form name = 'auth-form' id = 'auth-form' onSubmit={handleSubmit}>
 
-            <h2>Welcome to RTV!</h2>
+            <h2>Welcome to Rock The Vote!</h2>
             <input 
                 placeholder='username'
                 name='username'

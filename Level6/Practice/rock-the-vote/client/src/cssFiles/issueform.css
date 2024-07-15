@@ -88,3 +88,7 @@ form {
     cursor: pointer;
     align-self: center;
 }
+
+.imgUrl-input {
+    background-color: antiquewhite
+}

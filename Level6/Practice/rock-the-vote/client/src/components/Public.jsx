@@ -43,11 +43,16 @@ export default function Public() {
     };
 
     const handleCommentSubmit = async (issueId) => {
+        if (!isAuthenticated()) {
+            console.log('User is not authenticated.')
+            return
+        }
+
         try {
             const newComment = {
                 content: commentContent[issueId],
                 issueId,
-                username: isAuthenticated() ? user.username : 'Anonymous'
+                username: user.username
             };
             await addComment(issueId, newComment);
             setCommentContent(prevContent => ({ 
@@ -116,7 +121,7 @@ export default function Public() {
     return (
         <div className='public-wrapper'>
             <div className='public-container'>
-                <h1>Current Issues</h1>                
+                <h1 className='public-issues-title'>Current Issues</h1>                
                 <ul className='issues-list'>
                     {issues.map(issue => (
                         <li key={issue._id} className='issue-item'>
@@ -152,12 +157,16 @@ export default function Public() {
                                                 className='comment-item'>{comment.username}: {comment.content}</li>
                                         ))}
                                     </ul>
-                                    <textarea
-                                        value={commentContent[issue._id] || ''}
-                                        onChange={(e) => handleInputChange(e, issue._id)}
-                                        placeholder='Add a comment'
-                                    />
-                                    <button onClick={() => handleCommentSubmit(issue._id)}>Submit</button>
+                                    {isAuthenticated() && (
+                                        <div>
+                                            <textarea className='textarea'
+                                                value={commentContent[issue._id] || ''}
+                                                onChange={(e) => handleInputChange(e, issue._id)}
+                                                placeholder='Add a comment'
+                                            />
+                                            <button onClick={() => handleCommentSubmit(issue._id)}>Submit</button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </li>

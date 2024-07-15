@@ -2,19 +2,10 @@ const express = require('express');
 const commentsRouter = express.Router();
 const Comment = require('../models/comment');
 const Issue = require('../models/issue');
-const { expressjwt: jwt } = require('express-jwt')
+const { expressjwt: jwt } = require('express-jwt');
 
 // Middleware to check authentication
-// old middleware.
-// commentsRouter.use((req, res, next) => {
-//     if (req.method !== 'POST' && !req.auth) {
-//         return res.status(404).send('Unauthorized.');
-//     }
-//     next();
-//});
-
-//new middleware
-commentsRouter.use(jwt({ secret: process.env.SECRET, algorithms: ['HS256'] }))
+commentsRouter.use(jwt({ secret: process.env.SECRET, algorithms: ['HS256'] }));
 
 // Get comments by issueId
 commentsRouter.get('/:issueId', async (req, res, next) => {
@@ -29,71 +20,31 @@ commentsRouter.get('/:issueId', async (req, res, next) => {
     }
 });
 
-// Create a new comment without authentication
+// Create a new comment
 commentsRouter.post('/:issueId', async (req, res, next) => {
-    //old code:
-    // req.body.user = req.auth._id;
-    // req.body.issue = req.params.issueId;
-    // req.body.username = req.auth.username;
-
-    // try {
-    //     const { content, issueId, username = 'Anonymous' } = req.body;
-    //     console.log('Received new comment', { content, issueId, username });
-
-    //     // Verifies a current issue exists
-    //     const existingIssue = await Issue.findById(issueId);
-    //     if (!existingIssue) {
-    //         return res.status(404).send({ message: 'Issue does not exist.' });
-    //     }
-
-    //     // Create new comment
-    //     const newComment = new Comment({ content, issue: issueId, username });
-    //     const savedComment = await newComment.save();
-
-    //     // Update issue with new comment
-    //     existingIssue.comments.push(savedComment._id);
-    //     await existingIssue.save();
-
-    //     return res.status(201).send(savedComment);
-
-    const { content } = req.body
-    const { issueId } = req.params
-    const author = req.auth ? req.auth._id : null
-    const username = req.auth ? req.auth.username : 'Anonymous'
+    const { content } = req.body;
+    const { issueId } = req.params;
+    const author = req.auth._id;
+    const username = req.auth.username;
 
     try {
-        const existingIssue = await Issue.findById(issueId)
+        const existingIssue = await Issue.findById(issueId);
         if (!existingIssue) {
-            return res.status(404).send({ message: "Issue does not exist."})
+            return res.status(404).send({ message: "Issue does not exist." });
         }
-        
-        const newComment = new Comment({ content, issue: issueId, author, username })
-        const savedComment = await newComment.save()
 
-        if (!existingIssue.comment) {
-            existingIssue.comments = []
+        const newComment = new Comment({ content, issue: issueId, author, username });
+        const savedComment = await newComment.save();
+
+        if (!existingIssue.comments) {
+            existingIssue.comments = [];
         }
-        existingIssue.comments.push(savedComment._id)
-        await existingIssue.save()
+        existingIssue.comments.push(savedComment._id);
+        await existingIssue.save();
 
-        return res.status(201).send(savedComment)    
+        return res.status(201).send(savedComment);
     } catch (error) {
         console.log('Error adding a comment:', error);
-        res.status(500).send({ error: 'Internal Server Error' });
-        return next(error);
-    }
-});
-
-// Get a specific comment by Id.
-commentsRouter.get('/:issueId/:commentId', async (req, res, next) => {
-    try {
-        const { commentId } = req.params;
-        const comment = await Comment.findById(commentId);
-        if (!comment) {
-            return res.status(404).send({ message: 'Comment not found.' });
-        }
-        res.status(200).send(comment);
-    } catch (error) {
         res.status(500).send({ error: 'Internal Server Error' });
         return next(error);
     }
@@ -114,7 +65,7 @@ commentsRouter.put('/:issueId/:commentId', async (req, res, next) => {
 
         // Check if authenticated user is author
         if (comment.author.toString() !== userId) {
-            return res.status(403).send({ comment: 'Forbidden: You are not allowed to edit the comment.' });
+            return res.status(403).send({ message: 'Forbidden: You are not allowed to edit the comment.' });
         }
 
         // Update comment

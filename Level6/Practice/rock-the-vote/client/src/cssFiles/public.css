@@ -22,11 +22,18 @@
 }
 
 .public-issues-title {
+    margin-bottom: 20px;
     text-align: center;
     font-weight: bolder;
     font-style: italic;
     font-size: 50px;
+    text-shadow: 
+        -1px -1px 0 rgb(105, 163, 163),  
+         1px -1px 0 rgb(105, 163, 163),
+        -1px  1px 0 rgb(105, 163, 163),
+         1px  1px 0 rgb(105, 163, 163); /* Border color */    
     color: firebrick;    
+    background-color: antiquewhite;
 }
 
 .issue-list-container {

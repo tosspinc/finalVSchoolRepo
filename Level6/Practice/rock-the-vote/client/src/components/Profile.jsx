@@ -4,9 +4,12 @@ import IssueForm from './IssueForm';
 import '../cssFiles/profile.css';
 
 function Profile() {
-    const { user, issues, getUserIssues, deleteIssue, editIssue } = useContext(UserContext);
+    const { user, issues, getUserIssues, deleteIssue, editIssue, addComment, deleteComment, editComment } = useContext(UserContext);
     const [isEditing, setIsEditing] = useState(false);
     const [currentIssue, setCurrentIssue] = useState({});
+    const [currentComment, setCurrentComment] = useState({});
+    const [isCommentEditing, setIsCommentEditing] = useState(false);
+    const [commentContent, setCommentContent] = useState('');
 
     useEffect(() => {
         getUserIssues ()
@@ -17,15 +20,32 @@ function Profile() {
         setCurrentIssue(issue);
     };
 
-    const handleDeleteClick = (issueId) => {
-        deleteIssue(issueId);
-    };
-
     const handleEditSubmit = (updatedIssue) => {
-        editIssue(currentIssue._id, updatedIssue);
-        setIsEditing(false);
-        setCurrentIssue({});
-    };
+        setIsCommentEditing(true)
+        setCurrentComment(comment)
+        setCommentContent(comment.content)
+    }
+
+    const handleCommentDeletClick = (commentId) => {
+        deleteComment(currentIssue._id, commentId)
+    }
+
+    const handleCommentEditSubmit = () => {
+        editComment(currentIssue._id, currentComment._id, { content: commentContent })
+        setIsCommentEditing(false)
+        setCurrentComment({})
+        setCommentContent('')
+    }
+
+    // const handleDeleteClick = (issueId) => {
+    //     deleteIssue(issueId);
+    // };
+
+    // const handleEditSubmit = (updatedIssue) => {
+    //     editIssue(currentIssue._id, updatedIssue);
+    //     setIsEditing(false);
+    //     setCurrentIssue({});
+    // };
 
     return (
         <div className='profile-wrapper'>
@@ -44,6 +64,32 @@ function Profile() {
                                 <div className='button-container'>
                                     <button className='buttons' onClick={() => handleEditClick(issue)}>Edit</button>
                                     <button className='buttons' onClick={() => handleDeleteClick(issue._id)}>Delete</button>
+                                </div>
+                                <div className='comments-section'>
+                                    <h3>Comments:</h3>
+                                    <ul className='comments-list'>
+                                        {Array.isArray(issue.comments) && issue.comments.map(comment => (
+                                            <li key={comment._id} className='comment-item'>
+                                                <span><strong>{comment.username}</strong> {comment.content}</span>
+                                                {comment.author === user._id && (
+                                                   <div>
+                                                    <button onClick={() => handleCommentEditClick(comment._id)}>Edit</button>
+                                                    <button onClick={() => handleCommentDeleteClick(comment._id)}>Delete</button>
+                                                   </div> 
+                                                )}       
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {isCommentEditing && (
+                                        <div>
+                                            <textarea
+                                                value={commentContent}
+                                                onChange={(e) => setCommentContent(e.target.value)}
+                                                placeholder='Edit your comment'
+                                            />
+                                            <button onClick={handleCommentEditSubmit}>Submit</button>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </li>

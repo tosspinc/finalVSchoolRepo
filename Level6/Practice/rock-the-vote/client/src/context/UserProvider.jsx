@@ -188,14 +188,9 @@ export default function UserProvider({ children }) {
 
     const addComment = async (issueId, newComment) => {
         try {
-            const token = localStorage.getItem('token')
-            const res = await userAxios.post(`/api/comments/${issueId}`, newComment, {
-                header: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            setUserState(prevState => ({
-                ...prevState,
+            const res = await userAxios.post(`/api/comments/${issueId}`, newComment)
+                setUserState(prevState => ({
+                    ...prevState,
                 issues: prevState.issues.map(issue =>
                     issue._id === issueId ? {
                         ...issue,
@@ -209,6 +204,42 @@ export default function UserProvider({ children }) {
             console.error('Error adding a comment: ', error);
         }
     };
+
+    const deleteComment = async (issueId, commentId) => {
+        try {
+            await userAxios.delete(`/api/comments/${issueId}/${commentId}`)
+            setUserState(prevState => ({
+                ...prevState,
+                issues: prevState.issue.map(issue =>
+                    issue._id === issueId ? {
+                        ...issue,
+                        comments: issue.comments.filter(comment => comment._id !== commentId)
+                    } : issue
+                )
+            }))
+        } catch (error) {
+            console.error("Error deleting comment.", error)
+        }
+    }
+
+    const editComment = async (issueId, commentId, updatedComment) => {
+        try {
+            await userAxios.put(`/api/comments/${issueId}/${commentId}`, updatedComment)
+            setUserState(prevState => ({
+                ...prevState,
+                issues: prevState.issues.map(issue =>
+                    issue._id === issueId ? {
+                        ...issue,
+                        comments: issue.comments.map(comment =>
+                            comment._id === commentId ? res.data : comment
+                        )
+                    } : issue
+                )
+            }))
+        } catch (error) {
+            console.error('Error editing comment', error)
+        }
+    }
 
     return (
         <UserContext.Provider value={{
@@ -227,7 +258,9 @@ export default function UserProvider({ children }) {
             resetAuthErr,
             handleUpvote,
             handleDownvote,
-            addComment
+            addComment,
+            deleteComment,
+            editComment
         }}>
             {children}
         </UserContext.Provider>
