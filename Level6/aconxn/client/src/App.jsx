@@ -1,14 +1,17 @@
+import React, {useContext} from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 export default function App() {
-  const [count, setCount] = useState(0)
+  const {token, logout} = useContext(UserProvider)
 
   return (
     <>
       <div>
+        <Routes>
+          <Route />
+        </Routes>
       </div>        
     </>
   )
