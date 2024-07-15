@@ -43,10 +43,10 @@
     font-size: 50px;
     color: firebrick;   
     text-shadow: 
-        -1px -1px 0 rgb(105, 163, 163),  
-         1px -1px 0 rgb(105, 163, 163),
-        -1px  1px 0 rgb(105, 163, 163),
-         1px  1px 0 rgb(105, 163, 163); /* Border color */
+        -1px -1px 0 rgb(105, 163, 163),  /*top left moves 1px to left and 1px up w/ - blur effect w/ Border color*/
+         1px -1px 0 rgb(105, 163, 163), /*top right moves 1px to R and 1 px up w/ 0 blur effect w/ Border color*/
+        -1px  1px 0 rgb(105, 163, 163), /*bottom left move 1px to the left and 1px down w/ 0 blur effect w/ Border color*/
+         1px  1px 0 rgb(105, 163, 163); /* bottom right moves 1px to R and 1px down w/ 0 blur effect w/ Border color */
     background-color: antiquewhite; 
 }
 
