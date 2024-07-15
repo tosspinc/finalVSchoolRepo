@@ -28,3 +28,9 @@ const connectToDb = async () => {
         process.exit(1)
     }
 }
+
+connectToDb()
+
+app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
+})

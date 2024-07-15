@@ -1,0 +1,39 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+* {
+    background-color: rgb(48, 213, 200);
+}
+
+.aconxn-content {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+
+.home-container {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 3rem;
+    position: relative;
+    left: 20%;
+}
+
+h1 .trademark {
+    font-size: 0.7rem;
+    vertical-align: top;
+}
+
+h3 {
+    font-size: 25px;
+    position: relative;
+    left: 70%;
+    transform: translateX(-40%)
+}

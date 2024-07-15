@@ -1,0 +1,43 @@
+.footer-bottom-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: antiquewhite;
+    padding: .5rem;
+    width: 100%;
+  }
+  
+  .footer-nav {
+    background-color: #333;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    margin-bottom: .5rem;
+    flex-wrap: wrap;
+    
+  }
+  
+  .item {
+    color: antiquewhite;
+    font-style: italic;
+    text-decoration: none;
+    margin: 0.5rem;
+    background-color: #333;
+    justify-content: space-between;
+  }
+  
+  .item-about-info {
+    color: bisque;
+  }
+
+  .item:hover {
+    text-decoration: underline;
+  }
+  
+  small {
+    text-align: center;
+    color: antiquewhite;
+    font-style: italic;
+    background-color: black;
+  }
+  
