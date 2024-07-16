@@ -12,12 +12,13 @@ export default function Public() {
         getAllIssues();
         getComment()
 
+
     }, []);
 
     return (
         <div className='public-wrapper'>
             <h1 className='public-issues-title'>Current Issues</h1>
-            <IssueList issues={allIssues} />
+            <IssueList issues={allIssues} isPublic={true} />
         </div>
     );
 }

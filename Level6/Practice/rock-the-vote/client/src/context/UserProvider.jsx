@@ -173,7 +173,11 @@ export default function UserProvider({ children }) {
     const handleUpvote = async (issueId) => {
         try {
             const res = await userAxios.put(`/api/user/issues/upvotes/${issueId}`);
-            return res.data;
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+            }))
+            setAllIssues(prevAllIssues => prevAllIssues.map(issue => issue._id === issueId ? res.data : issue))
         } catch (error) {
             console.log(error)
         }
@@ -182,22 +186,26 @@ export default function UserProvider({ children }) {
     const handleDownvote = async (issueId) => {
         try {
             const res = await userAxios.put(`/api/user/issues/downvotes/${issueId}`);
-            return res.data;
+            setUserState(prevUserState => ({
+                ...prevUserState,
+                issues: prevUserState.issues.map(issue => issue._id === issueId ? res.data : issue)
+            }))
+            setAllIssues(prevAllIssues => prevAllIssues.map(issue => issue._id === issueId ? res.data : issue))
         } catch (error) {
             console.log(error)
         }
     };
 
-    function getComment(){
+    function getComment() {
         userAxios.get('/api/comments')
-        .then(res => setComments(res.data))
-        .catch(error => console.log(error))
+            .then(res => setComments(res.data))
+            .catch(error => console.log(error))
     }
 
     const addComment = async (issueId, newComment) => {
         try {
             const res = await userAxios.post(`/api/comments/${issueId}`, newComment)
-                setComments(prevComments => [...prevComments, res.data])
+            setComments(prevComments => [...prevComments, res.data])
         } catch (error) {
             console.error('Error adding a comment: ', error);
         }

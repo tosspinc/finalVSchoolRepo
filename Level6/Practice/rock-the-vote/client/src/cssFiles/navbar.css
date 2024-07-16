@@ -9,7 +9,19 @@
     border: 1px solid darkgray;
   }
 
-  button {
-    height: 40px;
-    width: 150px;
+  .navbar-links {
+    display: flex;
+    gap: 20px;
   }
+
+.user-info {
+  margin-right: 20px;
+  font-size: 30px;
+  font-weight: bolder;
+  color: antiquewhite;
+} 
+
+button {
+  height: 40px;
+  width: 150px;
+}

@@ -87,30 +87,13 @@ currentIssuesRouter.delete('/:issueId', async (req, res, next) => {
 
 currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
     try {
-        const issueId = req.params.issueId
-        const userId = req.auth._id
-
-        const issue = await Issues.findById(issueId)
-        
-        if (!issue) {
-            return res.status(404).send({ message: 'Issue not found.' })
-        }
-
-        if (issue.user.toString() === userId) {
-            return res.status(403).send({ message: 'Users cannot vote on their own issues.' });
-        }
-
-        //removes user from upvotes if they have upvoted
-        await Issues.updateOne({ _id: issueId }, {$pull: {upvotes: userId } })
-
-        //toggle downvote: add if not present, remove if already present
-        const update = issue.downvotes.includes(userId)
-        ? {$pull: {downvotes: userId } }
-        : { $addToSet: { downvotes: userId } }
         const updatedIssue = await Issues.findByIdAndUpdate(
-            issueId, 
-            update, 
-            { new: true }
+            req.params.issueId,
+            {
+                $addToSet: {downvotes: req.auth._id},
+                $pull: {upvotes: req.auth._id}
+            },
+            {new: true}
         )
         return res.status(201).send(updatedIssue)
     } catch (error) {
@@ -121,33 +104,15 @@ currentIssuesRouter.put('/downvotes/:issueId', async (req, res, next) => {
 
 currentIssuesRouter.put('/upvotes/:issueId', async (req, res, next) => {
     try {
-        const issueId = req.params.issueId
-        const userId = req.auth._id
-
-        const issue = await Issues.findById(issueId)
-
-        if (!issue) { 
-            return res.status(404).send({ message: 'Issue not found' })
-        }
-
-        if (issue.user.toString() === userId) {
-            return res.status(403).send({ message: 'Users cannot vote on thier own issues.' })
-        }
-
-        //removes user from downvotes if they have downvoted already.
-        await Issues.updateOne({ _id: issueId }, { $pull: { downvotes: userId } })
-
-        //toggle upvote: add if not present, remove if already present
-        const update = issue.upvotes.includes(userId)
-        ? {$pull: { upvotes: userId } }
-        : {$addToSet: { upvotes: userId } }
         const updatedIssue = await Issues.findByIdAndUpdate(
-            issueId,
-            update,
-            { new: true }
+            req.params.issueId,
+            {
+                $addToSet: {upvotes: req.auth._id},
+                $pull: {downvotes: req.auth._id}
+            },
+            {new: true}
         )
-        
-        return res.status(201).sendd(updatedIssue)
+        return res.status(201).send(updatedIssue)
     } catch (error) {
         res.status(500)
         return next(error)

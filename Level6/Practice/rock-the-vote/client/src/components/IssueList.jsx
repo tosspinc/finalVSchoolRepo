@@ -5,11 +5,11 @@ import '../cssFiles/issuelist.css'
 
 function IssueList(props){
 
-    const {issues} = props
-
+    const {issues, isPublic} = props
+    console.log(props)
     const issueElements = issues.map(issue => {
         return(
-            <Issue key={issue._id} {...issue}/>
+            <Issue key={issue._id} {...issue} isPublic={isPublic}/>
         )
     })
 

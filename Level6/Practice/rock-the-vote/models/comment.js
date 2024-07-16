@@ -24,6 +24,10 @@ const commentSchema = new Schema({
         type: String,
         default: 'Anonymous',
         trim: true
+    },
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'UserName'
     }
 })
 

@@ -17,13 +17,12 @@ function Profile() {
         getComment()
     }, []);
 
-
+    console.log(issues)
 
     return (
         <div className='profile-public-wrapper'>
-            
             <IssueForm />
-            <IssueList issues={issues} />
+            <IssueList issues={issues} isPublic={false} />
         </div>
     );
 }

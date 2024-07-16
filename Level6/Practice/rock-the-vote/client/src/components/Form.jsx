@@ -21,7 +21,7 @@
 
         return ( 
             <form className='auth-form-container' onSubmit={handleSubmit}>
-                <h2 className='rtv-form-title'>Welcome to Rock The Vote!</h2>
+                <h2 className='rtv-form-title'>Rock The Vote!</h2>
                 <div className='input-container'>
                     <label htmlFor='username' className='input-label'>Username: </label>
                     <input 

@@ -1,20 +1,18 @@
 import { useContext, useState } from "react"
 import { UserContext } from "../context/UserProvider"
+import PublicComments from "./PublicComments"
 
 
 
 function Issue(props){
 
-    const {comments, user} = useContext(UserContext)
-    /*const {handleUpvotes, handleDownvotes} = useContext(UserContext)*/ 
-    const {title, description, imgUrl, username, userId, upvotes, downvotes, _id } = props
+    const {title, description, imgUrl, username, userId, upvotes, downvotes, _id, isPublic } = props
 
-    /* const {comments, user, handleUpvote, handleDownvote} = useContext(UserContext)*/
+    const {comments, user, handleUpvote, handleDownvote} = useContext(UserContext)
     const [formData, setFormData] = useState({
         title, 
         description
     })
-    /*const [isEditing, setIsEditing] = useState(false)*/
 
     const filteredComments = comments.filter(comment => comment.issue === _id)
     console.log(filteredComments)
@@ -78,11 +76,13 @@ function Issue(props){
                 <button onClick={handleToggle}>Cancel</button>
             </form>
         )}
+        {isPublic && <PublicComments issueId = {_id}/>}
         <div>
             {filteredComments.map(comment => {
                 return(
                     <div /*key={comment._id*/>
                         <h3>{comment.content}</h3>
+                        <p>{comment.username}</p>
                     </div>
                 )
             })}

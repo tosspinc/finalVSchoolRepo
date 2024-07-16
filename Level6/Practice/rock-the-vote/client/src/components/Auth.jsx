@@ -18,7 +18,7 @@ function Auth() {
   }
 
   const toggleForm = () => {
-    setIsMember(!isMember)
+    setIsMember(prevIsMember => !prevIsMember)
     resetAuthErr()
   }
 
@@ -31,8 +31,9 @@ function Auth() {
             isMember={isMember} 
             submit={handleSubmit}
             errMsg={errMsg}
+            toggleForm={toggleForm}
+            
           /> 
-          <button onClick={toggleForm}>Create an Account?</button>
         </>
         ) :  (  
         <>
@@ -40,6 +41,8 @@ function Auth() {
             isMember={isMember} 
             submit={handleSubmit}
             errMsg={errMsg}
+            toggleForm={toggleForm}
+            
           /> 
         </>
         )
