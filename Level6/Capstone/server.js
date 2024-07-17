@@ -1,11 +1,12 @@
 const mongoose = require("mongoose")
 const express = require("express");
 const morgan = require("morgan");
-const dotenv = require("dotenv")
 const cors = require("cors")
 const cookieParser = require('cookie-parser')
+const dotenv = require('dotenv')
 
 dotenv.config();
+
 
 const app = express();
 const port = 9000;
@@ -45,7 +46,7 @@ app.use("/api/pets", require("./routes/petProductsRouter.js"));
 app.use("/api/appliance", require("./routes/appliancePartRouter.js"))
 
 //login & create account route.
-app.use("/auth/userName", require("./routes/authRouter.js"))
+app.use("/auth", require("./routes/authRouter.js"))
 
 //cookie settings code
 app.get('/set-cookie', (req, res) => {

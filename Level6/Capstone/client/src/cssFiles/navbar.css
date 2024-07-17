@@ -30,7 +30,14 @@
   .navcenter-search, .search-container{
     background-color: rgb(48, 213, 200);
   }
-  
+
+  /*displays username*/
+  .username-display {
+    margin-right: 15px;
+    font-weight: bolder;
+    background-color: rgb(48, 213, 200);
+  }
+
   /*Navigation search all button*/
   .all {
     margin-top: 9px;
@@ -135,5 +142,5 @@
     padding: 0;
     height: 60px;
     width: 65px;
-    background-color: transparent;
+    background-color: rgb(48, 213, 200);
   }

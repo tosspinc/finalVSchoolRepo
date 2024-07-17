@@ -2,69 +2,90 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-//creates context for user
+// Creates context for user
 const TosspiContext = createContext();
 
-//creates an instance of axios
+// Creates an instance of axios
 const userAxios = axios.create({
-  baseURL: '/auth/User'
-})
+  baseURL: 'http://localhost:9000/auth' // Ensure this points to your server
+});
 
 userAxios.interceptors.request.use(config => {
-  const token = sessionStorage.getItem('token')
+  const token = localStorage.getItem('token');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  return config
-  }, error => {
-    return Promise.reject(error)
-})
+  return config;
+}, error => {
+  return Promise.reject(error);
+});
 
 export const TosspiWebsite = ({ children }) => {
-  const [user, setUser] = useState(null)
-  const [token, setToken] = useState(sessionStorage.getItem('token') || "")
-  const navigate = useNavigate()
+  const [user, setUser] = useState(null);
+  const [token, setToken] = useState(localStorage.getItem('token') || "");
+  const navigate = useNavigate();
   const [applianceParts, setApplianceParts] = useState([]);
 
   useEffect(() => {
     if (token) {
-      userAxios.get('/')
+      userAxios.get('/users') // Corrected endpoint
         .then(response => {
-          setUser(response.data)
+          console.log('Fetched user data:', response.data); // Log the user data
+          setUser(response.data.find(u => u.token === token)); // Ensure the user data has a 'username' property
         })
         .catch(error => {
-          console.error('Error fetching user: ', error)
-        })
+          console.error('Error fetching user:', error);
+        });
     }
   }, [token]);
 
+  const signup = async (credentials) => {
+    try {
+      const response = await axios.post('http://localhost:9000/auth/signup', credentials); // Ensure this points to your server
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      setToken(token);
+      setUser(user);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing up.', error);
+      throw error;
+    }
+  };
+
   const login = async (credentials) => {
     try {
-      const response = await userAxios.post('/login', credentials)
-      const { token, user } = response.data
-      sessionStorage.setItem('token', token)
-      setToken(token)
-      setUser(user)
-      Navigate('/')
+      const response = await userAxios.post('/login', credentials);
+      const { token, user } = response.data;
+      localStorage.setItem('token', token);
+      setToken(token);
+      setUser(user);
+      navigate('/');
     } catch (error) {
-      console.error('Error logging in:', error)
-      throw error
+      console.error('Error logging in:', error);
+      throw error;
     }
-  }
+  };
 
   const logout = () => {
-    sessionStorage.removeItem('token')
-    setToken('')
-    setUser(null)
-    Navigate('/login')
-  }
+    localStorage.removeItem('token');
+    setToken('');
+    setUser(null);
+    navigate('/login');
+  };
 
   return (
-    <TosspiContext.Provider value={{ user, login, logout, applianceParts, setApplianceParts }}>
+    <TosspiContext.Provider value={{
+      user,
+      signup,
+      login,
+      logout,
+      applianceParts,
+      setApplianceParts
+    }}>
       {children}
     </TosspiContext.Provider>
   );
 };
 
 export default TosspiContext;
-

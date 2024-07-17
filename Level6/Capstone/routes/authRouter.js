@@ -1,110 +1,121 @@
-const express = require('express')
-const authRouter = express.Router()
-const UserName = require('../models/userName')
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
+const express = require('express');
+const authRouter = express.Router();
+const UserName = require('../models/userName');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-//get all users
-authRouter.get("/", async (req, res, next) => {
+// Get all users
+authRouter.get('/users', async (req, res, next) => {
     try {
-        const allUserNames = await UserName.find()
-        return res.status(200).send(allUserNames)
+        const allUserNames = await UserName.find().select('-password');
+        return res.status(200).send(allUserNames);
     } catch (error) {
-        console.error('Error fetching all users.', error)
-        res.status(500).send({ error: "Internal Server Error"})
-        return next(error)
+        console.error('Error fetching all users.', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+        return next(error);
     }
-})
+});
 
-//creates a new user in mongoose
+// Creates a new user in mongoose
 authRouter.post('/signup', async (req, res, next) => {
     try {
-        const {username, password} = req.body
+        const { username, password } = req.body;
+        console.log('Signup request received with:', { username, password });
+
+        const lowerCaseUsername = username.toLowerCase();
 
         if (!username || !password) {
-            return res.status(400).send({ error: 'Username and password are required.'})
+            console.log('Username or password not provided');
+            return res.status(400).send({ error: 'Username and password are required.' });
         }
 
-        //checks if username is already in use
-        const existingUser = await UserName.findOne({ userName: username.toLowerCase() })
+        // Checks if username is already in use
+        const existingUser = await UserName.findOne({ username: lowerCaseUsername });
         if (existingUser) {
-            return res.status(403).send({ error: "That username is already being used." })
+            console.log('Username already exists:', lowerCaseUsername); // Logging
+            return res.status(403).send({ error: 'That username is already being used.' });
         }
 
-        //hash password before saving
-        const hashedPassword = await bcrypt.hash(password, 10)
+        // Hash password before saving
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUserName = new UserName({ username: lowerCaseUsername, password: hashedPassword });
+        const savedUserName = await newUserName.save();
 
-        const newUserName = new UserName({ userName: username.toLowerCase(), password: hashedPassword })
-        const savedUserName = await newUserName.save()
+        // Generate JWT token
+        const token = jwt.sign(savedUserName.withoutPassword(), process.env.SECRET);
+        console.log('User created and token generated.', { user: savedUserName.withoutPassword(), token });
 
-        //generate jwt token
-        const token = jwt.sign({ userName: savedUserName.userName }, process.env.SECRET)
-
-        return res.status(201).send({ user: savedUserName.withoutPassword(), token })
+        return res.status(201).send({ user: savedUserName.withoutPassword(), token });
     } catch (error) {
-        console.error('Error creating new user.', error)
-        res.status(500).send({ error: "Internal Server Error"})
-        return next(error)
+        console.error('Error creating new user.', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+        return next(error);
     }
-})
+});
 
-//Login Route
+// Login Route
 authRouter.post('/login', async (req, res, next) => {
     try {
-        const { username, password} = req.body
+        const { username, password } = req.body;
+        console.log('Login request received with:', { username, password });
 
         if (!username || !password) {
             return res.status(400).send({ error: 'Username and password are required.' });
         }
 
-        //checks if they already exists in database.
-        const user = await UserName.findOne({ userName: username.toLowerCase() })
-        if(!user) {
-            return res.status(403).send({ error: "No User with your username exists. Please signup." })
+        // Checks if they already exist in database
+        const user = await UserName.findOne({ username: username.toLowerCase() });
+        if (!user) {
+            console.log('User not found:', username.toLowerCase());
+            res.status(403);
+            return next(new Error('No User with your username exists. Please signup.'));
         }
 
-        //checks if password matches.
-        const isMatch = await bcrypt.compare(password, user.password)
+        // Check if password matches
+        const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(403).send({ error: "Incorrect username or password." })
+            console.log('Password mismatch for user:', username.toLowerCase());
+            res.status(403);
+            return next(new Error('Password is incorrect.'));
         }
 
-        //generate jwt token
-        const token = jwt.sign({ id: user._id, userName: user.userName }, process.env.SECRET, { expiresIn: '1hr'})
+        // Generate JWT token
+        const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
+        console.log('User Authenticated, token generated:', token);
 
-        return res.status(200).send({ message: "Logged in successfully.", user: user.withoutPassword(), token })
+        return res.status(200).send({ token, user: user.withoutPassword() });
     } catch (error) {
-        console.error('Error logging in user.', error)
-        res.status(500).send({ error: "Internal Server Error"})
-        return next(error)
+        console.error('Error logging in user.', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+        return next(error);
     }
-})
+});
 
-//put - updates user
+// Put - updates user
 authRouter.put('/:id', async (req, res, next) => {
     try {
-    const updatedUserName = await UserName.findByIdAndUpdate(
+        const updatedUserName = await UserName.findByIdAndUpdate(
             req.params.id,
             req.body,
-            {new: true} 
-    )
-    return res.status(200).send(updatedUserName.withoutPassword())
+            { new: true }
+        );
+        return res.status(200).send(updatedUserName.withoutPassword());
     } catch (error) {
-        console.error('Error updating user.', error), 
-        res.status(500).send({ error: "Internal Server Error"})
-        return next(error)
+        console.error('Error updating user.', error);
+        res.status(500).send({ error: 'Internal Server Error' });
+        return next(error);
     }
-})
+});
 
-//delete a user
-authRouter.delete("/:id", async (req, res, next) => {
+// Delete a user
+authRouter.delete('/:id', async (req, res, next) => {
     try {
-        const deletedUserName = await UserName.findByIdAndDelete(req.params.id)
-        return res.status(200).send(`User ${deletedUserName.userName} deleted successfully.`)
+        const deletedUserName = await UserName.findByIdAndDelete(req.params.id);
+        return res.status(200).send(`User ${deletedUserName.username} deleted successfully.`);
     } catch (error) {
-        res.status(500).send({ error: "Internal Server Error"})
-        return next(error)
+        res.status(500).send({ error: 'Internal Server Error' });
+        return next(error);
     }
-})
+});
 
-module.exports = authRouter
+module.exports = authRouter;

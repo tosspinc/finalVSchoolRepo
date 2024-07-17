@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import axios from 'axios';
 import '../cssFiles/popup.css';
 import TosspiContext from '../context/TosspiContext';
 
@@ -7,7 +6,7 @@ const Popup = ({ closePopup }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const { login } = useContext(TosspiContext);
+    const { login, signup } = useContext(TosspiContext);
 
     const handleUsernameChange = (event) => {
         console.log(event.target.value)
@@ -55,14 +54,16 @@ const Popup = ({ closePopup }) => {
                                     value={username}
                                     name="username" 
                                     onChange={handleUsernameChange}
-                                    required />
+                                    required 
+                                />
                                 <label>Password:</label>
                                 <input 
                                     type="password" 
                                     value={password}
                                     name="password" 
                                     onChange={handlePasswordChange}
-                                    required />
+                                    required 
+                                />
                                 <button type="submit">Login</button>
                             </form>
                             <p onClick={() => setIsLogin(false)}>Don't have an account? Create one here.</p>
@@ -77,7 +78,8 @@ const Popup = ({ closePopup }) => {
                                     value={username}
                                     name="username" 
                                     onChange={handleUsernameChange}
-                                    required />
+                                    required 
+                                />
                                 <label>Password:</label>
                                 <input 
                                     type="password" 
