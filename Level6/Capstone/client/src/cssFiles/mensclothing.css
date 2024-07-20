@@ -1,17 +1,17 @@
-/* pets.css */
+/* mensclothing.css */
 
-.pets-row {
+.mensclothing-row {
     margin: 30px;
     padding: 2px;
     border: 1.5px solid black;
     max-width: 1600px;
   }
   
-  .pets-search-container {
+  .mensclothing-search-container {
     text-align: center;
   }
   
-  .pets-grid {
+  .mensclothing-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;

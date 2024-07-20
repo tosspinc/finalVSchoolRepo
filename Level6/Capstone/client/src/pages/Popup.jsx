@@ -22,7 +22,7 @@ const Popup = ({ closePopup }) => {
         event.preventDefault()
         try {
             await login({ username, password })
-            console.log('submitted')
+            console.log('Login submitted')
             closePopup()
         } catch (error) {
             console.error('Login failed:', error)
@@ -33,6 +33,7 @@ const Popup = ({ closePopup }) => {
         event.preventDefault()
         try {
             await signup({ username, password })
+            console.log('Signup submitted')
             closePopup()
         } catch (error) {
             console.error('Signup failed:', error)
@@ -86,7 +87,8 @@ const Popup = ({ closePopup }) => {
                                     value={password}
                                     name="password" 
                                     onChange={handlePasswordChange}
-                                    required />
+                                    required 
+                                />
                                 <button type="submit">Create Account</button>
                             </form>
                             <p onClick={() => setIsLogin(true)}>Already have an account? Login here.</p>

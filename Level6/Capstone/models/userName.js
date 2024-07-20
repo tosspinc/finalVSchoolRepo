@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs')
 
+
 //author schema or blueprint
 const userNameSchema = new Schema ({
     username: {
@@ -22,6 +23,9 @@ const userNameSchema = new Schema ({
         require: false,
         trim: true
     },
+    cart: [{
+        
+    }],
     isAdmin: {
         type: Boolean,
         default: false,

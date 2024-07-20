@@ -3,7 +3,10 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors")
 const cookieParser = require('cookie-parser')
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
+const inventoryRouter = require("./routes/inventoryRouter.js");
+const cartRouter = require("./routes/cartItemRouter.js");
+const { expressjwt } = require("express-jwt");
 
 dotenv.config();
 
@@ -40,13 +43,11 @@ connectToDb();
 
 //routes
 //page routes
-app.use("/api/books", require("./routes/bookRouter.js"));
-app.use("/api/authors", require("./routes/authorRouter.js"));
-app.use("/api/pets", require("./routes/petProductsRouter.js"));
-app.use("/api/appliance", require("./routes/appliancePartRouter.js"))
-
 //login & create account route.
 app.use("/auth", require("./routes/authRouter.js"))
+app.use('/api/inventory', inventoryRouter)
+app.use('/api/user', expressjwt({secret: process.env.SECRET, algorithms: ['HS256']}) )
+app.use('/api/user/cart', cartRouter)
 
 //cookie settings code
 app.get('/set-cookie', (req, res) => {

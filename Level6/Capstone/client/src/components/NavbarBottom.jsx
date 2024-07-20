@@ -6,6 +6,7 @@ import "../cssFiles/navbarbottom.css"
 export default function NavbarBottom() {
     return (
         <div className="navbar-bottom-container">
+            <div className="item all-products">All Products</div>
             <Link to='/applianceParts' className='item appliance-parts'>Appliance Parts</Link>
             <Link to='/books' className='item books'>Books</Link>
             <Link to='/pets' className='item pets'>Pets</Link>
@@ -19,7 +20,7 @@ export default function NavbarBottom() {
             <div className="item outdoor-products">Outdoors</div>
             <div className="item toy-products">Toys</div>
             <div className="item sports-products">Sports</div>
-            <div className="item all-products">All Products</div>
+            
         </div>
     );
 }

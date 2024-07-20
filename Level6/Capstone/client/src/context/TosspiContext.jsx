@@ -1,14 +1,10 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 // Creates context for user
 const TosspiContext = createContext();
 
-// Creates an instance of axios
-const userAxios = axios.create({
-  baseURL: 'http://localhost:9000/auth' // Ensure this points to your server
-});
+const userAxios = axios.create();
 
 userAxios.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
@@ -16,37 +12,30 @@ userAxios.interceptors.request.use(config => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
-}, error => {
-  return Promise.reject(error);
 });
 
-export const TosspiWebsite = ({ children }) => {
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(localStorage.getItem('token') || "");
-  const navigate = useNavigate();
-  const [applianceParts, setApplianceParts] = useState([]);
+const initState = {
+  user: JSON.parse(localStorage.getItem('user')) || {},
+  token: localStorage.getItem('token') || ''
+}
 
-  useEffect(() => {
-    if (token) {
-      userAxios.get('/users') // Corrected endpoint
-        .then(response => {
-          console.log('Fetched user data:', response.data); // Log the user data
-          setUser(response.data.find(u => u.token === token)); // Ensure the user data has a 'username' property
-        })
-        .catch(error => {
-          console.error('Error fetching user:', error);
-        });
-    }
-  }, [token]);
+export const TosspiWebsite = ({ children }) => {
+  const [userState, setUserState] = useState(initState);
+  const [inventory, setInventory] = useState([])
 
   const signup = async (credentials) => {
     try {
-      const response = await axios.post('http://localhost:9000/auth/signup', credentials); // Ensure this points to your server
+      const response = await axios.post('/auth/signup', credentials);
       const { token, user } = response.data;
       localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
-      navigate('/');
+      localStorage.setItem('user', JSON.stringify(user))
+      setUserState(prev => {
+        return{
+          ...prev,
+          user,
+          token
+        }
+      })
     } catch (error) {
       console.error('Error signing up.', error);
       throw error;
@@ -55,12 +44,17 @@ export const TosspiWebsite = ({ children }) => {
 
   const login = async (credentials) => {
     try {
-      const response = await userAxios.post('/login', credentials);
+      const response = await userAxios.post('/auth/login', credentials);
       const { token, user } = response.data;
       localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
-      navigate('/');
+      localStorage.setItem('user', JSON.stringify(user))
+      setUserState(prev => {
+        return{
+          ...prev,
+          user,
+          token
+        }
+      })
     } catch (error) {
       console.error('Error logging in:', error);
       throw error;
@@ -69,19 +63,30 @@ export const TosspiWebsite = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    setToken('');
-    setUser(null);
-    navigate('/login');
+    localStorage.removeItem('user')
+    setUserState({
+      user: {},
+      token: ''
+    });
   };
+
+  const getInventory = async() => {
+    try {
+      const res = await userAxios.get('/api/inventory')
+      setInventory(res.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <TosspiContext.Provider value={{
-      user,
+      ...userState,
       signup,
       login,
       logout,
-      applianceParts,
-      setApplianceParts
+      getInventory,
+      inventory
     }}>
       {children}
     </TosspiContext.Provider>

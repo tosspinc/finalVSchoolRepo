@@ -1,0 +1,11 @@
+.chosen-product-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 300px;
+    border: 1px solid black;
+    width: 80%;
+    height: 600px;
+    background-color: bisque;
+    margin-left: 20px;
+    margin-right: 20px;
+}

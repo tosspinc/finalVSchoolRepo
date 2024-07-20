@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import "../cssFiles/carousel.css"
-//import { motion, AnimatePresence } from 'framer-motion';
 import image1 from '/src/assets/Imgs/productpics/homeappliancepics/applianceparts/microwave/diodes/WB18x10449/frontview.jpg';
 import image2 from '/src/assets/Imgs/productpics/homeappliancepics/applianceparts/microwave/diodes/wb26x28935/frontview.png';
 import image3 from '/src/assets/Imgs/productpics/homeappliancepics/applianceparts/microwave/diodes/wb27x1160/sideview.jpg';
