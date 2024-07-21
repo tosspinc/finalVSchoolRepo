@@ -5,7 +5,7 @@
     bottom: 0;
     left: 0; */
     width: 100%;
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
     padding: 5px;
     text-align: center;
     height: 5vh;
@@ -14,18 +14,21 @@
   .footer-top-row {
     display: flex;
     justify-content: space-around;
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
     align-items: center;
   }
   
   .footer-bottom-row {
     display: flex;
-    background-color: rgb(48, 213, 200);
-    justify-content: space-between;
+    background-color: #594D5B;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 3vh;
   }
   
   .footer-left-column {
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
   }
   
 
@@ -36,18 +39,22 @@
   }
   
   .footer-left-column a {
-    background-color: lightgoldenrodyellow;
+    background-color: bisque;
     color: black;
   }
 
   .footer-right-column {
     height: 45px;
     width: 100px;
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
   }
 
 .mainfooter small {
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
+    color: bisque;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
   
   /*footer social media stuff*/
@@ -58,12 +65,12 @@
     align-items: center;
     justify-content: center;
     margin: .5rem 0 1.5rem 0;
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
     width: 200px;
   }
   
   .facebook, .twitter, .tiktok, .instagram {
-    background-color: rgb(48, 213, 200);
+    background-color: #594D5B;
     height: 40px;
     width: 40px;
   }
@@ -71,7 +78,7 @@
   .about-info, .contact-info, .careers-info  {
     height: 15px;
     width: 40px;
-    background-color: lightgoldenrodyellow;
+    background-color: #594D5B;
     border: 1px solid black;
     color: black;
   }
