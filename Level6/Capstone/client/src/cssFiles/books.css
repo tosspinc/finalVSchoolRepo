@@ -1,20 +1,32 @@
 /* books.css */
 
 .books-row {
-    margin: 30px;
-    padding: 2px;
-    border: 1.5px solid black;
-    max-width: 1600px;
-  }
+  margin-top: 25px;
+  margin-left: 200px;
+  margin-right: 100;
+  padding: 2px;
+  border: 1.5px solid black;
+  max-width: 75%;
+}
   
-  .books-search-container {
-    text-align: center;
-  }
+.books-search-container {
+  text-align: center;
+  background-color: #594D5B;
+}
   
-  .books-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
+.books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: center;
+  gap: 5px;
+  background-color: maroon;
+}
+
+h1 {
+  background-color: orange;
+  border: 2px solid maroon;
+}
   

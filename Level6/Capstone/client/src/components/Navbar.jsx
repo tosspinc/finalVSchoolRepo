@@ -32,7 +32,6 @@ export default function Navbar() {
                         <span className="username-display">Welcome: {user.username}</span>
                         <button className="item login" onClick={logout}>
                             <img src="./src/assets/Imgs/Logout.png" className="logout-logo" />
-                            <span>Logout</span>
                         </button>
                     </>
                 ) : (
@@ -40,7 +39,6 @@ export default function Navbar() {
                         <span className="username-display">Welcome:</span>
                         <button className="item login" onClick={togglePopup}>
                             <img src="./src/assets/Imgs/Login.jpg" className="login-logo" />
-                            <span>Login / Create Account</span>
                         </button>
                     </>
                 )}
