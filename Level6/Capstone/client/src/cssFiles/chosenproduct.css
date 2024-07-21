@@ -50,6 +50,20 @@
     margin: 5px 0;
 }
 
+.quantity-selector {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.quantity-selector label {
+    margin-right: 10px;
+}
+
+.quantity-selector select {
+    padding: 5px;
+    font-size: 16px;
+}
+
 .add-to-cart-button {
     padding: 10px 20px;
     border: none;

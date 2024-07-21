@@ -34,6 +34,7 @@ const ChosenProduct = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [error, setError] = useState(null)
+  const [quantity, setQuantity] = useState(1); // State for quantity
 
   useEffect(() => {
     const getProduct = async () => {
@@ -83,6 +84,18 @@ const ChosenProduct = () => {
           {product.category === 'Pet Product' && (
             <p>Brand: {product.brand}</p>
           )}
+          <div className="quantity-selector">
+            <label htmlFor="quantity">Quantity: </label>
+            <select 
+              id="quantity" 
+              value={quantity} 
+              onChange={(e) => setQuantity(e.target.value)}
+            >
+              {[...Array(25).keys()].map(n => (
+                <option key={n + 1} value={n + 1}>{n + 1}</option>
+              ))}
+            </select>
+          </div>
           <button className="add-to-cart-button">Add to Cart</button>
           <button className="buy-now-button">Buy Now</button>
         </div>
