@@ -73,3 +73,14 @@
   
   }
   
+  /* Media Querires */
+  @media (max-width: 768px) {
+    .navbar-bottom-container {
+      flex-direction: column;
+      height: auto;
+    }
+    .item {
+      width: 100%;
+      justify-content: center;
+    }
+  }

@@ -80,3 +80,13 @@
     flex: 1;
   }
 
+/* Media Queries*/
+
+@media (max-width: 768px) {
+  .footer-top-row {
+    flex-direction: column;
+  }
+  .social-media-links {
+    flex-direction: column;
+  }
+}

@@ -71,3 +71,27 @@
   margin: 5px 0;
   color: #333;
 }
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .inventory-item {
+      width: 200px;
+      height: auto;
+  }
+  .item-image img {
+      width: 100px;
+      height: 140px;
+  }
+  .item-info {
+      padding: 5px;
+  }
+  .item-title {
+      font-size: 1em;
+  }
+  .item-description {
+      font-size: 0.7em;
+  }
+  .item-price {
+      font-size: 0.9em;
+  }
+}

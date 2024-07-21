@@ -40,3 +40,19 @@
   .right {
     right: 20px;
   }
+
+  /* media queries */
+  @media (max-width: 768px) {
+    .carousel-container {
+      height: 300px;
+      width: 100%;
+    }
+    .carousel-image {
+      width: 250px;
+      height: 200px;
+    }
+    .left, .right {
+      height: 40px;
+      width: 25px
+    }
+  }
