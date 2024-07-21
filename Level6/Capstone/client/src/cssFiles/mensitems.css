@@ -1,6 +1,4 @@
-/* mensclothing.css */
-
-.mensclothing-row {
+.mens-items-row {
   margin-top: 25px;
   margin-left: 200px;
   margin-right: 100;
@@ -9,12 +7,12 @@
   max-width: 75%;
 }
   
-.mensclothing-search-container {
+.mens-items-search-container {
   text-align: center;
   background-color: #594D5B;
 }
   
-.mensclothing-grid {
+.mens-items-grid {
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;

@@ -24,7 +24,18 @@
     color: bisque;
   }
   
-  
+  .item {
+    margin-top: 0;
+    margin-left: 0;
+    padding: 10px;
+    height: 40px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #594D5B;
+    color: bisque;
+  }
   
   /*Anchor styling */
   a {

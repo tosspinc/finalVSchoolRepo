@@ -28,10 +28,11 @@
 }
 
 .item-image img {
-  width: 150px;
-  height: 200px;
+  width: 125px;
+  height: 175px;
   display: block;
   margin-bottom: 5px;
+  margin-left: 10px;
 }
 
 .item-info {
