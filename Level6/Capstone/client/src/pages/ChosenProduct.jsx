@@ -7,7 +7,8 @@ import axios from 'axios';
 const fetchProductById = async (id) => {
   console.log("test")
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory/${id}`)
+    // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory/${id}`)
+    const response = await axios.get(`/api/inventory/${id}`)
     console.log("response: ", response.data)
     console.log("id:", id)
     return response.data
@@ -20,7 +21,8 @@ const fetchProductById = async (id) => {
 //fetch related products
 const fetchRelatedProducts = async (category) => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory?category=${category}`)
+    // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory?category=${category}`)
+    const response = await axios.get(`/api/inventory`, { params: { category } })
     console.log("response: ", response.data)
     return response.data
   } catch (error) {
@@ -39,10 +41,12 @@ const ChosenProduct = () => {
     const getProduct = async () => {
         try {
             const productData = await fetchProductById(id);
-            //console.log("product data:", productData)
+            console.log("product data:", productData)
             setProduct(productData);
             const relatedData = await fetchRelatedProducts(productData.category);
-            setRelatedProducts(relatedData.filter(item => item._id !== productData._id));
+            setRelatedProducts(relatedData.filter(
+              item => item._id !== productData._id)
+            );
         } catch(err){
             setError(err.message)
         }
