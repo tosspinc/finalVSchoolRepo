@@ -31,9 +31,12 @@
 
 .product-details h1 {
     font-size: 24px;
+    font-style: italic;
     font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
+    background-color: bisque;
+    border: 3px solid maroon;
     text-align: center;
     text-shadow: 1px 1px 0px white, 
                  -1px -1px 0px white, 
@@ -45,6 +48,10 @@
                  0px -1px 0px black;
 }
 
+.product-details h1:hover {
+    background-color: #e89000;
+}
+
 .product-details p {
     font-size: 16px;
     margin: 5px 0;
@@ -52,7 +59,9 @@
 
 .quantity-selector {
     margin-bottom: 10px;
-    font-size: 16px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .quantity-selector label {
@@ -61,7 +70,9 @@
 
 .quantity-selector select {
     padding: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
 }
 
 .add-to-cart-button {
@@ -69,7 +80,9 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -79,13 +92,16 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
 .add-to-cart-button {
-    background-color: #ffa41c;
+    background-color: bisque;
+    border: 3px solid maroon;
     color: black;
     text-shadow: 1px 1px 0px white, 
                  -1px -1px 0px white, 
@@ -102,7 +118,8 @@
 }
 
 .buy-now-button {
-    background-color: #ff9900;
+    background-color: bisque;
+    border: 3px solid maroon;
     color: black;
     text-shadow: 1px 1px 0px white, 
                  -1px -1px 0px white, 
