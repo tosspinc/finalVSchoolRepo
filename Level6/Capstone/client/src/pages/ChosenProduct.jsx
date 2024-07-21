@@ -7,7 +7,6 @@ import axios from 'axios';
 const fetchProductById = async (id) => {
   console.log("test")
   try {
-    // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory/${id}`)
     const response = await axios.get(`/api/inventory/${id}`)
     console.log("response: ", response.data)
     console.log("id:", id)
@@ -21,7 +20,6 @@ const fetchProductById = async (id) => {
 //fetch related products
 const fetchRelatedProducts = async (category) => {
   try {
-    // const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/inventory?category=${category}`)
     const response = await axios.get(`/api/inventory`, { params: { category } })
     console.log("response: ", response.data)
     return response.data
@@ -61,31 +59,34 @@ const ChosenProduct = () => {
   return (
     <div className="chosen-product-container">
       <div className="product-details">
-        <h1>{product.title}</h1>
         <img src={product.imageUrl} alt={product.title} />
-        <p>{product.description}</p>
-        <p>Price: ${product.price}</p>
-        {product.category === 'Appliance Part' && (
-          <>
-            <p>Part Number: {product.partNumber}</p>
-            <p>Manufacturer: {product.manufacturer}</p>
-          </>
-        )}
-        {product.category === 'Book' && (
-          <>
-            <p>Genre: {product.genre}</p>
-            <p>Year Published: {product.yearPublished}</p>
-            <p>Publisher: {product.publisher}</p>
-            <p>Pages: {product.pages}</p>
-            <p>Cover: {product.cover}</p>
-            <p>Author: {product.author}</p>
-          </>
-        )}
-        {product.category === 'Pet Product' && (
-          <p>Brand: {product.brand}</p>
-        )}
-        <button>Add to Cart</button>
-      </div>
+        <div className='product-info'>
+          <h1>{product.title}</h1>
+          <p>{product.description}</p>
+          <p>Price: ${product.price}</p>
+          {product.category === 'Appliance Part' && (
+            <>
+              <p>Part Number: {product.partNumber}</p>
+              <p>Manufacturer: {product.manufacturer}</p>
+            </>
+          )}
+          {product.category === 'Book' && (
+            <>
+              <p>Genre: {product.genre}</p>
+              <p>Year Published: {product.yearPublished}</p>
+              <p>Publisher: {product.publisher}</p>
+              <p>Pages: {product.pages}</p>
+              <p>Cover: {product.cover}</p>
+              <p>Author: {product.author}</p>
+            </>
+          )}
+          {product.category === 'Pet Product' && (
+            <p>Brand: {product.brand}</p>
+          )}
+          <button className="add-to-cart-button">Add to Cart</button>
+          <button className="buy-now-button">Buy Now</button>
+        </div>
+      </div>  
       <div className="related-products">
         <h2>Related Products</h2>
         <div className="related-products-grid">
