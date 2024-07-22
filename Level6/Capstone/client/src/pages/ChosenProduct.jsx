@@ -17,10 +17,10 @@ const fetchProductById = async (id) => {
   }
 };
 
-//fetch related products
+//fetch 5 inventory products
 const fetchRelatedProducts = async (category) => {
   try {
-    const response = await axios.get(`/api/inventory`, { params: { category } })
+    const response = await axios.get(`/api/inventory`, { params: { category, limit: 5 } })
     console.log("response: ", response.data)
     return response.data
   } catch (error) {
@@ -34,7 +34,7 @@ const ChosenProduct = () => {
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [error, setError] = useState(null)
-  const [quantity, setQuantity] = useState(1); // State for quantity
+  const [quantity, setQuantity] = useState(1); //state for quantity
 
   useEffect(() => {
     const getProduct = async () => {
@@ -44,7 +44,7 @@ const ChosenProduct = () => {
             setProduct(productData);
             const relatedData = await fetchRelatedProducts(productData.category);
             setRelatedProducts(relatedData.filter(
-              item => item._id !== productData._id)
+              item => item._id !== productData._id).slice(0, 5)
             );
         } catch(err){
             setError(err.message)
@@ -60,11 +60,12 @@ const ChosenProduct = () => {
   return (
     <div className="chosen-product-container">
       <div className="product-details">
-        <img src={product.imageUrl} alt={product.title} />
+        <div className="product-image">
+          <img src={product.imageUrl} alt={product.title} />
+        </div>
         <div className='product-info'>
           <h1>{product.title}</h1>
           <p>{product.description}</p>
-          <p>Price: ${product.price}</p>
           {product.category === 'Appliance Part' && (
             <>
               <p>Part Number: {product.partNumber}</p>
@@ -84,6 +85,12 @@ const ChosenProduct = () => {
           {product.category === 'Pet Product' && (
             <p>Brand: {product.brand}</p>
           )}
+        </div>
+        <div className="product-actions">
+          <p className="product-price">
+            <span className="price-label">Price:</span> 
+            <span className="price-amount">${product.price}</span>
+          </p>
           <div className="quantity-selector">
             <label htmlFor="quantity">Quantity: </label>
             <select 
