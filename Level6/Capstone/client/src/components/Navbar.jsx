@@ -2,12 +2,16 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Popup from "../pages/Popup";
 import TosspiContext from "../context/TosspiContext";
+import { ShoppingCartContext } from "../context/ShoppingCartContext";
 import "../cssFiles/navbar.css"; 
 
 export default function Navbar() {
     const [popupVisible, setPopupVisible] = useState(false);
-    const { user, logout, token } = useContext(TosspiContext);
+    const { user, logout, token, cartItems } = useContext(TosspiContext);
+    const { shoppingCartItems } = useContext(ShoppingCartContext)
+    
     console.log(user)
+
     const togglePopup = () => {
         setPopupVisible(!popupVisible);
     };
@@ -45,6 +49,7 @@ export default function Navbar() {
                 <div className="navright-shopping-cart">
                     <Link to='/shoppingcart' className="item shoppingcart">
                         <img src="./src/assets/Imgs/shopping-cart.jpg" className="cart-logo" />
+                        <span className="cart-count">{cartItems.length}</span>
                     </Link>
                 </div>
             </div>

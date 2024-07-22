@@ -18,6 +18,7 @@ import Carousel from './components/Carousel'
 import { useContext, useEffect } from 'react'
 import ChosenProduct from './pages/ChosenProduct'
 import './App.css'
+import ShoppingCart from './pages/ShoppingCart'
 
 export default function App() {
 
@@ -38,6 +39,7 @@ export default function App() {
       <div className='main'>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/shoppingcart' element={<ShoppingCart />} />
           <Route path="/applianceParts" element={<ApplianceParts />} />
           <Route path="/books" element={<Books />} />
           <Route path="/pets" element={<Pets />} />

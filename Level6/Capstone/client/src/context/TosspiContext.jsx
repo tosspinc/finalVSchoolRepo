@@ -22,6 +22,7 @@ const initState = {
 export const TosspiWebsite = ({ children }) => {
   const [userState, setUserState] = useState(initState);
   const [inventory, setInventory] = useState([])
+  const [cartItems, setCartItems] = useState([])
 
   const signup = async (credentials) => {
     try {
@@ -30,7 +31,7 @@ export const TosspiWebsite = ({ children }) => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user))
       setUserState(prev => {
-        return{
+        return {
           ...prev,
           user,
           token
@@ -49,7 +50,7 @@ export const TosspiWebsite = ({ children }) => {
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user))
       setUserState(prev => {
-        return{
+        return {
           ...prev,
           user,
           token
@@ -70,7 +71,7 @@ export const TosspiWebsite = ({ children }) => {
     });
   };
 
-  const getInventory = async() => {
+  const getInventory = async () => {
     try {
       const res = await userAxios.get('/api/inventory')
       setInventory(res.data)
@@ -79,6 +80,35 @@ export const TosspiWebsite = ({ children }) => {
     }
   }
 
+  const getUsersCart = async () => {
+    try {
+      const res = await userAxios.get('/api/user/cart')
+      setCartItems(res.data)
+    } catch (error) {
+      console.log(err)
+    }
+  }
+
+  const addToCart = async(item) => {
+    try {
+      const res = await userAxios.post('/api/user/cart', item)
+      console.log(res)
+      setCartItems(prev => [...prev, res.data])
+    } catch (error) {
+      console.log(err)
+    }
+  }
+
+
+  const {token} = userState
+
+  useEffect(() => {
+    if (token) {
+      getUsersCart()
+    }
+  }, [token])
+  console.log(cartItems)
+
   return (
     <TosspiContext.Provider value={{
       ...userState,
@@ -86,7 +116,9 @@ export const TosspiWebsite = ({ children }) => {
       login,
       logout,
       getInventory,
-      inventory
+      inventory,
+      cartItems,
+      addToCart
     }}>
       {children}
     </TosspiContext.Provider>

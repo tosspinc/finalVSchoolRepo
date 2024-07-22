@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../cssFiles/inventoryitem.css';
 
-const InventoryItem = ({ item }) => {
+const InventoryItem = ({ item, count }) => {
   return (
     <div className={`inventory-item ${item.category.replace(/\s+/g, '-').toLowerCase()}`}>
       <Link to={`/product/${item._id}`}>
@@ -35,6 +35,14 @@ const InventoryItem = ({ item }) => {
           {item.category === 'Pet Product' && (
             <p className="item-brand">Brand: {item.brand}</p>
           )}
+          {count && <p>Quantity: {count}</p>}
+          {
+            count &&
+            <div>
+              <button>Remove Item</button>
+              <button>Change Amount</button>
+            </div>
+          }
         </div>
       </Link>
     </div>

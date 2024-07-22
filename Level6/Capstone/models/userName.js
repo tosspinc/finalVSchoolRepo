@@ -51,6 +51,7 @@ userNameSchema.methods.checkPassword = function(passwordAttempt, callback){
         return callback(null, isMatch)
     })
 }
+
 //method to remove users password for token/sending the response
 userNameSchema.methods.withoutPassword = function(){
     const user = this.toObject()

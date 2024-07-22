@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import '../cssFiles/chosenproduct.css';
 import axios from 'axios';
+import { ShoppingCartContext } from '../context/ShoppingCartContext';
+import '../cssFiles/chosenproduct.css';
+import TosspiContext from '../context/TosspiContext';
 
 //fetch product by id.
 const fetchProductById = async (id) => {
@@ -33,26 +35,37 @@ const ChosenProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1); //state for quantity
+  const { addToCart } = useContext(TosspiContext);
 
   useEffect(() => {
     const getProduct = async () => {
-        try {
-            const productData = await fetchProductById(id);
-            console.log("product data:", productData)
-            setProduct(productData);
-            const relatedData = await fetchRelatedProducts(productData.category);
-            setRelatedProducts(relatedData.filter(
-              item => item._id !== productData._id).slice(0, 5)
-            );
-        } catch(err){
-            setError(err.message)
-        }
+      try {
+        const productData = await fetchProductById(id);
+        console.log("product data:", productData)
+        setProduct(productData);
+        const relatedData = await fetchRelatedProducts(productData.category);
+        setRelatedProducts(relatedData.filter(
+          item => item._id !== productData._id).slice(0, 5)
+        );
+      } catch(err) {
+        setError(err.message);
+      }
     };
 
     getProduct();
   }, [id]);
+
+  const handleAddToCart = () => {
+    const itemCopy = product
+    delete itemCopy._id
+    console.log(itemCopy)
+    addToCart({
+      count: quantity,
+      item: itemCopy
+    });
+  }
 
   if (error) return <div>Error: {error}</div>
   if (!product) return <div>Loading...</div>;
@@ -103,7 +116,7 @@ const ChosenProduct = () => {
               ))}
             </select>
           </div>
-          <button className="add-to-cart-button">Add to Cart</button>
+          <button className="add-to-cart-button" onClick={handleAddToCart}>Add to Cart</button>
           <button className="buy-now-button">Buy Now</button>
         </div>
       </div>  

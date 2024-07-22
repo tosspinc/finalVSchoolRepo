@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import "../cssFiles/footer.css"
+import TosspiContext from "../context/TosspiContext"
 
 export default function Footer () {
+
+    const {token, user} = useContext(TosspiContext)
+
     return (
         <footer className="mainfooter">
             <div className="footer-top-row">
@@ -10,6 +14,7 @@ export default function Footer () {
                     <Link to= "about" className="item about-info">About</Link>
                     <Link to= "contact-info" className="item contact-info">Contact</Link>
                     <Link to= "careers" className="item careers-info">Careers</Link>
+                    {token && user.isAdmin && <Link to='admin' className="item careers-info">Admin</Link>}
                 </div>
                 <div className="footer-center-column">
 

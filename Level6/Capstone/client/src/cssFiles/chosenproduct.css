@@ -36,20 +36,22 @@
     .product-details h1 {
         font-size: 24px;
         font-style: italic;
+        color: white;
         font-weight: bold;
         margin-top: 10px;
         margin-bottom: 5px;
-        background-color: bisque;
+        background-color: teal;
         border: 3px solid maroon;
+        border-radius: 10px;
         text-align: center;
-        text-shadow: 1px 1px 0px white, 
-                    -1px -1px 0px white, 
-                    -1px 1px 0px white, 
-                    1px -1px 0px white,
-                    1px 0px 0px black, 
-                    -1px 0px 0px black, 
-                    0px 1px 0px black, 
-                    0px -1px 0px black;
+        text-shadow: 1px 1px 0px black, 
+                    -1px -1px 0px black, 
+                    -1px 1px 0px black, 
+                    1px -1px 0px black,
+                    1px 0px 0px white, 
+                    -1px 0px 0px white, 
+                    0px 1px 0px white, 
+                    0px -1px 0px white;
     }
 
     .product-details h1:hover {
@@ -57,9 +59,11 @@
     }
 
     .product-info p {
-        font-size: 14px;
+        font-size: 16px;
         font-style: italic;
         margin-bottom: 10px;
+        color: black;
+        
     }
 
     .product-actions {
@@ -111,7 +115,7 @@
     .add-to-cart-button {
         padding: 10px 20px;
         border: none;
-        border-radius: 5px;
+        border-radius: 20px;
         cursor: pointer;
         font-size: 18px;
         font-style: italic;
@@ -123,17 +127,18 @@
     .buy-now-button {
         padding: 10px 20px;
         border: none;
-        border-radius: 5px;
+        border-radius: 20px;
         cursor: pointer;
         font-size: 18px;
         font-style: italic;
         font-weight: bold;
         margin-top: 10px;
         margin-bottom: 10px;
+        
     }
 
     .add-to-cart-button {
-        background-color: bisque;
+        background-color: orange;
         border: 3px solid maroon;
         color: black;
         text-shadow: 1px 1px 0px white, 
@@ -148,11 +153,11 @@
     }
 
     .add-to-cart-button:hover {
-        background-color: #e89000;
+        background-color: teal;
     }
 
     .buy-now-button {
-        background-color: bisque;
+        background-color: teal;
         border: 3px solid maroon;
         color: black;
         text-shadow: 1px 1px 0px white, 
@@ -167,7 +172,7 @@
     }
 
     .buy-now-button:hover {
-        background-color: #e67e22;
+        background-color: teal;
     }
 
     /* Related products section */
@@ -212,6 +217,7 @@
         text-align: center;
         transition: transform 0.3s;
         margin: 5px;
+        height: 100%;
     }
 
     .related-product-card:hover {
@@ -234,4 +240,5 @@
         font-size: 14px;
         color: #b12704;
         margin-bottom: 10px;
+        
     }
