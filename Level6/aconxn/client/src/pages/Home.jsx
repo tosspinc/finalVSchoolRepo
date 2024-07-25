@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { UserContext } from '../context/UserProvider';
 import '../cssfiles/home.css'
 
 export default function Home() {

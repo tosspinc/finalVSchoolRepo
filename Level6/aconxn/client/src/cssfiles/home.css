@@ -18,7 +18,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .smapp-left-column-title {
@@ -52,6 +52,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: auto;
 }
 
 .smapp-center-comments-container {
