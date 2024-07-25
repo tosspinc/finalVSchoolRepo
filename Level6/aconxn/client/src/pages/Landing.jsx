@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../cssfiles/home.css';
+import '../cssfiles/landing.css';
 
 export default function Home(props) {
   const initState = { username: '', password: '' }
