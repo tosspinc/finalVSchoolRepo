@@ -1,31 +1,68 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../cssfiles/home.css';
 
-export default function Home() {
+export default function Home(props) {
+  const initState = { username: '', password: '' }
+  const [formData, setFromData] = useState(initState)
+  const {isMember, submit, errMsg} = props
+
+  function handleChange(e) {
+    const { name, value } = e.target
+    setFromData(prevData => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault()
+    submit(formData)
+  }
+
   return (
     <div className="home-container">
       <div className="home-left">
-        <h1>ACONXN<span className="trademark">™</span></h1>
-        <h3>The place to connect with those important to you</h3>
+        <h1 className='smapp-title'>ACONXN<span className="trademark">™</span></h1>
+        <h3 className='smapp-description'>The place to connect with those important to you</h3>
       </div>
-      <div className="home-right">
-        <div className="login-container">
-          {/* Your login component or login form goes here */}
+      <div className="smapp-home-right">
+        <div className="smapp-login-container">
           <h2>Login</h2>
+          {/* <button onClick={handleGoogleLogin}>Sign in with Google</button> */}
+          {/* <button onClick={handleAppleLogin}>Sign in with Apple</button> */}
           <form>
-            <div>
-              <label>Username:</label>
-              <input type="text" name="username" />
+            <div className='smapp-input-group'>
+              <label htmlFor='username' className='smapp-input-label'>Username: </label>
+              <input
+                id="username"
+                placeholder="Username"
+                name="username"
+                value={FormData.username}
+                onChange={handleChange}
+                autoComplete='username' 
+              />
             </div>
             <div>
-              <label>Password:</label>
-              <input type="password" name="password" />
+              <label htmlFor='password' className='smapp-input-label'>Password:</label>
+              <input 
+                id='password'
+                placeholder='Password'
+                name='password' 
+                type='password' 
+                value={FormData.password}
+                onChange={handleChange}
+                autoComplete='current-password'
+                
+              />
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" className='login-button'>Login</button>
+            <button type="submit" className='create-account-button'>Create Account</button>
           </form>
+          <p className='smapp-agreement-text'>
+            By signing up you agree to the <span className='smapp-tos-text'>terms of service</span> and <span className='smapp-pp-text'>privacy policy</span> including <span className='smapp-cp-text'>Cookie Use</span>.
+          </p>
         </div>
       </div>
     </div>
   );
 }
-

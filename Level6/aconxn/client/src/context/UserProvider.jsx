@@ -1,11 +1,11 @@
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 
 // Create a context for user
 export const UserContext = createContext();
 
 const userAxios = axios.create({
-    baseURL: '/api/auth'
+    baseURL: '/api'
 });
 
 userAxios.interceptors.request.use(
@@ -30,6 +30,17 @@ const UserProvider = (props) => {
 
     const [userState, setUserState] = useState(initState);
 
+    useEffect(() => {
+        userAxios.get('/user')
+        .then(res => {
+            setUserState(prevState => ({
+                ...prevState,
+                user: res.data
+            }))
+        })
+        .catch(err => console.log(err))
+    }, [])
+    
     return (
         <UserContext.Provider value={{ userState, setUserState }}>
             {props.children}

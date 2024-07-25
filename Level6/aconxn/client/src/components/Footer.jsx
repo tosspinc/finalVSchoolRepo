@@ -12,7 +12,7 @@ export default function Footer() {
                 <Link to='cookie-policy' className='item cookie-policy-info'>Cookie Policy</Link>
                 <Link to='careers' className='item careers-info'>Careers</Link>
             </nav>
-            <small>&copy; 2024 ACONXN &trade; is a division of Tossp &trade; Inc. &copy; all rights reserved.</small>
+            <small>&copy; 2024 ACONXN &trade; is a division of Tosspi &trade; all rights reserved.</small>
         </footer>
     )
 }
