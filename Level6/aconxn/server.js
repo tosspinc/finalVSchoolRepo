@@ -33,6 +33,9 @@ const connectToDb = async () => {
 connectToDb();
 
 // Routes
+app.use('/api/auth', require('./Routes/authRouter'))
+app.use('/api/main', expressjwt({secret: process.env.SECRET, algorithms: ['HS256']}))
+app.use('/api/main/issues', require('./Routes/issueRouter'))
 
 
 // Error handling

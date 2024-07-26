@@ -1,38 +1,52 @@
 const express = require('express')
 const authRouter = express.Router()
-const username = require('../models/user')
+const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const userName = require('../models/user')
 
 
 //user signup
 authRouter.post('/signup', async (req, res, next) => {
     try {
-        const { username, password } = req.body
-        console.log('Signup request received with: ', { username, password })
-
-        const lowerCaseUsername = username.toLowerCase()
-
-        //check if user already exists.
-        const existingUser = await userName.findOne({ username: lowerCaseUsername })
-        if (existingUser) {
-            console.log('Username already exists.', lowerCaseUsername())
+        const user = await User.findOne({username: req.body.username})
+        if (user){
             res.status(403)
-            return next(new Error('That Username is already taken.'))
+            return next(new Error ('Username is already taken.'))
         }
-
-        //create new user
-        const newUser = new userName({ username: lowerCaseUsername, password })
+        
+        const newUser = new User(req.body)
         const savedUser = await newUser.save()
-
+        
         //generate JWT Token
-        const token = jwt.sign(savedUser.withoutPassword(), process.env.SECRET)
-        console.log('User created and token generated.', {user: savedUser.withoutPassword(), token})
-
-        return res.status(201).send({user: savedUser.withoutPassword(), token})
+        const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
+        return res.status(201).send({ user: savedUser, token })
     } catch (error) {
         console.error('Error signing up.', error)
         res.status(500)
         return next(error)
     }
 })
+
+authRouter.post('/login', async (req, res, next) => {
+    try {
+        const user = await User.findOne({username: req.body.username})
+        console.log(req.body.username)
+        if (!user){
+            res.status(403)
+            return next(new Error('Incorrect Username.'))
+        }
+        const isMatch = await user.checkPassword(req.body.password)
+        if (!isMatch){
+            console.log(user.password)
+            console.log(req.body.password)
+            res.status(403)
+            return next(new Error('Incorrect Password.'))
+        }
+        const token = jwt.sign(user.toObject(), process.env.SECRET)
+        return res.status(201).send({user, token})   
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
+module.exports = authRouter

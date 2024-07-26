@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs')
 const userSchema = new Schema ({
     username: {
         type: String,
-        require: true,
+        required: true,
         lowercase: true,
         unique: true,
         trim: true
@@ -14,13 +14,13 @@ const userSchema = new Schema ({
     password: {
         type: String,
         default: Date.now,
-        require: true,
+        required: true,
         trim: true
     },
     memberSince: {
         type: Date,
         default: Date.now,
-        require: false,
+        required: false,
         trim: true
     },
     isAdmin: {
@@ -42,11 +42,8 @@ userSchema.pre('save', function(next){
 })
 
 //method to check encrypted password on login
-userSchema.methods.checkPassword = function(passwordAttemp, callback) {
-    bcrypt.compare(passwordAttemp, this.password, (err, isMatch) => {
-        if(err) return callback(err)
-        return callback(null, isMatch)
-    })
+userSchema.methods.checkPassword = async function(passwordAttempt) {
+    return bcrypt.compare(passwordAttempt, this.password)
 }
 
 //method to remove password for token/sending the response
