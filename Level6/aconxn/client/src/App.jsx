@@ -5,9 +5,9 @@ import Footer from './components/Footer'
 import Home from './pages/Home';
 import CurrentIssues from './pages/CurrentIssues';
 import About from './pages/About';
-import TermsofService from './pages/TermsofService';
+import TermsOfService from './pages/TermsOfService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
-import CookiePolicy from './pages/CookiesPolicy';
+import CookiePolicy from './pages/CookiePolicy';
 import Careers from './pages/Careers';
 import './App.css'
 
@@ -21,7 +21,7 @@ export default function App() {
           <Route path='/' element={<Home />} />
           <Route path='/current-issues' element={<CurrentIssues />} />
           <Route path='/about' element={<About />} />
-          <Route path='/terms-of-service' element={<TermsofService />} />
+          <Route path='/terms-of-service' element={<TermsOfService />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
           <Route path='/cookie-policy' element={<CookiePolicy />} />
           <Route path='/careers' element={<Careers />} />

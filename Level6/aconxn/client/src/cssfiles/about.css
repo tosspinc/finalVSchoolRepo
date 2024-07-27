@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #434044;
+}
+
+.smapp-about-container {
+    margin-top: 50px;
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: flex;
+    box-sizing: border-box;
+    border: 1px solid antiquewhite;
+}
+
+.smapp-about-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 4rem;
+    position: relative;
+    color: orangered;
+    text-shadow: 
+     1px 1px 0px #434044, 
+    -1px -1px 0px antiquewhite, 
+    -1px 1px 0px #434044, 
+    1px -1px 0px antiquewhite,
+    1px 0px 0px #434044, 
+    -1px 0px 0px antiquewhite, 
+    0px 1px 0px #434044, 
+    0px -1px 0px antiquewhite;
+}
+
+.trademark {
+    font-size: 12px;
+    text-shadow: 
+        1px 1px 0px black, 
+        -1px -1px 0px black, 
+        -1px 1px 0px black, 
+        1px -1px 0px black,
+        1px 0px 0px orangered, 
+        -1px 0px 0px orangered, 
+        0px 1px 0px orangered, 
+        0px -1px 0px orangered;
+    vertical-align: top;
+}
+
+hr {
+    border: 2px solid orangered;
+    width: 80%;
+    margin-bottom: 15px;
+    
+}

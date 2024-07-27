@@ -1,10 +1,11 @@
 import React from 'react';
+import '../cssfiles/about.css'
 
 export default function About() {
   return (
-    <div className="about">
-      <h1>About Us</h1>
-      <p>Information about the company.</p>
+    <div className="smapp-about-container">
+      <h1 className='smapp-about-title'>ACONXN<span className="trademark">™</span> Company Information</h1>
+      <hr />
     </div>
   );
 }
