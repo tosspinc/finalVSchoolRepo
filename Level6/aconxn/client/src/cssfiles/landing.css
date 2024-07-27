@@ -21,19 +21,19 @@ html, body {
 }
 
 .smapp-title {
-    font-size: 3rem;
+    font-size: 5rem;
     position: relative;
     left: 20%;
     color: orangered;
     text-shadow: 
-        1px 1px 0px black, 
-        -1px -1px 0px black, 
-        -1px 1px 0px black, 
-        1px -1px 0px black,
-        1px 0px 0px orangered, 
-        -1px 0px 0px orangered, 
-        0px 1px 0px orangered, 
-        0px -1px 0px orangered;
+     1px 1px 0px #434044, 
+    -1px -1px 0px antiquewhite, 
+    -1px 1px 0px #434044, 
+    1px -1px 0px antiquewhite,
+    1px 0px 0px #434044, 
+    -1px 0px 0px antiquewhite, 
+    0px 1px 0px #434044, 
+    0px -1px 0px antiquewhite;
 }
 
 .smapp-title .trademark {
@@ -89,15 +89,42 @@ html, body {
   color: rgb(241, 93, 39)
 }
 
+.smapp-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .smapp-home-login {
     background-color: #434044;
+}
+
+.smapp-login-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    justify-content: space-between;
+}
+
+.smapp-member-title {
+    font-size: 44px;
+    text-shadow: 
+     .5px 1px 0px #434044, 
+    -.5px -1px 0px antiquewhite, 
+    -.5px 1px 0px #434044, 
+    .5px -.5px 0px antiquewhite,
+    .5px 0px 0px #434044, 
+    -.5px 0px 0px antiquewhite, 
+    0px .5px 0px #434044, 
+    0px -.5px 0px antiquewhite;
+    text-align: center;
 }
 
 .login-button {
     background-color: antiquewhite;
     margin-top: 10px;
     margin-right: 15px;
-    width: 200px;
+    margin-bottom: 3px;
+    width: 100%;
     height: 40px;
     color: #434044;
     font-size: 22px;
@@ -118,7 +145,8 @@ html, body {
 .create-account-button {
     background-color: antiquewhite;
     margin-top: 10px;
-    width: 200px;
+    margin-bottom: 8px;
+    width: 100%;
     height: 40px;
     color: #434044;
     font-size: 22px;
@@ -133,24 +161,38 @@ html, body {
     0px -1px 0px black;
     border-color: orangered;
     border-radius: 20px;
+    
+}
+
+.smapp-label-container {
+    width: 75px;
 }
 
 input {
-    margin-left: 6px;
+    margin-left: 85px;
     background-color: antiquewhite;
-    height: 20px;
-    width: 160px;
+    height: 40px;
+    width: 250px;
     color: black;
     font-size: 14px;
     font-style: italic;
     font-weight: bold;
     border-radius: 5px;
+    
 }
 
-.input-group {
+.smapp-input-group {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
+}
+
+.smapp-input-label {
+    margin-left: 55px;
+    font-size: 22px;
+    margin-right: 10px;
+    width: 100px;
+    text-align: right;
 }
 
 .smapp-home-right {

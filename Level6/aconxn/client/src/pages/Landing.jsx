@@ -27,12 +27,16 @@ export default function Home(props) {
       </div>
       <div className="smapp-home-right">
         <div className="smapp-login-container">
-          <h2>Login</h2>
+          <h2 className='smapp-member-title'>Become a Member!</h2>
           {/* <button onClick={handleGoogleLogin}>Sign in with Google</button> */}
           {/* <button onClick={handleAppleLogin}>Sign in with Apple</button> */}
-          <form>
+          <form className='smapp-form-container'>
             <div className='smapp-input-group'>
-              <label htmlFor='username' className='smapp-input-label'>Username: </label>
+              <div className='smapp-label-container'>
+                <label htmlFor='username' className='smapp-input-label'>
+                  Username: 
+                </label>
+              </div>
               <input
                 id="username"
                 placeholder="Username"
@@ -42,8 +46,12 @@ export default function Home(props) {
                 autoComplete='username' 
               />
             </div>
-            <div>
-              <label htmlFor='password' className='smapp-input-label'>Password:</label>
+            <div className='smapp-input-group'>
+              <div className='smapp-label-container'>
+                <label htmlFor='password' className='smapp-input-label'>
+                  Password: 
+                </label>
+              </div>  
               <input 
                 id='password'
                 placeholder='Password'
