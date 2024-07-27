@@ -37,15 +37,7 @@
 small {
   text-align: center;
   color: bisque;
-  text-shadow: 
-        1px 1px 0px black, 
-        -1px -1px 0px black, 
-        -1px 1px 0px black, 
-        1px -1px 0px black,
-        1px 0px 0px bisque, 
-        -1px 0px 0px bisque, 
-        0px 1px 0px bisque, 
-        0px -1px 0px bisque;
+  
   font-style: italic;
   background-color: #434044;
 }
@@ -58,4 +50,16 @@ small {
   max-width: 100%;
   flex-wrap: wrap;
 }
-  
+
+.smapp-appname {
+  color: orangered;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.smapp-coname {
+  color: orangered;
+  font-size: 14px;
+  font-style: italic;
+}
+
