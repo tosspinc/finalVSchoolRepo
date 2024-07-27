@@ -2,10 +2,11 @@ html, body {
     margin: 0;
     padding: 0;
     width: 100%;
+    height: 100%;
 }
 
 * {
-    background-color: #434044; 
+    background-color: #434044;
 }
 
 .aconxn-content {
@@ -14,10 +15,16 @@ html, body {
     padding: 0;
 }
 
-
 .home-container {
     width: 100%;
     box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    padding: 2rem;
+    background-color: #434044;
+    min-height: calc(100vh - 100px); /* Adjust this if footer height changes */
 }
 
 .smapp-title {
@@ -25,14 +32,14 @@ html, body {
     position: relative;
     left: 20%;
     color: orangered;
-    text-shadow: 
-     1px 1px 0px #434044, 
-    -1px -1px 0px antiquewhite, 
-    -1px 1px 0px #434044, 
+    text-shadow:
+     1px 1px 0px #434044,
+    -1px -1px 0px antiquewhite,
+    -1px 1px 0px #434044,
     1px -1px 0px antiquewhite,
-    1px 0px 0px #434044, 
-    -1px 0px 0px antiquewhite, 
-    0px 1px 0px #434044, 
+    1px 0px 0px #434044,
+    -1px 0px 0px antiquewhite,
+    0px 1px 0px #434044,
     0px -1px 0px antiquewhite;
 }
 
@@ -40,14 +47,14 @@ html, body {
     font-size: 0.9rem;
     vertical-align: top;
     color: orangered;
-    text-shadow: 
-        1px 1px 0px black, 
-        -1px -1px 0px black, 
-        -1px 1px 0px black, 
+    text-shadow:
+        1px 1px 0px black,
+        -1px -1px 0px black,
+        -1px 1px 0px black,
         1px -1px 0px black,
-        1px 0px 0px orangered, 
-        -1px 0px 0px orangered, 
-        0px 1px 0px orangered, 
+        1px 0px 0px orangered,
+        -1px 0px 0px orangered,
+        0px 1px 0px orangered,
         0px -1px 0px orangered;
 }
 
@@ -59,34 +66,19 @@ html, body {
     color: bisque;
 }
 
-.aconxn-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-  
-.home-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex: 1;
-  padding: 2rem;
-  background-color: #434044;
-}
-  
 .home-left {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-  
+
 .smapp-home-right {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: rgb(241, 93, 39)
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgb(241, 93, 39);
 }
 
 .smapp-form-container {
@@ -109,15 +101,15 @@ html, body {
 .smapp-welcome-title {
     margin-bottom: 10px;
     font-size: 34px;
-    text-shadow: 
-     .5px 1px 0px #434044, 
-    -.5px -1px 0px antiquewhite, 
-    -.5px 1px 0px #434044, 
-    .5px -.5px 0px antiquewhite,
-    .5px 0px 0px #434044, 
-    -.5px 0px 0px antiquewhite, 
-    0px .5px 0px #434044, 
-    0px -.5px 0px antiquewhite;
+    text-shadow:
+     0.5px 1px 0px #434044,
+    -0.5px -1px 0px antiquewhite,
+    -0.5px 1px 0px #434044,
+    0.5px -0.5px 0px antiquewhite,
+    0.5px 0px 0px #434044,
+    -0.5px 0px 0px antiquewhite,
+    0px 0.5px 0px #434044,
+    0px -0.5px 0px antiquewhite;
     text-align: center;
     width: 100%;
 }
@@ -126,15 +118,15 @@ html, body {
     margin-top: 50px;
     margin-bottom: 5px;
     font-size: 34px;
-    text-shadow: 
-     .5px 1px 0px #434044, 
-    -.5px -1px 0px antiquewhite, 
-    -.5px 1px 0px #434044, 
-    .5px -.5px 0px antiquewhite,
-    .5px 0px 0px #434044, 
-    -.5px 0px 0px antiquewhite, 
-    0px .5px 0px #434044, 
-    0px -.5px 0px antiquewhite;
+    text-shadow:
+     0.5px 1px 0px #434044,
+    -0.5px -1px 0px antiquewhite,
+    -0.5px 1px 0px #434044,
+    0.5px -0.5px 0px antiquewhite,
+    0.5px 0px 0px #434044,
+    -0.5px 0px 0px antiquewhite,
+    0px 0.5px 0px #434044,
+    0px -0.5px 0px antiquewhite;
     text-align: center;
 }
 
@@ -147,14 +139,14 @@ html, body {
     height: 40px;
     color: #434044;
     font-size: 22px;
-    text-shadow: 
-     1px 1px 0px antiquewhite, 
-    -1px -1px 0px antiquewhite, 
-    -1px 1px 0px antiquewhite, 
+    text-shadow:
+     1px 1px 0px antiquewhite,
+    -1px -1px 0px antiquewhite,
+    -1px 1px 0px antiquewhite,
     1px -1px 0px antiquewhite,
-    1px 0px 0px black, 
-    -1px 0px 0px black, 
-    0px 1px 0px black, 
+    1px 0px 0px black,
+    -1px 0px 0px black,
+    0px 1px 0px black,
     0px -1px 0px black;
     border-color: orangered;
     border-radius: 20px;
@@ -169,18 +161,17 @@ html, body {
     height: 40px;
     color: #434044;
     font-size: 22px;
-    text-shadow: 
-     1px 1px 0px antiquewhite, 
-    -1px -1px 0px antiquewhite, 
-    -1px 1px 0px antiquewhite, 
+    text-shadow:
+     1px 1px 0px antiquewhite,
+    -1px -1px 0px antiquewhite,
+    -1px 1px 0px antiquewhite,
     1px -1px 0px antiquewhite,
-    1px 0px 0px black, 
-    -1px 0px 0px black, 
-    0px 1px 0px black, 
+    1px 0px 0px black,
+    -1px 0px 0px black,
+    0px 1px 0px black,
     0px -1px 0px black;
     border-color: orangered;
     border-radius: 20px;
-    
 }
 
 .smapp-label-container {
@@ -197,7 +188,6 @@ input {
     font-style: italic;
     font-weight: bold;
     border-radius: 5px;
-    
 }
 
 .smapp-input-group {
@@ -231,4 +221,3 @@ input {
     color: bisque;
     font-style: italic;
 }
-
