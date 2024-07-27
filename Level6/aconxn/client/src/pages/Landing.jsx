@@ -27,11 +27,11 @@ export default function Home(props) {
       </div>
       <div className="smapp-home-right">
         <div className="smapp-login-container">
-          <h2 className='smapp-member-title'>Become a Member!</h2>
+          <h2 className='smapp-welcome-title'>Already A Member!</h2>
           {/* <button onClick={handleGoogleLogin}>Sign in with Google</button> */}
           {/* <button onClick={handleAppleLogin}>Sign in with Apple</button> */}
           <form className='smapp-form-container'>
-            <div className='smapp-input-group'>
+            {/* <div className='smapp-input-group'>
               <div className='smapp-label-container'>
                 <label htmlFor='username' className='smapp-input-label'>
                   Username: 
@@ -45,8 +45,8 @@ export default function Home(props) {
                 onChange={handleChange}
                 autoComplete='username' 
               />
-            </div>
-            <div className='smapp-input-group'>
+            </div> */}
+            {/* <div className='smapp-input-group'>
               <div className='smapp-label-container'>
                 <label htmlFor='password' className='smapp-input-label'>
                   Password: 
@@ -62,8 +62,9 @@ export default function Home(props) {
                 autoComplete='current-password'
                 
               />
-            </div>
+            </div> */}
             <button type="submit" className='login-button'>Login</button>
+            <h2 className='smapp-member-title'>Become a Member!</h2>
             <button type="submit" className='create-account-button'>Create Account</button>
           </form>
           <p className='smapp-agreement-text'>

@@ -101,12 +101,31 @@ html, body {
 .smapp-login-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-left: 20px;
     justify-content: space-between;
 }
 
+.smapp-welcome-title {
+    margin-bottom: 10px;
+    font-size: 34px;
+    text-shadow: 
+     .5px 1px 0px #434044, 
+    -.5px -1px 0px antiquewhite, 
+    -.5px 1px 0px #434044, 
+    .5px -.5px 0px antiquewhite,
+    .5px 0px 0px #434044, 
+    -.5px 0px 0px antiquewhite, 
+    0px .5px 0px #434044, 
+    0px -.5px 0px antiquewhite;
+    text-align: center;
+    width: 100%;
+}
+
 .smapp-member-title {
-    font-size: 44px;
+    margin-top: 50px;
+    margin-bottom: 5px;
+    font-size: 34px;
     text-shadow: 
      .5px 1px 0px #434044, 
     -.5px -1px 0px antiquewhite, 
@@ -145,7 +164,7 @@ html, body {
 .create-account-button {
     background-color: antiquewhite;
     margin-top: 10px;
-    margin-bottom: 8px;
+    margin-bottom: 50px;
     width: 100%;
     height: 40px;
     color: #434044;
