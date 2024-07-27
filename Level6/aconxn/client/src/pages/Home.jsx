@@ -1,42 +1,77 @@
-import React, { useContext, useState } from "react";
-import { UserContext } from '../context/UserProvider';
-import '../cssfiles/home.css'
+import React, { useState } from 'react';
+import '../cssfiles/home.css';
 
-export default function Home() {
+export default function Home(props) {
+  const initState = { username: '', password: '' }
+  const [formData, setFromData] = useState(initState)
+  const {isMember, submit, errMsg} = props
 
-    return (
-        <div className="smapp-homepage-container">
-            <div className="smapp-left-column">
-                <h1 className="smapp-left-column-title">ACONXN</h1>
-                <hr className="smapp-left-column-seperator" />
-                <ul className="smapp-left-column-links">
+  function handleChange(e) {
+    const { name, value } = e.target
+    setFromData(prevData => ({
+      ...prevData,
+      [name]: value
+    }))
+  }
 
-                </ul>
-                <hr className="smapp-vertical-seperator" />
-                <div className="smapp-left-column-user-info">
-                    <p className="username-title">Username: </p>
-                    <button className="smapp-left-column-logout-button">Logout</button>
-                </div>
-            </div>
-            <div className="smapp-center-column">
-                <h1 className="smapp-home-topics-title">Current Topics</h1>
-                <div className="smapp-comments-container">
+  function handleSubmit(e) {
+    e.preventDefault()
+    submit(formData)
+  }
 
-                </div>
-            </div>
-            <div className="smapp-right-column">
-                <div className="smapp-adds-container">
-
-                </div>
-                <div className="smapp-vertical-seperator"></div>
-                <div className="smapp-right-happening-now">
-
-                </div>
-                <div className="smapp-right-seperator"></div>
-                <div className="smapp-right-contacts">
-
-                </div>
-            </div>
+  return (
+    <div className="home-container">
+      <div className="home-left">
+        <h1 className='smapp-title'>ACONXN<span className="trademark">™</span></h1>
+        <h3 className='smapp-description'>The place to connect with those important to you</h3>
+      </div>
+      <div className="smapp-home-right">
+        <div className="smapp-login-container">
+          <h2 className='smapp-welcome-title'>Already A Member!</h2>
+          {/* <button onClick={handleGoogleLogin}>Sign in with Google</button> */}
+          {/* <button onClick={handleAppleLogin}>Sign in with Apple</button> */}
+          <form className='smapp-form-container'>
+            {/* <div className='smapp-input-group'>
+              <div className='smapp-label-container'>
+                <label htmlFor='username' className='smapp-input-label'>
+                  Username: 
+                </label>
+              </div>
+              <input
+                id="username"
+                placeholder="Username"
+                name="username"
+                value={FormData.username}
+                onChange={handleChange}
+                autoComplete='username' 
+              />
+            </div> */}
+            {/* <div className='smapp-input-group'>
+              <div className='smapp-label-container'>
+                <label htmlFor='password' className='smapp-input-label'>
+                  Password: 
+                </label>
+              </div>  
+              <input 
+                id='password'
+                placeholder='Password'
+                name='password' 
+                type='password' 
+                value={FormData.password}
+                onChange={handleChange}
+                autoComplete='current-password'
+                
+              />
+            </div> */}
+            <button type="submit" className='login-button'>Login</button>
+            <h2 className='smapp-member-title'>Become a Member!</h2>
+            <button type="submit" className='create-account-button'>Create Account</button>
+          </form>
+          <p className='smapp-agreement-text'>
+            By signing up you agree to the <span className='smapp-tos-text'>terms of service</span> and <span className='smapp-pp-text'>privacy policy</span> including <span className='smapp-cp-text'>Cookie Use</span>.
+          </p>
         </div>
-    )
+      </div>
+    </div>
+  );
 }

@@ -2,8 +2,8 @@ import React, {useContext} from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { UserContext } from './context/UserProvider'
 import Footer from './components/Footer'
-import Landing from './pages/Landing';
 import Home from './pages/Home';
+import CurrentIssues from './pages/CurrentIssues';
 import About from './pages/About';
 import TermsofService from './pages/TermsofService';
 import PrivacyPolicy from './pages/PrivacyPolicy';
@@ -18,8 +18,8 @@ export default function App() {
     <>
       <div className='aconxn-content'>
         <Routes>
-          <Route path='/' element={<Landing />} />
-          <Route path='/home' element={<Home />} />
+          <Route path='/' element={<Home />} />
+          <Route path='/current-issues' element={<CurrentIssues />} />
           <Route path='/about' element={<About />} />
           <Route path='/terms-of-service' element={<TermsofService />} />
           <Route path='/privacy-policy' element={<PrivacyPolicy />} />
