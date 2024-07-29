@@ -179,7 +179,8 @@ html, body {
 }
 
 input {
-    margin-left: 85px;
+    margin-top: 10px;
+    margin-left: 15px;
     background-color: antiquewhite;
     height: 40px;
     width: 250px;
@@ -189,6 +190,8 @@ input {
     font-weight: bold;
     border-radius: 5px;
 }
+
+
 
 .smapp-input-group {
     display: flex;

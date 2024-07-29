@@ -1,8 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { UserContext } from '../context/UserProvider';
 import '../cssfiles/currentissues.css'
 
 export default function CurrentIssues() {
+    const { userState } = useContext(UserContext)
 
     return (
         <div className="smapp-current-issues-container">
@@ -14,7 +15,7 @@ export default function CurrentIssues() {
                 </ul>
                 <hr className="smapp-vertical-seperator" />
                 <div className="smapp-left-column-user-info">
-                    <p className="username-title">Username: </p>
+                    <p className="username-title">Username: {userState.user.username}</p>
                     <button className="smapp-left-column-logout-button">Logout</button>
                 </div>
             </div>

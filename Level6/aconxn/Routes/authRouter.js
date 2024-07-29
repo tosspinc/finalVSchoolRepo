@@ -42,7 +42,7 @@ authRouter.post('/login', async (req, res, next) => {
             return next(new Error('Incorrect Password.'))
         }
         const token = jwt.sign(user.toObject(), process.env.SECRET)
-        return res.status(201).send({user, token})   
+        return res.status(201).send({user, token, redirect: '/current-issues'})   
     } catch (error) {
         res.status(500)
         return next(error)
