@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken')
 //user signup
 authRouter.post('/signup', async (req, res, next) => {
     try {
+        console.log('Signup request received: ', req.body)
         const user = await User.findOne({username: req.body.username})
         if (user){
             res.status(403)
@@ -18,6 +19,7 @@ authRouter.post('/signup', async (req, res, next) => {
         
         //generate JWT Token
         const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
+        console.log('Signup successful, user created: ', savedUser)
         return res.status(201).send({ user: savedUser, token })
     } catch (error) {
         console.error('Error signing up.', error)

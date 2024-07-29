@@ -126,7 +126,7 @@
     margin-bottom: 15px;
     background-color: #434044;
     color: antiquewhite;
-    font-size: 16px;
+    font-size: 16px; 
     font-style: italic;
     border: 2px solid orangered;
     padding: 10px;
@@ -134,3 +134,8 @@
     border-radius: 5px;
 }
   
+.error-message {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
