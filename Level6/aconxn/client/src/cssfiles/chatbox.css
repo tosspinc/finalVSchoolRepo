@@ -1,0 +1,21 @@
+.smapp-chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #434044;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    height: 200px ;
+    border: 2px solid bisque;
+}
+
+.smapp-chat-container {
+    flex: 1;
+    background-color: #5c5a5f;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+
+    border: 2px solid bisque;
+}

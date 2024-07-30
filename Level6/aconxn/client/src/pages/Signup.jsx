@@ -22,7 +22,7 @@ export default function Signup({ isOpen, onClose }) {
         console.log('Submitting form with credentials: ', credentials)
         const success = await signup(credentials)
         if (success) {
-            console.log(('Signup successful, closing modal.'))
+            console.log('Signup successful, closing modal.')
             onClose()
         } else {
             console.log('Signup failed.')
@@ -33,32 +33,32 @@ export default function Signup({ isOpen, onClose }) {
         <div className='smapp-signup-overlay'>
             <div className='smapp-signup-container'>
                 <button className="smapp-close-button" onClick={onClose}>X</button>
-                    <h2 className='smapp-signup-title'>Welcome to ACONXN<span className="trademark">™</span></h2>
-                    <h3 className='smapp-signup-description'>Let's get you signed up.</h3>
-                    <form className='smapp-signup-form'>
-                        <div className="smapp-signup-group">
-                            <label className='smapp-group-label' htmlFor='username'>Username: </label>
-                            <input className='smapp-group-input' 
-                                type='text' 
-                                id='username' 
-                                name='username' 
-                                value={credentials.username}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className='smapp-signup-group'>
-                            <label className='smapp-group-label' htmlFor='password'>Password: </label>
-                            <input className='smapp-group-input' 
-                                type='text' 
-                                id='password' 
-                                name='password'
-                                value={credentials.password}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <button type='submit' className='smapp-signup-button' onClick={handleSubmit}>Sign up</button>
+                <h2 className='smapp-signup-title'>Welcome to ACONXN<span className="trademark">™</span></h2>
+                <h3 className='smapp-signup-description'>Let's get you signed up.</h3>
+                <form className='smapp-signup-form'>
+                    <div className="smapp-signup-group">
+                        <label className='smapp-group-label' htmlFor='username'>Username: </label>
+                        <input className='smapp-group-input' 
+                            type='text' 
+                            id='username' 
+                            name='username' 
+                            value={credentials.username}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div className='smapp-signup-group'>
+                        <label className='smapp-group-label' htmlFor='password'>Password: </label>
+                        <input className='smapp-group-input' 
+                            type='text' 
+                            id='password' 
+                            name='password'
+                            value={credentials.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <button type='submit' className='smapp-signup-button' onClick={handleSubmit}>Sign up</button>
                         {errMsg && <p className="error-message">{errMsg}</p>}
-                    </form>
+                </form>
             </div>
         </div>
     )

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../context/UserProvider';
 import '../cssfiles/leftsidebar.css';
 
 export default function LeftSideBar() {
+    const { userState } = useContext(UserContext)
+    
+
     return (
         <div className='left-sidebar-container'>
             <div className='left-sidebar-header'>
@@ -11,6 +15,7 @@ export default function LeftSideBar() {
             <nav className='left-sidebar-nav'>
 
             </nav>
+            
         </div>
     )
 }

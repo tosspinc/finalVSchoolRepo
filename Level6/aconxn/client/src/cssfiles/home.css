@@ -96,6 +96,7 @@ html, body {
     align-items: center;
     margin-left: 20px;
     justify-content: space-between;
+    background-color: #434044;
 }
 
 .smapp-welcome-title {
