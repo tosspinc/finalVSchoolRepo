@@ -15,6 +15,17 @@ issueRouter.post('/', async (req, res, next) => {
     }
 });
 
+//get an issue
+issueRouter.get('/user', async (req, res, next) => {
+    try {
+        const foundIssues = await Issue.find({userId: req.auth._id})
+        return res.status(200).send(foundIssues)
+    } catch (error) {
+        res.status(500)
+        return next(error)
+    }
+})
+
 // Get issues by user id
 issueRouter.get('/', async (req, res, next) => {
     try {

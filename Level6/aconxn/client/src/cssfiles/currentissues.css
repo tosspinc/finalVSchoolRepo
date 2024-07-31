@@ -1,8 +1,9 @@
-.currentissues-container {
+ .currentissues-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     background-color: #434044;
+    width: 1610px;
 }
 
 .currentissues-toprow {
@@ -49,20 +50,21 @@
     display: flex;
     flex: 1;
     gap: 10px;
-    background-color: #5c5a5f;
+    background-color: bisque;
     padding: 10px;
     border-radius: 10px;
     width: calc(100% - 595px); 
-    height: calc(100vh-200px);
-    margin-left: 195px;
-    margin-right: 415px;
+    height: calc(100vh - 220px);
+    margin-left: 185px;
+    margin-right: 98px;
+    
 }
 
 .currentissues-left-column, .currentissues-center-column, .currentissues-right-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     padding: 10px;
 }
 
@@ -102,16 +104,62 @@
     flex-direction: column;
     flex: 1;
     justify-content: space-between;
+    width: 98%;
 }
 
-.currentissues-item-container, .currentissues-input-container, .currentissues-button-container {
+.currentissues-item-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1; 
+    flex: 3;
+    border: 1px solid white;
+    width: 95%;
+    height: 200px; 
+    margin-bottom: 5px;
+    border-radius: 10px;
+    background-color: #5c5a5f;
+    overflow-y: auto;
+}
+
+.issue-item {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.currentissues-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 70px;
+    border-radius: 10px; 
+}
+
+.currentissues-input-container input {
+    height: 70px;
+    width: 90%;
+    max-width: 360px;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.currentissues-button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
 }
 
 .currentissues-margin {
+    margin-bottom: 10px;
+}
+
+.currentissues-button-seperator {
+    border: 1px solid antiquewhite;
+    width: 100%;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
@@ -131,7 +179,7 @@
 
 .smapp-right-column {
     width: 400px;
-    height: calc(100% - 120px); 
+    height: calc(100% - 110px); 
     display: flex;
     flex-direction: column;
     justify-content: space-between;

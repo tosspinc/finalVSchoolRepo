@@ -4,28 +4,32 @@ import { UserContext } from '../context/UserProvider';
 import '../cssfiles/leftsidebar.css';
 
 export default function LeftSideBar() {
-    const { userState, logout } = useContext(UserContext)
-    const navigate = useNavigate()
+    const { userState, logout } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    // Destructure the user from userState
+    const { user } = userState || {};
 
     const handleLogout = () => {
-        logout()
-        navigate('/')
-    }
-    
+        logout();
+        navigate('/');
+    };
 
+    // Ensure user is defined before trying to access username
     return (
         <div className='left-sidebar-container'>
             <div className='left-sidebar-header'>
                 <h1 className='left-sidebar-title'>ACONXN <span className="trademark">™</span></h1>
             </div>
             <nav className='left-sidebar-nav'>
-
+                <Link to='/profile' className='left-sidebar-link'>Profile</Link>
+                <Link to='/create-issue' className='left-sidebar-link'>Create Issue</Link>
             </nav>
             <div className='left-sidebar-footer'>
-                <hr className='left-sidebar-footer-seperator' />
-                <p className='.left-sidebar-footer-title'>Welcome: </p>
+                <hr className='left-sidebar-footer-separator' />
+                {user && <p className='left-sidebar-footer-title'>Welcome: {user.username}</p>}
                 <button className='left-sidebar-logout-button' onClick={handleLogout}>Logout</button>
             </div>
         </div>
-    )
+    );
 }

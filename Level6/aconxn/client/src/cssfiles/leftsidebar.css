@@ -37,7 +37,7 @@
 .left-sidebar-title {
     margin-top: 20px;
     margin-bottom: 15px;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     position: relative;
     color: orangered;
     text-shadow: 
@@ -73,7 +73,7 @@
 
 .left-sidebar-footer-title {
     margin: 20px 0;
-    font-size: 2rem;
+    font-size: 1rem;
     color: bisque;
     
 }
@@ -96,4 +96,36 @@
     background-color: antiquewhite;
     margin: 10px 0;
     width: 98%;
+}
+
+.left-sidebar-link {
+    color: bisque;
+    text-shadow: 
+        1px 1px 0px orangered, 
+        -1px -1px 0px black, 
+        -1px 1px 0px orangered, 
+        1px -1px 0px black,
+        1px 0px 0px orangered, 
+        -1px 0px 0px black, 
+        0px 1px 0px orangered, 
+        0px -1px 0px black;   
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    font-style: italic;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.left-sidebar-link:hover {
+    color: orangered;
+    text-shadow: 
+        1px 1px 0px bisque, 
+        -1px -1px 0px black, 
+        -1px 1px 0px bisque, 
+        1px -1px 0px black,
+        1px 0px 0px bisque, 
+        -1px 0px 0px black, 
+        0px 1px 0px bisque, 
+        0px -1px 0px black;
 }

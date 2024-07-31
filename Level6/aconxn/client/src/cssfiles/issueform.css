@@ -1,0 +1,106 @@
+.aconxn-issue-container {
+    margin-top: 20px;
+    margin-left: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 85%;
+    height: 150px;
+    box-sizing: border-box;
+    border: 1px solid bisque;
+    border-radius: 10px;
+    background-color: #434044;
+}
+
+.aconxn-issue-title {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 2rem;
+    color: orangered;
+    text-shadow: 
+     1px 1px 0px #434044, 
+    -1px -1px 0px antiquewhite, 
+    -1px 1px 0px #434044, 
+    1px -1px 0px antiquewhite,
+    1px 0px 0px #434044, 
+    -1px 0px 0px antiquewhite, 
+    0px 1px 0px #434044, 
+    0px -1px 0px antiquewhite;
+}
+
+.trademark {
+    font-size: 12px;
+    text-shadow: 
+        1px 1px 0px black, 
+        -1px -1px 0px black, 
+        -1px 1px 0px black, 
+        1px -1px 0px black,
+        1px 0px 0px orangered, 
+        -1px 0px 0px orangered, 
+        0px 1px 0px orangered, 
+        0px -1px 0px orangered;
+    vertical-align: top;
+}
+
+hr {
+    border: 2px solid orangered;
+    width: 5px;
+    margin-bottom: 10px;
+    
+}
+
+.aconxn-issueform-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: antiquewhite;
+    padding: 20px;
+    border: 2px solid orangered;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    height: 500px;
+    margin-top: 600px;
+    margin-left: 10px;
+}
+
+.aconxn-issueform-name,
+.aconxn-issueform-img {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #434044;
+    border-radius: 5px;
+}
+
+.aconxn-issueform-description {
+    width: 90%;
+    padding: 10px;
+    height: 150px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.aconxn-formsubmit-button,
+.aconxn-formcancel-button {
+    margin: 5px;
+    background-color: #434044;
+    padding:  10px 20px;
+    font-size: 18px;
+    color: bisque;
+    text-shadow: 
+     1px 1px 0px #434044, 
+    -1px -1px 0px orangered, 
+    -1px 1px 0px #434044, 
+    1px -1px 0px orangered,
+    1px 0px 0px #434044, 
+    -1px 0px 0px orangered, 
+    0px 1px 0px #434044, 
+    0px -1px 0px orangered;
+    border: 2px solid bisque;
+    border-radius: 10px;
+    width: 200px;
+    cursor: pointer;
+}

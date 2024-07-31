@@ -1,0 +1,41 @@
+.aconxn-issue-container {
+    background-color: orangered;
+    height: 100px;
+}
+
+.aconxn-issue {
+    background-color: bisque;
+    border: 2px solid orangered;
+    width: 310px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.aconxn-issue-title, .aconxn-issue-description, .aconxn-issue-img{
+    background-color: bisque;
+}
+
+.aconxn-issue-img {
+    height: 50px;
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    
+}
+
+.aconxn-issue-title {
+    font-size: 18px;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    width: 300px;
+    margin-top: 5px;
+}
+
+.aconxn-issue-description {
+    font-size: 12px;
+    text-align: center;
+    font-style: italic;
+    width: 300px;
+    padding-bottom: 5px;
+}
