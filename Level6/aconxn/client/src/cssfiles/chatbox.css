@@ -1,3 +1,13 @@
+.smapp-chat-container {
+    flex: 1;
+    background-color: #5c5a5f;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    
+    border: 2px solid bisque;
+}
+
 .smapp-chat-box {
     flex: 1;
     display: flex;
@@ -10,12 +20,20 @@
     border: 2px solid bisque;
 }
 
-.smapp-chat-container {
+.section-header {
+    font-size: 1.5rem;
+    background-color: bisque;
+    color: #434044;
+    margin-bottom: 10px;
+    text-align: center;
+    border-radius: 10px;
+    border: 2px solid orangered;
+}
+
+.smapp-ads-container, .smapp-chat-container {
     flex: 1;
-    background-color: #5c5a5f;
+    background-color: #434044;
     padding: 10px;
     border-radius: 10px;
-    margin-bottom: 10px;
-
-    border: 2px solid bisque;
+    border: 2px solid antiquewhite;
 }

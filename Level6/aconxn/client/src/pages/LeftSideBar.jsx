@@ -1,10 +1,16 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../context/UserProvider';
 import '../cssfiles/leftsidebar.css';
 
 export default function LeftSideBar() {
-    const { userState } = useContext(UserContext)
+    const { userState, logout } = useContext(UserContext)
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        logout()
+        navigate('/')
+    }
     
 
     return (
@@ -15,7 +21,11 @@ export default function LeftSideBar() {
             <nav className='left-sidebar-nav'>
 
             </nav>
-            
+            <div className='left-sidebar-footer'>
+                <hr className='left-sidebar-footer-seperator' />
+                <p className='.left-sidebar-footer-title'>Welcome: </p>
+                <button className='left-sidebar-logout-button' onClick={handleLogout}>Logout</button>
+            </div>
         </div>
     )
 }

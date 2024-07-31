@@ -1,21 +1,23 @@
 .left-sidebar-container {
-    width: 175px;
+    width: 180px;
     color: antiquewhite;
-    height: 91vh;
+    height: 88vh;
     position: fixed;
-    top: 0;
-    left: 0;
+    top: 10px;
+    left: 5px;
+    bottom: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     border: 2px solid orangered;
+
 }
 
 .left-sidebar.header {
-    width: 100%;
+    width: 90%;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 .left-sidebar-nav {
@@ -61,4 +63,37 @@
         0px 1px 0px orangered, 
         0px -1px 0px orangered;
     vertical-align: top;
+}
+
+ .left-sidebar-footer {
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+.left-sidebar-footer-title {
+    margin: 20px 0;
+    font-size: 2rem;
+    color: bisque;
+    
+}
+
+.left-sidebar-logout-button {
+    background-color: bisque;
+    border: 1px solid orangered;
+    color: #434044;
+    font-weight: bold;
+    font-style: italic;
+    border-radius: 10px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.left-sidebar-footer-seperator {
+    height: 1px;
+    background-color: antiquewhite;
+    margin: 10px 0;
+    width: 98%;
 }

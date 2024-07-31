@@ -1,68 +1,22 @@
-.smapp-currentissues-container {
+.currentissues-container {
     display: flex;
     flex-direction: column;
     height: 100vh;
     background-color: #434044;
 }
 
-.smapp-main-content {
-    display: flex;
-    flex: 1;
-    padding: 10px;
-    background-color: #434044;
-    margin-top: 100px; /* Space for the top row */
-}
-
-.smapp-left-column {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-
-.smapp-comments-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    background-color: #5c5a5f;
-    padding: 10px;
-    border-radius: 10px;
-    width: 1310px;
-    margin-bottom: 75px;
-    margin-left: 173px;
-    margin-right: 170px;
-}
-
-.smapp-right-column {
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    bottom: 50px; /* Adjust based on the footer height */
-    right: 0;
-    overflow-y: auto;
-    border-left: 2px solid orangered; /* Adds a border to separate the right column */
-    background-color: #434044;
-}
-
-.smapp-top-row {
+.currentissues-toprow {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
     background-color: antiquewhite;
     height: 100px;
-    border-top: 2px solid orangered;
-    border-bottom: 2px solid orangered;
+    border: 2px solid orangered;
     position: fixed;
-    top: 0;
-    left: 175px; /* Adjust based on the sidebar width */
-    right: 400px; /* Adjust based on the right column width */
+    top: 10px;
+    left: 195px; 
+    right: 415px; 
 }
 
 .currentissues-title {
@@ -83,32 +37,129 @@
     width: 100%;
 }
 
-.smapp-adsbox, .smapp-chatbox {
-    flex: 1;
+.currentissues-main-content {
     display: flex;
-    flex-direction: column;
+    flex: 1;
+    padding: 10px;
+    background-color: #434044;
+    margin-top: 110px;
+}
+
+.currentissues-comments-container {
+    display: flex;
+    flex: 1;
+    gap: 10px;
     background-color: #5c5a5f;
     padding: 10px;
     border-radius: 10px;
+    width: calc(100% - 595px); 
+    height: calc(100vh-200px);
+    margin-left: 195px;
+    margin-right: 415px;
+}
+
+.currentissues-left-column, .currentissues-center-column, .currentissues-right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.currentissues-left-column {
+    width: 30%;
+}
+
+.currentissues-center-column {
+    width: 40%;
+}
+
+.currentissues-right-column {
+    width: 30%;
+}
+
+.currentissues-left-column .currentissues-content-selector {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #434044;
+    color: #fff;
     margin-bottom: 10px;
+}
+
+.currentissues-selector-seperator {
     border: 1px solid antiquewhite;
+    width: 100%;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.smapp-chatbox {
-    margin-bottom: 30px; /* Adds space between the chat box and the footer */
-}
-
-.section-header {
-    font-size: 1.5rem;
-    color: antiquewhite;
-    margin-bottom: 10px;
-    text-align: center;
-}
-
-.smapp-ads-container, .smapp-chat-container {
+.currentissues-content-container {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    justify-content: space-between;
+}
+
+.currentissues-item-container, .currentissues-input-container, .currentissues-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1; 
+}
+
+.currentissues-margin {
+    margin-bottom: 10px;
+}
+
+.currentissues-submit-button, .currentissues-edit-button, .currentissues-delete-button {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #434044;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.currentissues-submit-button:hover, .currentissues-edit-button:hover, .currentissues-delete-button:hover {
+    background-color: orangered;
+}
+
+.smapp-right-column {
+    width: 400px;
+    height: calc(100% - 120px); 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    bottom: 10px;
+    margin-left: 20px;
+    overflow-y: auto;
+    border: 2px solid orangered; 
+    background-color: #434044;
+}
+
+.aconxn-adsbox-container, .aconxn-chatbox-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     background-color: #434044;
     padding: 10px;
     border-radius: 10px;
-    border: 2px solid antiquewhite;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border: 2px solid bisque;
+}
+
+.currentissues-trendingposts-title, .currentissues-myposts-title {
+    color: antiquewhite;
+    margin-bottom: 10px;
+    text-align: center;
 }

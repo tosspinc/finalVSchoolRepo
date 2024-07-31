@@ -57,6 +57,7 @@
         }
 
         async function signup(credentials) {
+            resetAuthErr()  //resets all autherrors before trying to signup.
             try {
                 console.log('Attempting signup with credentials: ', credentials)
                 const response = await userAxios.post('auth/signup', credentials)
@@ -79,6 +80,7 @@
         }
 
         async function login(credentials) {
+            resetAuthErr() //resets all autherrors before trying to log in.
             try {
                 console.log('Attemptin to Login with credentials: ', credentials)
                 const response = await userAxios.post('auth/login', credentials)
@@ -100,11 +102,24 @@
             }
         }
 
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            setUserState({
+                token: '',
+                user: {},
+                errMsg: '',
+                issues: []
+            });
+        }
+
         return (
             <UserContext.Provider value={{ 
                 ...userState, 
                 signup,
-                login
+                login,
+                logout,
+                resetAuthErr
             }}>
                 {children}
             </UserContext.Provider>

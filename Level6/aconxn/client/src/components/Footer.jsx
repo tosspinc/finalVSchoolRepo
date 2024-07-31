@@ -7,7 +7,7 @@ export default function Footer() {
 
     const getFooterLinks = () => {
         const links = [
-            { path: '/', label: 'Home', className: 'home-info' },
+            { path: '/current-issues', label: 'Current Issues', className: 'current-issues' },
             { path: '/about', label: 'About', className: 'about-info' },
             { path: '/terms-of-service', label: 'Terms of Service', className: 'tos-info' },
             { path: '/privacy-policy', label: 'Privacy Policy', className: 'privacy-policy-info' },
