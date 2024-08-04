@@ -1,0 +1,9 @@
+.issuelist-container {
+    width: 96%;
+    margin: 2px auto;
+    background-color: transparent;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

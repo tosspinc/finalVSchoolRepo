@@ -1,10 +1,11 @@
+// userprovider.jsx
 import React, { useState, createContext, useEffect } from "react";
 import axios from "axios";
 
 // Create a context for user
 export const UserContext = createContext();
 
-const userAxios = axios.create({
+export const userAxios = axios.create({
     baseURL: '/api'
 });
 
@@ -23,8 +24,8 @@ const safeParseJSON = (value) => {
     try {
         return value ? JSON.parse(value) : null
     } catch (error) {
-        console.error('JSON parsing error: ', error)
-        return null
+        console.error('JSON parsing error: ', error);
+        return null;
     }
 }
 

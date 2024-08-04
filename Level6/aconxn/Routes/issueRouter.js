@@ -76,7 +76,7 @@ issueRouter.delete('/:issueId', async (req, res, next) => {
             return res.status(400).send({ message: 'No Issue has been found to delete.' })
         }
 
-        return es.status(200).send({ message: `Issue titled ${deletedIssue.title} has been deleted successfully.` })
+        return res.status(200).send({ message: `Issue titled ${deletedIssue.title} has been deleted successfully.` })
     } catch (error) {
         res.status(500)
         return next(error)

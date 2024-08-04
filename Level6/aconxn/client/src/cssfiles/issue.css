@@ -1,21 +1,37 @@
-.aconxn-issue-container {
+.issue-container {
     background-color: orangered;
-    height: 100px;
+    padding: 2px;
+    margin: 2px auto;
+    height: 150px;
+    width: 98%;
+    border-radius: 5px;
+    
 }
 
-.aconxn-issue {
+.issue-checkbox {
+    margin-right: 10px;
+    height: 10px;
+    width: 10px;
+}
+
+.issue {
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 3px;
     background-color: bisque;
-    border: 2px solid orangered;
-    width: 310px;
+    border-radius: 5px;
+    width: 98%;
+    height: 98%;
     text-align: center;
-    padding-top: 5px;
+    padding-top: 10px;
+    box-sizing: border-box;
 }
 
-.aconxn-issue-title, .aconxn-issue-description, .aconxn-issue-img{
-    background-color: bisque;
+.issue-title, .issue-description, .issue-img{
+    background-color: transparent;
 }
 
-.aconxn-issue-img {
+.issue-img {
     height: 50px;
     width: 50px;
     display: block;
@@ -23,19 +39,19 @@
     
 }
 
-.aconxn-issue-title {
-    font-size: 18px;
+.issue-title {
+    font-size: 16px;
     text-align: center;
     font-style: italic;
     font-weight: bold;
-    width: 300px;
+    width: 98%;
     margin-top: 5px;
 }
 
-.aconxn-issue-description {
+.issue-description {
     font-size: 12px;
     text-align: center;
     font-style: italic;
-    width: 300px;
+    width: 98%;
     padding-bottom: 5px;
 }

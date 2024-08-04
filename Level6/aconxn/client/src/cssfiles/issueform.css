@@ -1,11 +1,11 @@
 .aconxn-issue-container {
     margin-top: 20px;
-    margin-left: 240px;
+    margin-left: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 85%;
+    width: 60%;
     height: 150px;
     box-sizing: border-box;
     border: 1px solid bisque;
