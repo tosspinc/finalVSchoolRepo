@@ -90,11 +90,6 @@ export default function CurrentIssues() {
                 <h1 className="currentissues-title">All Posts</h1>
             </div>
             <div className="currentissues-main-content">
-                {showIssueForm && (
-                    <div className="currentissues-issueform-container">
-                        <IssueForm onClose={closeIssueForm} />
-                    </div>
-                )}
                 <div className="currentissues-comments-container">
                     <div className="currentissues-left-column">
                         <select className="currentissues-content-selector">

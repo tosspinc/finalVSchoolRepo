@@ -26,7 +26,6 @@ export default function IssueForm({ onClose }) {
         try {
             await userAxios.post('/main/issues', formData);
             getUserIssues();
-            onClose();
             navigate('/current-issues')
         } catch (error) {
             console.error('Error submitting issue: ', error);

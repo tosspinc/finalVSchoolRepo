@@ -12,6 +12,7 @@ import PrivacyPolicy from './pages/PrivacyPolicy';
 import CookiePolicy from './pages/CookiePolicy';
 import Careers from './pages/Careers';
 import Profile from './components/Profile'
+import IssueForm from './components/IssueForm';
 import './App.css';
 
 export default function App() {
@@ -26,6 +27,7 @@ export default function App() {
           <div className={`main-content ${showLeftSideBar ? 'with-sidebar' : ''}`}>
             <Routes>
               <Route path='/' element={<Home />} />
+              <Route path='/create-issue' element={<IssueForm /> } />
               <Route path='/current-issues' element={<CurrentIssues />} />
               <Route path='/about' element={<About />} />
               <Route path='/terms-of-service' element={<TermsOfService />} />

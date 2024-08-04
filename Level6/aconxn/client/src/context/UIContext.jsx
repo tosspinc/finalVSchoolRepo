@@ -5,7 +5,6 @@ export const UIContext = createContext()
 
 export function UIProvider({children}) {
     const [showIssueForm, setShowIssueForm] = useState(false)
-
     const openIssueForm = () => setShowIssueForm(true)
     const closeIssueForm = () => setShowIssueForm(false)
 

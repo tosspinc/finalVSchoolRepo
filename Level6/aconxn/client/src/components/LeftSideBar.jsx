@@ -19,9 +19,9 @@ export default function LeftSideBar() {
 
     const handleCreateIssue = (e) => {
         e.preventDefault()
-        openIssueForm()
-        navigate('/current-issues')
-    }
+        /*openIssueForm()*/
+        navigate('/create-issue')
+    } 
 
     return (
         <div className='left-sidebar-container'>
