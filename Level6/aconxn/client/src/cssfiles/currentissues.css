@@ -1,4 +1,4 @@
- .currentissues-container {
+.currentissues-container {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -6,7 +6,6 @@
     background-color: #434044;
     width: 82%;
     overflow: hidden;
-    
 }
 
 .currentissues-main-content {
@@ -26,8 +25,8 @@
     border: 2px solid orangered;
     position: fixed;
     top: 10px;
-    left: 195px; 
-    right: 415px; 
+    left: 195px;
+    right: 415px;
 }
 
 .currentissues-title {
@@ -63,14 +62,15 @@
     background-color: bisque;
     padding: 10px;
     border-radius: 10px;
-    width: calc(100% - 595px); 
+    width: calc(100% - 595px);
     height: calc(100vh - 220px);
     margin-left: 185px;
     margin-right: 98px;
-    
 }
 
-.currentissues-left-column, .currentissues-center-column, .currentissues-right-column {
+.currentissues-left-column,
+.currentissues-center-column,
+.currentissues-right-column {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,8 +78,6 @@
     padding: 10px;
     overflow-y: auto;
 }
-
-
 
 .currentissues-left-column {
     width: 30%;
@@ -128,7 +126,7 @@
     flex: 3;
     border: 1px solid white;
     width: 100%;
-    height: 200px; 
+    height: 200px;
     margin-bottom: 5px;
     border-radius: 10px;
     background-color: #5c5a5f;
@@ -148,9 +146,8 @@
     justify-content: center;
     width: 100%;
     height: 70px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
-
 
 .currentissues-contentinput-container input {
     height: 70px;
@@ -166,9 +163,8 @@
     justify-content: center;
     width: 100%;
     height: 70px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
-
 
 .currentissues-trendingposts-input-container input {
     height: 70px;
@@ -184,9 +180,8 @@
     justify-content: center;
     width: 100%;
     height: 70px;
-    border-radius: 10px; 
+    border-radius: 10px;
 }
-
 
 .currentissues-mypost-input-container input {
     height: 70px;
@@ -195,10 +190,6 @@
     border-radius: 5px;
     padding: 10px;
 }
-
-
-
-
 
 .currentissues-button-container {
     display: flex;
@@ -219,7 +210,9 @@
     margin-bottom: 10px;
 }
 
-.currentissues-submit-button, .currentissues-edit-button, .currentissues-delete-button {
+.currentissues-submit-button,
+.currentissues-edit-button,
+.currentissues-delete-button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -229,13 +222,23 @@
     margin-right: 5px;
 }
 
-.currentissues-submit-button:hover, .currentissues-edit-button:hover, .currentissues-delete-button:hover {
+.currentissues-submit-button:hover,
+.currentissues-edit-button:hover,
+.currentissues-delete-button:hover {
     background-color: orangered;
+}
+
+.currentissues-select-message {
+    color: bisque;
+    font-size: 0.8rem;
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 .smapp-right-column {
     width: 400px;
-    height: calc(100% - 110px); 
+    height: calc(100% - 110px);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -246,11 +249,12 @@
     bottom: 10px;
     margin-left: 20px;
     overflow-y: auto;
-    border: 2px solid orangered; 
+    border: 2px solid orangered;
     background-color: #434044;
 }
 
-.aconxn-adsbox-container, .aconxn-chatbox-container {
+.aconxn-adsbox-container,
+.aconxn-chatbox-container {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -262,55 +266,12 @@
     border: 2px solid bisque;
 }
 
-.currentissues-trendingposts-title, .currentissues-myposts-title {
+.currentissues-trendingposts-title,
+.currentissues-myposts-title {
     color: antiquewhite;
     margin-top: 10px;
     margin-bottom: 10px;
     text-align: center;
-}
-
-/*scrollbar stuff*/
-/* The entire scrollbar */
-.currentissues-right-column::-webkit-scrollbar {
-    width: 12px; /* Width of the vertical scrollbar */
-    height: 12px; /* Height of the horizontal scrollbar */
-}
-
-/* The scrollbar track (background) */
-.currentissues-right-column::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 10px;
-}
-
-/* The scrollbar handle (thumb) */
-.currentissues-right-column::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 10px;
-}
-
-/* The scrollbar handle (thumb) on hover */
-.currentissues-right-column::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-}
-
-/* Adding the same styling for another container, if needed */
-.currentissues-displayed-items-container::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-
-.currentissues-displayed-items-container::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-    border-radius: 10px;
-}
-
-.currentissues-displayed-items-container::-webkit-scrollbar-thumb {
-    background: #888; 
-    border-radius: 10px;
-}
-
-.currentissues-displayed-items-container::-webkit-scrollbar-thumb:hover {
-    background: #555; 
 }
 
 .currentissues-save-button {
@@ -333,4 +294,48 @@
 .currentissues-save-button:disabled {
     background-color: #434044;
     cursor: not-allowed;
+}
+
+/*scrollbar stuff*/
+/* The entire scrollbar */
+.currentissues-right-column::-webkit-scrollbar {
+    width: 12px; /* Width of the vertical scrollbar */
+    height: 12px; /* Height of the horizontal scrollbar */
+}
+
+/* The scrollbar track (background) */
+.currentissues-right-column::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* The scrollbar handle (thumb) */
+.currentissues-right-column::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* The scrollbar handle (thumb) on hover */
+.currentissues-right-column::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Adding the same styling for another container, if needed */
+.currentissues-displayed-items-container::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.currentissues-displayed-items-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.currentissues-displayed-items-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+.currentissues-displayed-items-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

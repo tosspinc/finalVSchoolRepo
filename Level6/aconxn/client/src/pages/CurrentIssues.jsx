@@ -9,7 +9,7 @@ import '../cssfiles/currentissues.css';
 
 export default function CurrentIssues() {
     const { userState, getUserIssues } = useContext(UserContext);
-    const { showIssueForm, closeIssueForm } = useUIContext();
+    const { showIssueForm } = useUIContext();
     const { issues } = userState;
     const [selectedIssueId, setSelectedIssueId] = useState(null);
     const [selectedSection, setSelectedSection] = useState(null);
@@ -35,7 +35,7 @@ export default function CurrentIssues() {
             } else if (section === 'myPosts') {
                 setMyPostsComment(issueToEdit.description);
             }
-            setIsEditing(true);
+            setIsEditing(false);
         }
     };
 
@@ -55,7 +55,7 @@ export default function CurrentIssues() {
                 updatedComment = myPostsComment;
             }
 
-            await userAxios.put(`/main/issues/${selectedIssueId}`, { description: updatedComment });
+            await userAxios.put(`/main/issues/post/${selectedIssueId}`, { description: updatedComment });
             getUserIssues();
             setSelectedIssueId(null);
             setSelectedSection(null);
@@ -63,6 +63,7 @@ export default function CurrentIssues() {
             setAllPostsComment('');
             setMyPostsComment('');
             setIsEditing(false);
+            setRefresh(prev => !prev); // Refresh the issues list
         } catch (error) {
             console.error('Error saving issue: ', error);
         }
@@ -90,6 +91,11 @@ export default function CurrentIssues() {
                 <h1 className="currentissues-title">All Posts</h1>
             </div>
             <div className="currentissues-main-content">
+                {showIssueForm && (
+                    <div className="currentissues-issueform-container">
+                        <IssueForm />
+                    </div>
+                )}
                 <div className="currentissues-comments-container">
                     <div className="currentissues-left-column">
                         <select className="currentissues-content-selector">
@@ -150,22 +156,28 @@ export default function CurrentIssues() {
                             <div className="currentissues-displayed-items-container">
                                 <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} />
                             </div>
-                            <div className="currentissues-mypost-input-container">
-                                <input 
-                                    type="text" 
-                                    maxLength="200" 
-                                    placeholder="Enter your comment" 
-                                    value={myPostsComment}
-                                    onChange={(e) => setMyPostsComment(e.target.value)}
-                                />
-                            </div>
-                            <hr className="currentissues-button-seperator" />
-                            <div className="currentissues-button-container">
-                                {isEditing && (
+                            <hr className="currentissues-selector-seperator" />
+                            {selectedSection === 'myPosts' && !selectedIssueId && (
+                                <p className="currentissues-select-message">Choose an issue to edit or delete.</p>
+                            )}
+                            {selectedSection === 'myPosts' && selectedIssueId && !isEditing && (
+                                <div className="currentissues-button-container">
+                                    <button className="currentissues-edit-button" onClick={() => setIsEditing(true)}>Edit</button>
+                                    <button className="currentissues-delete-button" onClick={deleteIssue}>Delete</button>
+                                </div>
+                            )}
+                            {isEditing && selectedSection === 'myPosts' && (
+                                <div className="currentissues-mypost-input-container">
+                                    <input 
+                                        type="text" 
+                                        maxLength="200" 
+                                        placeholder="Edit your comment"
+                                        value={myPostsComment}
+                                        onChange={(e) => setMyPostsComment(e.target.value)}
+                                    />
                                     <button className="currentissues-save-button" onClick={saveEdit}>Save</button>
-                                )}
-                                <button className="currentissues-delete-button" onClick={deleteIssue}>Delete</button>
-                            </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
