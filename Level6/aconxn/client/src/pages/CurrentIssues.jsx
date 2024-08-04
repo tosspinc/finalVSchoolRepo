@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext, userAxios } from '../context/UserProvider';
 import { useUIContext } from '../context/UIContext';
-import ChatBox from "../components/ChatBox";
-import AdsBox from "../components/AdsBox";
-import IssueList from "../components/IssueList";
-import IssueForm from "../components/IssueForm";
+import ChatBox from '../components/ChatBox';
+import AdsBox from '../components/AdsBox';
+import IssueList from '../components/IssueList';
+import IssueForm from '../components/IssueForm';
 import '../cssfiles/currentissues.css';
 
 export default function CurrentIssues() {
@@ -24,18 +24,25 @@ export default function CurrentIssues() {
     }, [refresh]);
 
     const handleSelectIssue = (id, section) => {
-        setSelectedIssueId(id);
-        setSelectedSection(section);
-        const issueToEdit = issues.find(issue => issue._id === id);
-        if (issueToEdit) {
-            if (section === 'contentPosts') {
-                setContentPostsComment(issueToEdit.description);
-            } else if (section === 'allPosts') {
-                setAllPostsComment(issueToEdit.description);
-            } else if (section === 'myPosts') {
-                setMyPostsComment(issueToEdit.description);
-            }
+        if (selectedIssueId === id) {
+            // Unselecting the issue
+            setSelectedIssueId(null);
+            setSelectedSection(null);
             setIsEditing(false);
+        } else {
+            setSelectedIssueId(id);
+            setSelectedSection(section);
+            const issueToEdit = issues.find(issue => issue._id === id);
+            if (issueToEdit) {
+                if (section === 'contentPosts') {
+                    setContentPostsComment(issueToEdit.description);
+                } else if (section === 'allPosts') {
+                    setAllPostsComment(issueToEdit.description);
+                } else if (section === 'myPosts') {
+                    setMyPostsComment(issueToEdit.description);
+                }
+                setIsEditing(false);
+            }
         }
     };
 
@@ -153,12 +160,14 @@ export default function CurrentIssues() {
                     <div className="currentissues-right-column">
                         <h2 className="currentissues-myposts-title">My Posts</h2>
                         <div className="currentissues-content-container">
-                            <div className="currentissues-displayed-items-container">
+                            <div className="currentissues-myposts-displayeditems-container">
                                 <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} />
                             </div>
                             <hr className="currentissues-selector-seperator" />
                             {selectedSection === 'myPosts' && !selectedIssueId && (
-                                <p className="currentissues-select-message">Choose an issue to edit or delete.</p>
+                                <p className="currentissues-select-message">
+                                    Choose an issue to: <span className="currentissues-edit-text">edit</span> or <span className="currentissues-delete-text">delete</span>.
+                                </p>
                             )}
                             {selectedSection === 'myPosts' && selectedIssueId && !isEditing && (
                                 <div className="currentissues-button-container">
