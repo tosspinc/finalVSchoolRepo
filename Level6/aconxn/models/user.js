@@ -21,6 +21,7 @@ const userSchema = new Schema ({
         type: String,
         required: false,
         unique: true,
+        sparse: true, //makes sure no duplicate values.
         trim: true
     },
     memberSince: {

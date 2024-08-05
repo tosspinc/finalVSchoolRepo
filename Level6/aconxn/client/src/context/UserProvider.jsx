@@ -56,6 +56,7 @@ export default function UserProvider({ children }) {
     async function signup(credentials) {
         resetAuthErr();
         try {
+            console.log('Sending Signup request with credentials: ', credentials)
             const response = await userAxios.post('auth/signup', credentials);
             const { token, user } = response.data;
             setUserState(prevState => ({
@@ -67,6 +68,7 @@ export default function UserProvider({ children }) {
             localStorage.setItem('user', JSON.stringify(user));
             return true;
         } catch (error) {
+            console.error('Signup error: ', error)
             const errorMessage = error.response?.data?.message || "An error occurred. Please try again later.";
             handleAuthErr(errorMessage);
             return false;

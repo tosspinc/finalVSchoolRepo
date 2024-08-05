@@ -20,12 +20,14 @@ export default function Signup({ isOpen, onClose }) {
     async function handleSubmit(e) {
         e.preventDefault()
         console.log('Submitting form with credentials: ', credentials)
+        try {
         const success = await signup(credentials)
-        if (success) {
-            console.log('Signup successful, closing modal.')
-            onClose()
-        } else {
-            console.log('Signup failed.')
+            if (success) {
+                console.log('Signup successful, closing modal.')
+                onClose()
+            }
+        } catch(error) {
+            console.log('Signup failed.', error)
         }
     }
 
