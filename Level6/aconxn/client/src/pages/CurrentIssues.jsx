@@ -25,7 +25,6 @@ export default function CurrentIssues() {
 
     const handleSelectIssue = (id, section) => {
         if (selectedIssueId === id) {
-            // Unselecting the issue
             setSelectedIssueId(null);
             setSelectedSection(null);
             setIsEditing(false);
@@ -118,43 +117,34 @@ export default function CurrentIssues() {
                         </select>
                         <hr className="currentissues-selector-seperator" />
                         <div className="currentissues-content-container">
-                            <div className="currentissues-displayed-items-container">
+                            <div className="currentissues-contentinputposts-displayeditems-container">
                                 {/* Container for selected item */}
-                            </div>
-                            <div className="currentissues-contentinput-container">
-                                <input 
-                                    type="text" 
-                                    maxLength="200" 
-                                    placeholder="Enter your comment"
-                                    value={contentPostsComment}
-                                    onChange={(e) => setContentPostsComment(e.target.value)}
-                                />
-                            </div>
-                            <hr className="currentissues-button-seperator" />
-                            <div className="currentissues-button-container">
-                                <button className="currentissues-submit-button">Submit</button>
                             </div>
                         </div>
                     </div>
                     <div className="currentissues-center-column">
                         <h2 className="currentissues-trendingposts-title">Trending Posts</h2>
                         <div className="currentissues-content-container">
-                            <div className="currentissues-displayed-items-container">
-                                {/* All current trending posts container */}
+                            <div className="currentissues-trendingposts-displayeditems-container">
+                                <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'allPosts')} />
                             </div>
-                            <div className="currentissues-trendingposts-input-container">
-                                <input 
-                                    type="text" 
-                                    maxLength="200" 
-                                    placeholder="Enter your comment" 
-                                    value={allPostsComment}
-                                    onChange={(e) => setAllPostsComment(e.target.value)}
-                                />
-                            </div>
-                            <hr className="currentissues-button-seperator" />
-                            <div className="currentissues-button-container">
-                                <button className="currentissues-submit-button">Submit</button>
-                            </div>
+                            {selectedSection === 'allPosts' && selectedIssueId && (
+                                <>
+                                    <hr className="currentissues-button-seperator" />
+                                    <div className="currentissues-trendingposts-input-container">
+                                        <input 
+                                            type="text" 
+                                            maxLength="200" 
+                                            placeholder="Enter your comment" 
+                                            value={allPostsComment}
+                                            onChange={(e) => setAllPostsComment(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="currentissues-button-container">
+                                        <button className="currentissues-submit-button">Submit</button>
+                                    </div>
+                                </>
+                            )}
                         </div>
                     </div>
                     <div className="currentissues-right-column">
@@ -163,29 +153,26 @@ export default function CurrentIssues() {
                             <div className="currentissues-myposts-displayeditems-container">
                                 <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} />
                             </div>
-                            <hr className="currentissues-selector-seperator" />
-                            {selectedSection === 'myPosts' && !selectedIssueId && (
-                                <p className="currentissues-select-message">
-                                    Choose an issue to: <span className="currentissues-edit-text">edit</span> or <span className="currentissues-delete-text">delete</span>.
-                                </p>
-                            )}
-                            {selectedSection === 'myPosts' && selectedIssueId && !isEditing && (
-                                <div className="currentissues-button-container">
-                                    <button className="currentissues-edit-button" onClick={() => setIsEditing(true)}>Edit</button>
-                                    <button className="currentissues-delete-button" onClick={deleteIssue}>Delete</button>
-                                </div>
-                            )}
-                            {isEditing && selectedSection === 'myPosts' && (
-                                <div className="currentissues-mypost-input-container">
-                                    <input 
-                                        type="text" 
-                                        maxLength="200" 
-                                        placeholder="Edit your comment"
-                                        value={myPostsComment}
-                                        onChange={(e) => setMyPostsComment(e.target.value)}
-                                    />
-                                    <button className="currentissues-save-button" onClick={saveEdit}>Save</button>
-                                </div>
+                            {selectedSection === 'myPosts' && selectedIssueId && (
+                                <>
+                                    <hr className="currentissues-selector-seperator" />
+                                    <div className="currentissues-button-container">
+                                        <button className="currentissues-edit-button" onClick={() => setIsEditing(true)}>Edit</button>
+                                        <button className="currentissues-delete-button" onClick={deleteIssue}>Delete</button>
+                                    </div>
+                                    {isEditing && (
+                                        <div className="currentissues-mypost-input-container">
+                                            <input 
+                                                type="text" 
+                                                maxLength="200" 
+                                                placeholder="Edit your comment"
+                                                value={myPostsComment}
+                                                onChange={(e) => setMyPostsComment(e.target.value)}
+                                            />
+                                            <button className="currentissues-save-button" onClick={saveEdit}>Save</button>
+                                        </div>
+                                    )}
+                                </>
                             )}
                         </div>
                     </div>

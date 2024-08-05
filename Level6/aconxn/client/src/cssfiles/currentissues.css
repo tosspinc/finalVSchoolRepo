@@ -119,10 +119,12 @@
     overflow-y: hidden;
 }
 
-.currentissues-displayed-items-container {
+.currentissues-contentinputposts-displayeditems-container,
+.currentissues-trendingposts-displayeditems-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex: 3;
     border: 1px solid white;
     width: 100%;
@@ -135,8 +137,9 @@
 
 .currentissues-myposts-displayeditems-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     flex: 3;
     border: 1px solid white;
     width: 100%;
