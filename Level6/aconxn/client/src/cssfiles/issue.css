@@ -1,11 +1,14 @@
 .issue-container {
-    background-color: orangered;
+    background-color: bisque;
     padding: 2px;
     margin: 2px auto;
-    height: 150px;
-    width: 98%;
     border-radius: 5px;
-    
+    border: 2px solid orangered;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 98%;
 }
 
 .issue-checkbox {
@@ -14,20 +17,35 @@
     width: 10px;
 }
 
+.vote-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    margin-top: 10px;
+}
+
+.vote-buttons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.vote-buttons button img {
+    width: 24px;
+    height: 24px;
+}
+
 .issue {
-    margin-top: 2px;
-    margin-bottom: 2px;
-    margin-left: 3px;
     background-color: bisque;
     border-radius: 5px;
-    width: 98%;
-    height: 98%;
+    padding: 10px;
     text-align: center;
-    padding-top: 10px;
     box-sizing: border-box;
 }
 
-.issue-title, .issue-description, .issue-img{
+.issue-title, .issue-description, .issue-img {
     background-color: transparent;
 }
 
@@ -36,7 +54,6 @@
     width: 50px;
     display: block;
     margin: 0 auto;
-    
 }
 
 .issue-title {
@@ -54,4 +71,53 @@
     font-style: italic;
     width: 98%;
     padding-bottom: 5px;
+}
+
+span {
+    background-color: transparent;
+}
+
+.comments-section {
+    margin-top: 10px;
+    background-color: bisque;
+}
+
+.add-comment {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    background-color: bisque;
+    align-items: center;
+}
+
+.add-comment input {
+    padding: 5px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.add-comment button {
+    margin-bottom: 8px;
+    background-color: #434044;
+    border: 1px solid bisque;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 5px;
+    color: #fff;
+    width: 100px;
+    height: 40px;
+    align-items: center;
+}
+
+.add-comment button:hover {
+    background-color: orangered;
+}
+
+h4 {
+    background-color: bisque;
+}
+
+p, strong {
+    background-color: bisque;
 }

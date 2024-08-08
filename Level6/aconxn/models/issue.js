@@ -24,7 +24,24 @@ const issueSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User'
-    }
+    },
+    upvotes: {
+        type: Number,
+        default: 0
+    },
+    downvotes: {
+        type: Number,
+        default: 0
+    }, 
+    userVotes: [{
+        userId: { type: Schema.Types.ObjectId, ref: 'User'},
+        vote: { type: String, enum: ['upvote', 'downvote']}
+    }],
+    comments: [{
+        comment: { type: String, required: true },
+        username: { type: String, required: true },
+        userId: { type: Schema.Types.ObjectId, ref: 'User' }
+    }]
 });
 
 module.exports = mongoose.model('Issue', issueSchema);

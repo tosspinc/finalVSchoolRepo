@@ -3,8 +3,8 @@
     flex-direction: column;
     flex-grow: 1;
     height: 100vh;
-    background-color: #434044;
-    width: 82%;
+    background-color: transparent;
+    width: 86.5%;
     overflow: hidden;
 }
 
@@ -13,6 +13,7 @@
     flex-grow: 1;
     padding: 5px;
     margin-top: 110px;
+    justify-content: space-between;
 }
 
 .currentissues-toprow {
@@ -25,8 +26,8 @@
     border: 2px solid orangered;
     position: fixed;
     top: 10px;
-    left: 195px;
-    right: 415px;
+    left: 190px;
+    right: 335px;
 }
 
 .currentissues-title {
@@ -47,14 +48,6 @@
     width: 100%;
 }
 
-.currentissues-main-content {
-    display: flex;
-    flex: 1;
-    padding: 10px;
-    background-color: #434044;
-    margin-top: 110px;
-}
-
 .currentissues-comments-container {
     display: flex;
     flex: 1;
@@ -62,7 +55,7 @@
     background-color: bisque;
     padding: 10px;
     border-radius: 10px;
-    width: calc(100% - 595px);
+    width: calc(100% - 95px);
     height: calc(100vh - 220px);
     margin-left: 185px;
     margin-right: 98px;
@@ -89,6 +82,11 @@
 
 .currentissues-right-column {
     width: 30%;
+}
+
+/* Full-width class to expand center column */
+.currentissues-content-container.full-width {
+    width: 98%;
 }
 
 .currentissues-left-column .currentissues-content-selector {
@@ -156,41 +154,8 @@
     border-bottom: 1px solid #ccc;
 }
 
-/*input containers*/
-.currentissues-contentinput-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 70px;
-    border-radius: 10px;
-}
-
-.currentissues-contentinput-container input {
-    height: 70px;
-    width: 90%;
-    max-width: 360px;
-    border-radius: 5px;
-    padding: 10px;
-}
-
-.currentissues-trendingposts-input-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 70px;
-    border-radius: 10px;
-}
-
-.currentissues-trendingposts-input-container input {
-    height: 70px;
-    width: 90%;
-    max-width: 360px;
-    border-radius: 5px;
-    padding: 10px;
-}
-
+.currentissues-contentinput-container,
+.currentissues-trendingposts-input-container,
 .currentissues-mypost-input-container {
     display: flex;
     align-items: center;
@@ -200,6 +165,8 @@
     border-radius: 10px;
 }
 
+.currentissues-contentinput-container input,
+.currentissues-trendingposts-input-container input,
 .currentissues-mypost-input-container input {
     height: 70px;
     width: 90%;
@@ -229,7 +196,8 @@
 
 .currentissues-submit-button,
 .currentissues-edit-button,
-.currentissues-delete-button {
+.currentissues-delete-button,
+.currentissues-save-button {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -241,7 +209,8 @@
 
 .currentissues-submit-button:hover,
 .currentissues-edit-button:hover,
-.currentissues-delete-button:hover {
+.currentissues-delete-button:hover,
+.currentissues-save-button:hover {
     background-color: orangered;
 }
 
@@ -262,7 +231,7 @@
 }
 
 .smapp-right-column {
-    width: 400px;
+    width: 320px;
     height: calc(100% - 110px);
     display: flex;
     flex-direction: column;
@@ -299,53 +268,30 @@
     text-align: center;
 }
 
-.currentissues-save-button {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid orangered;
-    background-color: bisque;
-    color: #434044;
-    font-size: 14px;
-    font-style: italic;
-    cursor: pointer;
-}
-
-.currentissues-save-button:hover {
-    border: 1px solid bisque;
-    background-color: orangered;
-    color: bisque;
-}
-
 .currentissues-save-button:disabled {
     background-color: #434044;
     cursor: not-allowed;
 }
 
-/*scrollbar stuff*/
-/* The entire scrollbar */
 .currentissues-right-column::-webkit-scrollbar {
-    width: 12px; /* Width of the vertical scrollbar */
-    height: 12px; /* Height of the horizontal scrollbar */
+    width: 12px;
+    height: 12px;
 }
 
-/* The scrollbar track (background) */
 .currentissues-right-column::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
 }
 
-/* The scrollbar handle (thumb) */
 .currentissues-right-column::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
 }
 
-/* The scrollbar handle (thumb) on hover */
 .currentissues-right-column::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
-/* Adding the same styling for another container, if needed */
 .currentissues-displayed-items-container::-webkit-scrollbar {
     width: 12px;
     height: 12px;

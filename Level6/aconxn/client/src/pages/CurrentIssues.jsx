@@ -14,7 +14,6 @@ export default function CurrentIssues() {
     const [selectedIssueId, setSelectedIssueId] = useState(null);
     const [selectedSection, setSelectedSection] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [contentPostsComment, setContentPostsComment] = useState('');
     const [allPostsComment, setAllPostsComment] = useState('');
     const [myPostsComment, setMyPostsComment] = useState('');
     const [trendingPosts, setTrendingPosts] = useState([]);
@@ -23,29 +22,29 @@ export default function CurrentIssues() {
 
     useEffect(() => {
         getUserIssues();
-        fetchTrendingPosts()
-        fetchUserPosts()
+        fetchTrendingPosts();
+        fetchUserPosts();
     }, [refresh]);
 
     const fetchTrendingPosts = async () => {
         try {
-            const response = await userAxios.get('/main/issues/allPosts')
-            setTrendingPosts(response.data)
+            const response = await userAxios.get('/main/issues/allPosts');
+            setTrendingPosts(response.data);
         } catch (error) {
-            console.error('Errror fetching trending posts: ', error)
+            console.error('Error fetching trending posts: ', error);
         }
-    }
+    };
 
     const fetchUserPosts = async () => {
         try {
             if (user && user._id) {
-                const response = await userAxios.get(`/main/issues/userPosts/${user._id}`)
-                setUserPosts(response.data)
+                const response = await userAxios.get(`/main/issues/userPosts/${user._id}`);
+                setUserPosts(response.data);
             }
         } catch (error) {
-            console.error('Error fetching user Posts: ', error)
+            console.error('Error fetching user posts: ', error);
         }
-    }
+    };
 
     const handleSelectIssue = (id, section) => {
         if (selectedIssueId === id) {
@@ -57,9 +56,7 @@ export default function CurrentIssues() {
             setSelectedSection(section);
             const issueToEdit = (section === 'myPosts' ? userPosts : trendingPosts).find(issue => issue._id === id);
             if (issueToEdit) {
-                if (section === 'contentPosts') {
-                    setContentPostsComment(issueToEdit.description);
-                } else if (section === 'allPosts') {
+                if (section === 'allPosts') {
                     setAllPostsComment(issueToEdit.description);
                 } else if (section === 'myPosts') {
                     setMyPostsComment(issueToEdit.description);
@@ -77,9 +74,7 @@ export default function CurrentIssues() {
 
         try {
             let updatedComment = '';
-            if (selectedSection === 'contentPosts') {
-                updatedComment = contentPostsComment;
-            } else if (selectedSection === 'allPosts') {
+            if (selectedSection === 'allPosts') {
                 updatedComment = allPostsComment;
             } else if (selectedSection === 'myPosts') {
                 updatedComment = myPostsComment;
@@ -91,7 +86,6 @@ export default function CurrentIssues() {
             fetchUserPosts();
             setSelectedIssueId(null);
             setSelectedSection(null);
-            setContentPostsComment('');
             setAllPostsComment('');
             setMyPostsComment('');
             setIsEditing(false);
@@ -116,6 +110,24 @@ export default function CurrentIssues() {
             fetchUserPosts();
         } catch (error) {
             console.error('Error deleting issue: ', error);
+        }
+    };
+
+    const handleUpvote = async (id) => {
+        try {
+            await userAxios.post(`/main/issues/upvote/${id}`);
+            setRefresh(prev => !prev);
+        } catch (error) {
+            console.error('Error upvoting issue: ', error);
+        }
+    };
+    
+    const handleDownvote = async (id) => {
+        try {
+            await userAxios.post(`/main/issues/downvote/${id}`);
+            setRefresh(prev => !prev);
+        } catch (error) {
+            console.error('Error downvoting issue: ', error);
         }
     };
 
@@ -152,9 +164,18 @@ export default function CurrentIssues() {
                     </div>
                     <div className="currentissues-center-column">
                         <h2 className="currentissues-trendingposts-title">Trending Posts</h2>
-                        <div className="currentissues-content-container">
+                        <div className="currentissues-content-container full-width">  {/* Added full-width class */}
                             <div className="currentissues-trendingposts-displayeditems-container">
-                                <IssueList issues={trendingPosts} handleSelect={(id) => handleSelectIssue(id, 'allPosts')} showUsername={true} />
+                                <IssueList
+                                    issues={trendingPosts}
+                                    handleSelect={(id) => handleSelectIssue(id, 'allPosts')}
+                                    showUsername={true}
+                                    handleUpvote={handleUpvote}
+                                    handleDownvote={handleDownvote}
+                                    showVoteButtons={true}
+                                    showCheckbox={true} // Ensure it's visible for trending posts but only selectable for non-user posts
+                                    allowComments={true}
+                                />
                             </div>
                             {selectedSection === 'allPosts' && selectedIssueId && (
                                 <>
@@ -169,7 +190,7 @@ export default function CurrentIssues() {
                                         />
                                     </div>
                                     <div className="currentissues-button-container">
-                                        <button className="currentissues-submit-button">Submit</button>
+                                        <button className="currentissues-submit-button" onClick={saveEdit}>Submit</button>
                                     </div>
                                 </>
                             )}
@@ -179,7 +200,16 @@ export default function CurrentIssues() {
                         <h2 className="currentissues-myposts-title">My Posts</h2>
                         <div className="currentissues-content-container">
                             <div className="currentissues-myposts-displayeditems-container">
-                                <IssueList issues={userPosts} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} showUsername={false} />
+                                <IssueList
+                                    issues={userPosts}
+                                    handleSelect={(id) => handleSelectIssue(id, 'myPosts')}
+                                    showUsername={false}
+                                    handleUpvote={handleUpvote}
+                                    handleDownvote={handleDownvote}
+                                    showVoteButtons={false}
+                                    showCheckbox={true}
+                                    allowComments={false} // Ensure it's hidden for user posts
+                                />
                             </div>
                             {selectedSection === 'myPosts' && selectedIssueId && (
                                 <>
