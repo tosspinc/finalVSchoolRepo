@@ -2,7 +2,7 @@ import Issue from './Issue';
 import '../cssfiles/issuelist.css';
 
 export default function IssueList(props) {
-    const { issues, handleSelect } = props
+    const { issues, handleSelect, showUsername } = props
 
     const issueElements = issues.map(issue => (
         <Issue 
@@ -11,6 +11,7 @@ export default function IssueList(props) {
             title={issue.title}
             description={issue.description}
             imgUrl={issue.imgUrl}
+            username={ showUsername ? issue.userId.username : undefined } //this conditionally passes the username where needed.
             handleSelect={handleSelect}
         />
     ))

@@ -18,12 +18,11 @@ authRouter.post('/signup', async (req, res, next) => {
         const savedUser = await newUser.save()
         
         //generate JWT Token
-        const token = jwt.sign({ id: savedUser._id}, process.env.SECRET)
+        const token = jwt.sign(savedUser.toObject(), process.env.SECRET)
         console.log('Signup successful, user created: ', savedUser)
-        return res.status(201).send({ user: savedUser.withoutPassword(), token })
+        return res.status(201).send({ user: savedUser, token })
     } catch (error) {
         console.error('Error signing up.', error)
-        console.error('Stack trace: ', error-stack)
         res.status(500)
         return next(error)
     }

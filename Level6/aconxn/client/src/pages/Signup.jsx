@@ -21,7 +21,7 @@ export default function Signup({ isOpen, onClose }) {
         e.preventDefault()
         console.log('Submitting form with credentials: ', credentials)
         try {
-        const success = await signup(credentials)
+            const success = await signup(credentials)
             if (success) {
                 console.log('Signup successful, closing modal.')
                 onClose()

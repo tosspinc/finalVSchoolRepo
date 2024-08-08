@@ -1,5 +1,6 @@
 const express = require('express');
-const Issue = require('../models/issue'); // Correct model import
+const Issue = require('../models/issue');
+const User = require('../models/user');
 const issueRouter = express.Router();
 
 // Post a new issue
@@ -27,10 +28,11 @@ issueRouter.get('/user', async (req, res, next) => {
 })
 
 // Get issues by user id
-issueRouter.get('/', async (req, res, next) => {
+issueRouter.get('/userPosts/:userId', async (req, res, next) => {
     try {
-        const foundIssues = await Issue.find({ userId: req.auth._id });
-        return res.status(200).send(foundIssues);
+        const userId = req.params.userId;
+        const userIssues = await Issue.find({ userId: userId }).populate('userId', 'username');
+        return res.status(200).send(userIssues);
     } catch (error) {
         res.status(500);
         return next(error);
@@ -57,9 +59,9 @@ issueRouter.put('/post/:issueId', async (req, res, next) => {
 })
 
 // Get all issues
-issueRouter.get('/all', async (req, res, next) => {
+issueRouter.get('/allPosts', async (req, res, next) => {
     try {
-        const allIssues = await Issue.find(); 
+        const allIssues = await Issue.find().populate('userId', 'username'); 
         return res.status(200).send(allIssues);
     } catch (error) {
         res.status(500);

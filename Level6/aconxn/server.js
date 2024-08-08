@@ -11,7 +11,7 @@ const port = 9000;
 // Middleware
 app.use(express.json());
 app.use(morgan("dev"));
-app.use(cors())
+app.use(cors());
 
 //checks to see if there is an .env file.
 if (!process.env.MONGO_URI) {

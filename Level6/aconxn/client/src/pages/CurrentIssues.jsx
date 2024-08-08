@@ -10,18 +10,42 @@ import '../cssfiles/currentissues.css';
 export default function CurrentIssues() {
     const { userState, getUserIssues } = useContext(UserContext);
     const { showIssueForm } = useUIContext();
-    const { issues } = userState;
+    const { issues, user } = userState;
     const [selectedIssueId, setSelectedIssueId] = useState(null);
     const [selectedSection, setSelectedSection] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [contentPostsComment, setContentPostsComment] = useState('');
     const [allPostsComment, setAllPostsComment] = useState('');
     const [myPostsComment, setMyPostsComment] = useState('');
+    const [trendingPosts, setTrendingPosts] = useState([]);
+    const [userPosts, setUserPosts] = useState([]);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         getUserIssues();
+        fetchTrendingPosts()
+        fetchUserPosts()
     }, [refresh]);
+
+    const fetchTrendingPosts = async () => {
+        try {
+            const response = await userAxios.get('/main/issues/allPosts')
+            setTrendingPosts(response.data)
+        } catch (error) {
+            console.error('Errror fetching trending posts: ', error)
+        }
+    }
+
+    const fetchUserPosts = async () => {
+        try {
+            if (user && user._id) {
+                const response = await userAxios.get(`/main/issues/userPosts/${user._id}`)
+                setUserPosts(response.data)
+            }
+        } catch (error) {
+            console.error('Error fetching user Posts: ', error)
+        }
+    }
 
     const handleSelectIssue = (id, section) => {
         if (selectedIssueId === id) {
@@ -31,7 +55,7 @@ export default function CurrentIssues() {
         } else {
             setSelectedIssueId(id);
             setSelectedSection(section);
-            const issueToEdit = issues.find(issue => issue._id === id);
+            const issueToEdit = (section === 'myPosts' ? userPosts : trendingPosts).find(issue => issue._id === id);
             if (issueToEdit) {
                 if (section === 'contentPosts') {
                     setContentPostsComment(issueToEdit.description);
@@ -63,6 +87,8 @@ export default function CurrentIssues() {
 
             await userAxios.put(`/main/issues/post/${selectedIssueId}`, { description: updatedComment });
             getUserIssues();
+            fetchTrendingPosts();
+            fetchUserPosts();
             setSelectedIssueId(null);
             setSelectedSection(null);
             setContentPostsComment('');
@@ -86,6 +112,8 @@ export default function CurrentIssues() {
             setSelectedIssueId(null);
             setRefresh(prev => !prev);
             getUserIssues();
+            fetchTrendingPosts();
+            fetchUserPosts();
         } catch (error) {
             console.error('Error deleting issue: ', error);
         }
@@ -126,7 +154,7 @@ export default function CurrentIssues() {
                         <h2 className="currentissues-trendingposts-title">Trending Posts</h2>
                         <div className="currentissues-content-container">
                             <div className="currentissues-trendingposts-displayeditems-container">
-                                <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'allPosts')} />
+                                <IssueList issues={trendingPosts} handleSelect={(id) => handleSelectIssue(id, 'allPosts')} showUsername={true} />
                             </div>
                             {selectedSection === 'allPosts' && selectedIssueId && (
                                 <>
@@ -151,7 +179,7 @@ export default function CurrentIssues() {
                         <h2 className="currentissues-myposts-title">My Posts</h2>
                         <div className="currentissues-content-container">
                             <div className="currentissues-myposts-displayeditems-container">
-                                <IssueList issues={issues} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} />
+                                <IssueList issues={userPosts} handleSelect={(id) => handleSelectIssue(id, 'myPosts')} showUsername={false} />
                             </div>
                             {selectedSection === 'myPosts' && selectedIssueId && (
                                 <>
